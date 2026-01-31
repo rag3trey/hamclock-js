@@ -104,7 +104,7 @@ Choose one of the following setups:
 #### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/hamclock-py.git
+git clone https://github.com/rag3trey/hamclock-js.git
 cd hamclock-py
 ```
 
@@ -272,7 +272,7 @@ Choose one of the following setups:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/rag3trey/hamclock-py.git
+   git clone https://github.com/rag3trey/hamclock-js.git
    cd hamclock-py
    ```
 
@@ -560,7 +560,7 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
 
 # Clone and deploy
-git clone https://github.com/yourusername/hamclock-web.git
+git clone https://github.com/rag3trey/hamclock-js.git
 cd hamclock-web
 docker-compose up -d
 ```
