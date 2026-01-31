@@ -1,4 +1,4 @@
-# HamClock Web - Amateur Radio Clock & Information Display
+# HamClock-js - Amateur Radio Clock & Information Display
 
 A modern web-based rewrite of ESPHamClock using **Python FastAPI** backend and **JavaScript/React** frontend.
 
@@ -658,8 +658,8 @@ The original ESPHamClock is Copyright © 2019 Elwood Downey, WB0OEW.
 
 ## 📞 Support
 
-- **Issues**: https://github.com/rag3trey/hamclock-py/issues
-- **Discussions**: https://github.com/rag3trey/hamclock-py/discussions
+- **Issues**: https://github.com/rag3trey/hamclock-js/issues
+- **Discussions**: https://github.com/rag3trey/hamclock-js/discussions
 - **Email**: rag3trey@gmail.com
 
 ---
