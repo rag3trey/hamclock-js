@@ -561,7 +561,7 @@ sh get-docker.sh
 
 # Clone and deploy
 git clone https://github.com/rag3trey/hamclock-js.git
-cd hamclock-web
+cd hamclock-js
 docker-compose up -d
 ```
 
