@@ -18,6 +18,7 @@ const CATStatus = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [ports, setPorts] = useState([]);
   const [selectedPort, setSelectedPort] = useState('');
+  const [selectedRadioModel, setSelectedRadioModel] = useState('yaesu');
   const [bands, setBands] = useState([]);
   const [frequencyInput, setFrequencyInput] = useState('');
 
@@ -67,7 +68,7 @@ const CATStatus = () => {
     setError(null);
 
     try {
-      const result = await connectCAT(selectedPort, 'kenwood', 9600);
+      const result = await connectCAT(selectedPort, selectedRadioModel, 9600);
       setCatStatus({
         connected: true,
         radio_model: result.radio,
@@ -164,6 +165,19 @@ const CATStatus = () => {
                   {port.port} ({port.description})
                 </option>
               ))}
+            </select>
+          </div>
+
+          <div className="connection-input">
+            <label>Radio Model:</label>
+            <select
+              value={selectedRadioModel}
+              onChange={(e) => setSelectedRadioModel(e.target.value)}
+              disabled={isConnecting}
+            >
+              <option value="yaesu">Yaesu</option>
+              <option value="kenwood">Kenwood</option>
+              <option value="icom">Icom</option>
             </select>
           </div>
 
