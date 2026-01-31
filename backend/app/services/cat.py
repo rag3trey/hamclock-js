@@ -154,16 +154,27 @@ class CATService:
             return 0
             
         try:
-            # Kenwood format: FR (read RX freq) or FT (read TX freq)
-            response = self._send_command(b"FA\r")
+            # Get command based on radio model
+            if self.radio_model not in self.radios:
+                return self.frequency
+                
+            command = self.radios[self.radio_model]["freq_get"]
+            response = self._send_command(command)
             
             if response:
-                # Parse frequency (format: FA00014050000)
                 freq_str = response.decode().strip()
-                if freq_str.startswith('FA'):
-                    freq_hz = int(freq_str[2:]) * 10  # Convert to Hz
-                    self.frequency = freq_hz
-                    return freq_hz
+                
+                # Parse based on radio model
+                if self.radio_model == "yaesu":
+                    if freq_str.startswith('FA'):
+                        freq_hz = int(freq_str[2:]) * 10  # Convert to Hz
+                        self.frequency = freq_hz
+                        return freq_hz
+                elif self.radio_model == "kenwood":
+                    if freq_str.startswith('FR'):
+                        freq_hz = int(freq_str[2:])
+                        self.frequency = freq_hz
+                        return freq_hz
                     
         except Exception as e:
             print(f"CAT: Error getting frequency: {e}")
@@ -176,9 +187,17 @@ class CATService:
             return False
             
         try:
-            # Convert Hz to radio format (usually 10 Hz resolution)
-            freq_val = frequency_hz // 10
-            command = f"FA{freq_val:011d}\r".encode()
+            if self.radio_model not in self.radios:
+                return False
+            
+            # Format command based on radio model
+            if self.radio_model == "yaesu":
+                freq_val = frequency_hz // 10
+                command = f"FA{freq_val:011d}\r".encode()
+            elif self.radio_model == "kenwood":
+                command = f"FT {frequency_hz:011d}\r".encode()
+            else:
+                return False
             
             response = self._send_command(command)
             if response:
@@ -197,7 +216,11 @@ class CATService:
             return "UNKNOWN"
             
         try:
-            response = self._send_command(b"MD\r")
+            if self.radio_model not in self.radios:
+                return "UNKNOWN"
+                
+            command = self.radios[self.radio_model]["mode_get"]
+            response = self._send_command(command)
             
             if response:
                 mode_str = response.decode().strip()
@@ -217,6 +240,9 @@ class CATService:
             return False
             
         try:
+            if self.radio_model not in self.radios:
+                return False
+            
             # Find mode number
             mode_upper = mode.upper()
             mode_num = None
@@ -228,8 +254,13 @@ class CATService:
             if mode_num is None:
                 print(f"CAT: Unknown mode: {mode}")
                 return False
+            
+            # Format command based on radio model
+            if self.radio_model == "yaesu" or self.radio_model == "kenwood":
+                command = f"MD{mode_num}\r".encode()
+            else:
+                return False
                 
-            command = f"MD{mode_num}\r".encode()
             response = self._send_command(command)
             
             if response:
@@ -248,7 +279,11 @@ class CATService:
             return 0
             
         try:
-            response = self._send_command(b"PC\r")
+            if self.radio_model not in self.radios:
+                return 0
+                
+            command = self.radios[self.radio_model]["power_get"]
+            response = self._send_command(command)
             
             if response:
                 power_str = response.decode().strip()
@@ -268,9 +303,19 @@ class CATService:
             return False
             
         try:
+            if self.radio_model not in self.radios:
+                return False
+            
             # Clamp power to valid range
             power = max(0, min(100, power))
-            command = f"PC{power:03d}\r".encode()
+            
+            # Format command based on radio model
+            if self.radio_model == "yaesu":
+                command = f"PC{power:03d}\r".encode()
+            elif self.radio_model == "kenwood":
+                command = f"PC{power:03d}\r".encode()
+            else:
+                return False
             
             response = self._send_command(command)
             if response:
