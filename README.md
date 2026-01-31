@@ -1,4 +1,4 @@
-# HamClock Web - Amateur Radio Clock & Information Display
+# HamClock-js - Amateur Radio Clock & Information Display
 
 A modern web-based rewrite of ESPHamClock using **Python FastAPI** backend and **JavaScript/React** frontend.
 
@@ -104,7 +104,7 @@ Choose one of the following setups:
 #### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/hamclock-py.git
+git clone https://github.com/rag3trey/hamclock-js.git
 cd hamclock-py
 ```
 
@@ -272,7 +272,7 @@ Choose one of the following setups:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/rag3trey/hamclock-py.git
+   git clone https://github.com/rag3trey/hamclock-js.git
    cd hamclock-py
    ```
 
@@ -560,8 +560,8 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
 
 # Clone and deploy
-git clone https://github.com/yourusername/hamclock-web.git
-cd hamclock-web
+git clone https://github.com/rag3trey/hamclock-js.git
+cd hamclock-js
 docker-compose up -d
 ```
 
@@ -658,8 +658,8 @@ The original ESPHamClock is Copyright © 2019 Elwood Downey, WB0OEW.
 
 ## 📞 Support
 
-- **Issues**: https://github.com/rag3trey/hamclock-py/issues
-- **Discussions**: https://github.com/rag3trey/hamclock-py/discussions
+- **Issues**: https://github.com/rag3trey/hamclock-js/issues
+- **Discussions**: https://github.com/rag3trey/hamclock-js/discussions
 - **Email**: rag3trey@gmail.com
 
 ---
