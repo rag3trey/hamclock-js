@@ -1,0 +1,142 @@
+.maidenhead-display {
+  background: rgba(20, 40, 60, 0.6);
+  border: 1px solid rgba(100, 150, 200, 0.3);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: 'Courier New', monospace;
+}
+
+.maidenhead-display label {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(150, 180, 220, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.grid-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.grid-value {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #00ff00;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  font-family: 'Courier New', monospace;
+  min-width: 80px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.grid-value.loading {
+  color: rgba(100, 150, 200, 0.7);
+  font-size: 14px;
+  text-shadow: none;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.grid-value.error {
+  color: rgba(255, 100, 100, 0.7);
+  font-size: 12px;
+  text-shadow: none;
+  letter-spacing: 0;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.precision-selector {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.precision-btn {
+  background: rgba(40, 80, 120, 0.5);
+  border: 1px solid rgba(100, 150, 200, 0.4);
+  color: rgba(150, 180, 220, 0.7);
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 36px;
+}
+
+.precision-btn:hover {
+  background: rgba(60, 100, 150, 0.6);
+  border-color: rgba(120, 170, 220, 0.6);
+  color: rgba(180, 220, 255, 0.9);
+}
+
+.precision-btn.active {
+  background: rgba(0, 150, 255, 0.6);
+  border-color: rgba(0, 200, 255, 0.8);
+  color: #00ffff;
+  text-shadow: 0 0 8px rgba(0, 200, 255, 0.5);
+  box-shadow: 0 0 12px rgba(0, 200, 255, 0.3);
+}
+
+.precision-btn:active {
+  transform: scale(0.95);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .maidenhead-display {
+    padding: 10px 12px;
+    margin: 6px 0;
+  }
+
+  .grid-value {
+    font-size: 20px;
+    min-width: 70px;
+  }
+
+  .precision-btn {
+    padding: 3px 6px;
+    font-size: 10px;
+    min-width: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .maidenhead-display {
+    padding: 8px 10px;
+  }
+
+  .grid-value {
+    font-size: 18px;
+    min-width: 60px;
+  }
+
+  .precision-btn {
+    padding: 2px 5px;
+    font-size: 9px;
+    min-width: 28px;
+  }
+
+  .precision-selector {
+    gap: 2px;
+  }
+}

@@ -1,0 +1,20 @@
+.clock-display {
+  display: flex;
+  gap: 2rem;
+}
+
+.clock-section {
+  text-align: center;
+}
+
+.clock-label {
+  font-size: 0.875rem;
+  color: #64b5f6;
+  margin-bottom: 0.25rem;
+}
+
+.clock-time {
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+}

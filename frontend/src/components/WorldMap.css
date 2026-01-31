@@ -1,0 +1,21 @@
+.world-map {
+  width: 100%;
+  position: relative;
+}
+
+.map-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: rgba(255,255,255,0.05);
+  border-radius: 4px;
+}
+
+.map-canvas {
+  cursor: crosshair;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  width: 100%;
+  height: auto;
+}

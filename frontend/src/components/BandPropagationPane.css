@@ -1,0 +1,141 @@
+.band-propagation-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(20, 30, 50, 0.6);
+  border-radius: 8px;
+  border: 1px solid rgba(100, 150, 200, 0.3);
+  max-height: 600px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 150, 200, 0.5) rgba(20, 30, 50, 0.3);
+}
+
+.band-propagation-pane::-webkit-scrollbar {
+  width: 6px;
+}
+
+.band-propagation-pane::-webkit-scrollbar-track {
+  background: rgba(20, 30, 50, 0.3);
+  border-radius: 3px;
+}
+
+.band-propagation-pane::-webkit-scrollbar-thumb {
+  background: rgba(100, 150, 200, 0.5);
+  border-radius: 3px;
+}
+
+.band-propagation-pane::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 150, 200, 0.7);
+}
+
+.band-propagation-pane.loading {
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  color: rgba(150, 150, 150, 0.8);
+  font-size: 14px;
+}
+
+.band-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-bottom: 1px solid rgba(100, 150, 200, 0.2);
+  padding-bottom: 12px;
+}
+
+.band-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #6dd5fa;
+}
+
+.band-icon {
+  font-size: 18px;
+}
+
+.space-weather-summary {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: rgba(200, 200, 200, 0.8);
+}
+
+.space-weather-summary span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.solar-flux {
+  color: #ffaa00;
+}
+
+.k-index {
+  color: #ff6b9d;
+}
+
+.a-index {
+  color: #00d4ff;
+}
+
+.bands-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+.band-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+  background: rgba(30, 40, 60, 0.8);
+  border-left: 4px solid;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.band-card:hover {
+  background: rgba(40, 50, 70, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.band-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(200, 200, 200, 0.9);
+  text-transform: uppercase;
+}
+
+.band-condition {
+  font-size: 13px;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(100, 200, 255, 0.3);
+}
+
+.band-muf {
+  font-size: 11px;
+  color: rgba(150, 200, 255, 0.7);
+  margin-top: 2px;
+}
+
+.band-fcrit {
+  font-size: 11px;
+  color: rgba(200, 150, 255, 0.7);
+}
+
+.band-timestamp {
+  font-size: 11px;
+  color: rgba(150, 150, 150, 0.6);
+  text-align: center;
+  padding-top: 8px;
+  border-top: 1px solid rgba(100, 150, 200, 0.2);
+  margin-top: 8px;
+}

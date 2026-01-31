@@ -1,0 +1,79 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.app-header {
+  background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+  padding: 1rem 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-title {
+  margin: 0;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.title-icon {
+  font-size: 2.5rem;
+}
+
+.callsign-badge {
+  font-size: 0.8rem;
+  margin-left: 1rem;
+  padding: 0.3rem 0.8rem;
+  background: rgba(255,255,255,0.2);
+  border-radius: 4px;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  display: inline-block;
+}
+
+.main-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.nav-link:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.app-main {
+  flex: 1;
+  padding: 2rem 0;
+  background: var(--bg-primary);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.app-footer {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 1rem 0;
+  text-align: center;
+  border-top: 1px solid rgba(128,128,128,0.2);
+}

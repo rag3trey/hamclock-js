@@ -1,0 +1,257 @@
+.qrz-info-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 800;
+  backdrop-filter: blur(4px);
+}
+
+.qrz-info-card {
+  background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+  border: 1px solid #3a3a3a;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.3s ease-out;
+  overflow: hidden;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.qrz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #3a3a3a;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.qrz-header h3 {
+  margin: 0;
+  font-size: 1.3em;
+  color: #4a9eff;
+  letter-spacing: 1px;
+}
+
+.qrz-close {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.qrz-close:hover {
+  color: #e0e0e0;
+}
+
+.qrz-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.qrz-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px;
+  background-color: rgba(74, 158, 255, 0.05);
+  border-left: 3px solid #4a9eff;
+  border-radius: 4px;
+}
+
+.qrz-label {
+  font-weight: 600;
+  color: #4a9eff;
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.qrz-value {
+  color: #d0d0d0;
+  text-align: right;
+  flex: 1;
+  word-break: break-word;
+}
+
+.qrz-value a {
+  color: #4a9eff;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.qrz-value a:hover {
+  text-decoration: underline;
+  color: #6bb3ff;
+}
+
+.qrz-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: #4a9eff;
+  font-size: 0.95em;
+}
+
+.qrz-loading::after {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-left: 8px;
+  border-radius: 50%;
+  background: #4a9eff;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.qrz-error {
+  padding: 16px;
+  background-color: rgba(255, 80, 80, 0.15);
+  border: 1px solid #ff5050;
+  border-radius: 6px;
+  color: #ff9999;
+  text-align: center;
+}
+
+.qrz-not-found {
+  padding: 24px;
+  text-align: center;
+  color: #888;
+  font-size: 0.95em;
+}
+
+/* Scrollbar styling */
+.qrz-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.qrz-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.qrz-content::-webkit-scrollbar-thumb {
+  background: rgba(74, 158, 255, 0.3);
+  border-radius: 3px;
+}
+
+.qrz-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(74, 158, 255, 0.5);
+}
+
+.qrz-photo {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid #4a9eff;
+  box-shadow: 0 4px 12px rgba(74, 158, 255, 0.2);
+}
+
+.qrz-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.qrz-bio {
+  padding: 12px;
+  background-color: rgba(74, 158, 255, 0.08);
+  border: 1px solid #4a9eff;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.qrz-bio .qrz-label {
+  border: none;
+  padding: 0;
+  background: none;
+}
+
+.qrz-bio-text {
+  color: #d0d0d0;
+  line-height: 1.4;
+  font-size: 0.9em;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.qrz-bio-text::-webkit-scrollbar {
+  width: 4px;
+}
+
+.qrz-bio-text::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.qrz-bio-text::-webkit-scrollbar-thumb {
+  background: rgba(74, 158, 255, 0.2);
+  border-radius: 2px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .qrz-info-card {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .qrz-field {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .qrz-label {
+    min-width: auto;
+  }
+
+  .qrz-value {
+    text-align: left;
+  }
+}
