@@ -24,19 +24,21 @@ const CATStatus = () => {
   // Fetch available ports and bands on mount
   useEffect(() => {
     const fetchPorts = async () => {
-      // CAT requires actual hardware - don't poll
-      setPorts([]);
+      try {
+        const portList = await getAvailableCATPorts();
+        setPorts(portList.ports || []);
+        if (portList.ports && portList.ports.length === 0) {
+          setError('No serial ports found. Connect a radio via USB and refresh.');
+        } else {
+          setError(null);
+        }
+      } catch (err) {
+        console.error('Error fetching ports:', err);
+        setError('Failed to fetch serial ports');
+      }
     };
 
-    const fetchBands = async () => {
-      // CAT requires actual hardware - don't poll
-      setBands([]);
-    };
-
-    // Set error instead of trying to connect
-    setError('CAT control requires hardware connection');
-
-    return () => {};
+    fetchPorts();
   }, []);
 
   // Poll CAT status if connected
