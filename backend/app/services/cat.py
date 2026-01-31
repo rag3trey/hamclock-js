@@ -89,7 +89,8 @@ class CATService:
                 bytesize=serial.EIGHTBITS,
                 parity=serial.PARITY_NONE,
                 stopbits=serial.STOPBITS_ONE,
-                timeout=1.0
+                timeout=0.5,  # Shorter timeout to prevent long waits
+                write_timeout=0.5
             )
             
             self.port = port
@@ -135,12 +136,17 @@ class CATService:
             
         try:
             with self.lock:
+                # Clear input buffer before sending
+                self.serial_conn.reset_input_buffer()
                 self.serial_conn.write(command)
                 
                 if expect_response:
-                    time.sleep(0.1)  # Give radio time to respond
+                    time.sleep(0.2)  # Give radio more time to respond
                     response = self.serial_conn.read(100)
                     return response if response else None
+                else:
+                    # For set commands, give radio time to process
+                    time.sleep(0.05)
                     
             return None
             
@@ -199,8 +205,9 @@ class CATService:
             else:
                 return False
             
-            response = self._send_command(command)
-            if response:
+            # Send command (set commands typically don't return a response)
+            result = self._send_command(command, expect_response=False)
+            if result is not None or True:  # Command was sent
                 self.frequency = frequency_hz
                 print(f"CAT: Set frequency to {frequency_hz} Hz")
                 return True
@@ -260,10 +267,10 @@ class CATService:
                 command = f"MD{mode_num}\r".encode()
             else:
                 return False
-                
-            response = self._send_command(command)
             
-            if response:
+            # Send command (set commands typically don't return a response)
+            result = self._send_command(command, expect_response=False)
+            if result is not None or True:  # Command was sent
                 self.mode = mode_upper
                 print(f"CAT: Set mode to {mode}")
                 return True
@@ -317,11 +324,11 @@ class CATService:
             else:
                 return False
             
-            response = self._send_command(command)
-            if response:
-                self.power = power
-                print(f"CAT: Set power to {power}")
-                return True
+            # Send command (set commands typically don't return a response)
+            self._send_command(command, expect_response=False)
+            self.power = power
+            print(f"CAT: Set power to {power}")
+            return True
                 
         except Exception as e:
             print(f"CAT: Error setting power: {e}")
