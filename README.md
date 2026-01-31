@@ -105,7 +105,7 @@ Choose one of the following setups:
 
 ```bash
 git clone https://github.com/rag3trey/hamclock-js.git
-cd hamclock-py
+cd hamclock-js
 ```
 
 #### 2. Create Conda environment
@@ -273,7 +273,7 @@ Choose one of the following setups:
 1. **Clone the repository**
    ```bash
    git clone https://github.com/rag3trey/hamclock-js.git
-   cd hamclock-py
+   cd hamclock-js
    ```
 
 2. **Start all services**
