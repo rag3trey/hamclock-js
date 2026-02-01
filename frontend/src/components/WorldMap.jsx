@@ -155,7 +155,7 @@ function calculateGreatCirclePath(lat1, lng1, lat2, lng2, numPoints = 100) {
 }
 
 // Canvas map for Azimuthal projection using D3
-function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapClick, showNightShade, showGrid, gridType, showRangeRings, zoomCenter, zoomScale }) {
+function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapClick, showNightShade, showGrid, gridType, showRangeRings, zoomCenter, zoomScale, visiblePanels }) {
   const canvasRef = useRef(null);
   const centerLat = zoomCenter?.lat || (deLocation ? deLocation.latitude : 40);
   const centerLng = zoomCenter?.lng || (deLocation ? deLocation.longitude : 0);
@@ -360,7 +360,7 @@ function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapCl
     }
     
     // Draw bearing lines from DE to all DX spots (Azimuthal)
-    if (deLocation && dxSpots && dxSpots.length > 0) {
+    if (visiblePanels?.dxcluster && deLocation && dxSpots && dxSpots.length > 0) {
       dxSpots.forEach((spot) => {
         const dePoint = projection([deLocation.longitude, deLocation.latitude]);
         const dxPoint = projection([spot.longitude, spot.latitude]);
@@ -409,7 +409,7 @@ function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapCl
     }
     
     // Draw all DX spots
-    if (dxSpots && dxSpots.length > 0) {
+    if (visiblePanels?.dxcluster && dxSpots && dxSpots.length > 0) {
       dxSpots.forEach((spot, index) => {
         const point = projection([spot.longitude, spot.latitude]);
         if (point) {
@@ -428,7 +428,7 @@ function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapCl
     }
     
     // Draw activations (SOTA/POTA) - blue markers with different style
-    if (activations && activations.length > 0) {
+    if (visiblePanels?.activations && activations && activations.length > 0) {
       activations.forEach((activation, index) => {
         const point = projection([activation.longitude, activation.latitude]);
         if (point) {
@@ -464,7 +464,7 @@ function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapCl
     }
     
     // Draw satellites (Azimuthal)
-    if (satellites && satellites.length > 0) {
+    if (visiblePanels?.satellites && satellites && satellites.length > 0) {
       satellites.forEach((sat) => {
         const point = projection([sat.longitude, sat.latitude]);
         if (point) {
@@ -482,7 +482,7 @@ function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapCl
         }
       });
     }
-  }, [deLocation, dxSpots, activations, satellites, terminatorData, showNightShade, showGrid, gridType, showRangeRings, centerLat, centerLng, zoomScale]);
+  }, [deLocation, dxSpots, activations, satellites, terminatorData, showNightShade, showGrid, gridType, showRangeRings, centerLat, centerLng, zoomScale, visiblePanels]);
 
   const handleClick = (e) => {
     const canvas = canvasRef.current;
@@ -513,7 +513,7 @@ function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapCl
 }
 
 // Canvas map for Mercator projection using D3
-function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapClick, showNightShade, showGrid, gridType, showRangeRings, zoomCenter, zoomScale }) {
+function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapClick, showNightShade, showGrid, gridType, showRangeRings, zoomCenter, zoomScale, visiblePanels }) {
   const canvasRef = useRef(null);
   
   const { data: terminatorData } = useQuery({
@@ -714,7 +714,7 @@ function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
     }
     
     // Draw bearing lines from DE to all DX spots
-    if (deLocation && dxSpots && dxSpots.length > 0) {
+    if (deLocation && visiblePanels?.dxcluster && dxSpots && dxSpots.length > 0) {
       dxSpots.forEach((spot) => {
         const dePoint = projection([deLocation.longitude, deLocation.latitude]);
         const dxPoint = projection([spot.longitude, spot.latitude]);
@@ -765,7 +765,7 @@ function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
     }
     
     // Draw all DX spots
-    if (dxSpots && dxSpots.length > 0) {
+    if (visiblePanels?.dxcluster && dxSpots && dxSpots.length > 0) {
       dxSpots.forEach((spot, index) => {
         const point = projection([spot.longitude, spot.latitude]);
         if (point) {
@@ -784,7 +784,7 @@ function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
     }
     
     // Draw activations (SOTA/POTA) - blue markers with different style
-    if (activations && activations.length > 0) {
+    if (visiblePanels?.activations && activations && activations.length > 0) {
       activations.forEach((activation, index) => {
         const point = projection([activation.longitude, activation.latitude]);
         if (point) {
@@ -820,7 +820,7 @@ function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
     }
     
     // Draw satellites (Mercator)
-    if (satellites && satellites.length > 0) {
+    if (visiblePanels?.satellites && satellites && satellites.length > 0) {
       satellites.forEach((sat) => {
         const point = projection([sat.longitude, sat.latitude]);
         if (point) {
@@ -838,7 +838,7 @@ function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
         }
       });
     }
-  }, [deLocation, dxSpots, activations, satellites, terminatorData, showNightShade, showGrid, zoomCenter, zoomScale]);
+  }, [deLocation, dxSpots, activations, satellites, terminatorData, showNightShade, showGrid, gridType, showRangeRings, zoomCenter, zoomScale, visiblePanels]);
 
   const handleClick = (e) => {
     const canvas = canvasRef.current;
@@ -869,7 +869,7 @@ function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
 }
 
 // Canvas map for Robinson projection using D3
-function RobinsonCanvas({ deLocation, dxSpots, activations, satellites, onMapClick, showNightShade, showGrid, gridType, showRangeRings, zoomCenter, zoomScale }) {
+function RobinsonCanvas({ deLocation, dxSpots, activations, satellites, onMapClick, showNightShade, showGrid, gridType, showRangeRings, zoomCenter, zoomScale, visiblePanels }) {
   const canvasRef = useRef(null);
   
   const { data: terminatorData } = useQuery({
@@ -1068,7 +1068,7 @@ function RobinsonCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
     }
     
     // Draw bearing lines from DE to all DX spots (Robinson)
-    if (deLocation && dxSpots && dxSpots.length > 0) {
+    if (deLocation && visiblePanels?.dxcluster && dxSpots && dxSpots.length > 0) {
       dxSpots.forEach((spot) => {
         const dePoint = projection([deLocation.longitude, deLocation.latitude]);
         const dxPoint = projection([spot.longitude, spot.latitude]);
@@ -1117,7 +1117,7 @@ function RobinsonCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
     }
     
     // Draw all DX spots
-    if (dxSpots && dxSpots.length > 0) {
+    if (visiblePanels?.dxcluster && dxSpots && dxSpots.length > 0) {
       dxSpots.forEach((spot, index) => {
         const point = projection([spot.longitude, spot.latitude]);
         if (point) {
@@ -1136,7 +1136,7 @@ function RobinsonCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
     }
     
     // Draw activations (SOTA/POTA) - blue markers with different style
-    if (activations && activations.length > 0) {
+    if (visiblePanels?.activations && activations && activations.length > 0) {
       activations.forEach((activation, index) => {
         const point = projection([activation.longitude, activation.latitude]);
         if (point) {
@@ -1172,7 +1172,7 @@ function RobinsonCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
     }
     
     // Draw satellites (Robinson)
-    if (satellites && satellites.length > 0) {
+    if (visiblePanels?.satellites && satellites && satellites.length > 0) {
       satellites.forEach((sat) => {
         const point = projection([sat.longitude, sat.latitude]);
         if (point) {
@@ -1190,7 +1190,7 @@ function RobinsonCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
         }
       });
     }
-  }, [deLocation, dxSpots, activations, satellites, terminatorData, showNightShade, showGrid, zoomCenter, zoomScale]);
+  }, [deLocation, dxSpots, activations, satellites, terminatorData, showNightShade, showGrid, gridType, showRangeRings, zoomCenter, zoomScale, visiblePanels]);
 
   const handleClick = (e) => {
     const canvas = canvasRef.current;
@@ -1221,7 +1221,7 @@ function RobinsonCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
 }
 
 // Main WorldMap component
-const WorldMap = ({ deLocation, dxSpots, activations, satellites, autoZoomToDX, onZoomComplete, onMapClick, onClearDX }) => {
+const WorldMap = ({ deLocation, dxSpots, activations, satellites, autoZoomToDX, onZoomComplete, onMapClick, onClearDX, visiblePanels }) => {
   const [showNightShade, setShowNightShade] = useState(true);
   const [showGrid, setShowGrid] = useState(true);
   const [gridType, setGridType] = useState('lat-lng');
@@ -1298,6 +1298,7 @@ const WorldMap = ({ deLocation, dxSpots, activations, satellites, autoZoomToDX, 
           showRangeRings={showRangeRings}
           zoomCenter={zoom.center}
           zoomScale={zoom.scale}
+          visiblePanels={visiblePanels}
         />
       ) : projection === 'robinson' ? (
         <RobinsonCanvas
@@ -1312,6 +1313,7 @@ const WorldMap = ({ deLocation, dxSpots, activations, satellites, autoZoomToDX, 
           showRangeRings={showRangeRings}
           zoomCenter={zoom.center}
           zoomScale={zoom.scale}
+          visiblePanels={visiblePanels}
         />
       ) : (
         <MercatorCanvas
@@ -1326,6 +1328,7 @@ const WorldMap = ({ deLocation, dxSpots, activations, satellites, autoZoomToDX, 
           showRangeRings={showRangeRings}
           zoomCenter={zoom.center}
           zoomScale={zoom.scale}
+          visiblePanels={visiblePanels}
         />
       )}
     </div>

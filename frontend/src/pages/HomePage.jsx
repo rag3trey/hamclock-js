@@ -372,6 +372,7 @@ const HomePage = () => {
                 setDxSpots(prev => [newSpot, ...prev]);
               }}
               onClearDX={() => setDxSpots([])}
+              visiblePanels={visiblePanels}
             />
           ) : (
             <div style={{ 
