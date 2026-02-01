@@ -8,7 +8,7 @@ import {
 } from '../utils/watchlistManager';
 import './WatchlistPane.css';
 
-export default function WatchlistPane({ visible }) {
+export default function WatchlistPane() {
   const [watchlist, setWatchlist] = useState(() => getWatchlist());
   const [activeTab, setActiveTab] = useState('satellites');
 
@@ -20,8 +20,6 @@ export default function WatchlistPane({ visible }) {
     window.addEventListener('watchlistChanged', handleWatchlistChange);
     return () => window.removeEventListener('watchlistChanged', handleWatchlistChange);
   }, []);
-
-  if (!visible) return null;
 
   const handleRemoveSatellite = (satelliteId) => {
     removeSatelliteFromWatchlist(satelliteId);

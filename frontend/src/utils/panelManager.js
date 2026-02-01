@@ -14,7 +14,7 @@ const PANEL_DEFAULTS = {
   activations: true,
   contests: true,
   satellites: true,
-  watchlist: false,
+  watchlist: true,
 };
 
 const PANEL_LABELS = {
