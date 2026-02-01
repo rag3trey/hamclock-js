@@ -50,3 +50,7 @@ build/
 # Misc
 *.log
 .cache/
+# Local documentation
+GPS_SETUP.md
+PROJECT_SUMMARY.md
+QUICKSTART.md
