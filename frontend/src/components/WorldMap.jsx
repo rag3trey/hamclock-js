@@ -11,6 +11,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './WorldMap.css';
 import MapControls from './MapControls';
+import { generateMaidenheadGrid, generateCQZoneGridLines, generateITURegionGridLines } from '../utils/gridUtils';
 
 // Convert TopoJSON to GeoJSON for rendering
 const worldLand = feature(worldLandTopo, worldLandTopo.objects.land);
@@ -153,7 +154,7 @@ function calculateGreatCirclePath(lat1, lng1, lat2, lng2, numPoints = 100) {
 }
 
 // Canvas map for Azimuthal projection using D3
-function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapClick, showNightShade, showGrid, zoomCenter, zoomScale }) {
+function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapClick, showNightShade, showGrid, gridType, zoomCenter, zoomScale }) {
   const canvasRef = useRef(null);
   const centerLat = zoomCenter?.lat || (deLocation ? deLocation.latitude : 40);
   const centerLng = zoomCenter?.lng || (deLocation ? deLocation.longitude : 0);
@@ -457,7 +458,7 @@ function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapCl
         }
       });
     }
-  }, [deLocation, dxSpots, activations, satellites, terminatorData, showNightShade, showGrid, centerLat, centerLng, zoomScale]);
+  }, [deLocation, dxSpots, activations, satellites, terminatorData, showNightShade, showGrid, gridType, centerLat, centerLng, zoomScale]);
 
   const handleClick = (e) => {
     const canvas = canvasRef.current;
@@ -488,7 +489,7 @@ function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapCl
 }
 
 // Canvas map for Mercator projection using D3
-function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapClick, showNightShade, showGrid, zoomCenter, zoomScale }) {
+function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapClick, showNightShade, showGrid, gridType, zoomCenter, zoomScale }) {
   const canvasRef = useRef(null);
   
   const { data: terminatorData } = useQuery({
@@ -826,7 +827,7 @@ function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
 }
 
 // Canvas map for Robinson projection using D3
-function RobinsonCanvas({ deLocation, dxSpots, activations, satellites, onMapClick, showNightShade, showGrid, zoomCenter, zoomScale }) {
+function RobinsonCanvas({ deLocation, dxSpots, activations, satellites, onMapClick, showNightShade, showGrid, gridType, zoomCenter, zoomScale }) {
   const canvasRef = useRef(null);
   
   const { data: terminatorData } = useQuery({
@@ -1230,6 +1231,7 @@ const WorldMap = ({ deLocation, dxSpots, activations, satellites, autoZoomToDX, 
           onMapClick={onMapClick}
           showNightShade={showNightShade}
           showGrid={showGrid}
+          gridType={gridType}
           zoomCenter={zoom.center}
           zoomScale={zoom.scale}
         />
@@ -1242,6 +1244,7 @@ const WorldMap = ({ deLocation, dxSpots, activations, satellites, autoZoomToDX, 
           onMapClick={onMapClick}
           showNightShade={showNightShade}
           showGrid={showGrid}
+          gridType={gridType}
           zoomCenter={zoom.center}
           zoomScale={zoom.scale}
         />
@@ -1254,6 +1257,7 @@ const WorldMap = ({ deLocation, dxSpots, activations, satellites, autoZoomToDX, 
           onMapClick={onMapClick}
           showNightShade={showNightShade}
           showGrid={showGrid}
+          gridType={gridType}
           zoomCenter={zoom.center}
           zoomScale={zoom.scale}
         />
