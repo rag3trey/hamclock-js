@@ -10,14 +10,17 @@ import {
   fetchSetCallsign,
   fetchResetSettings,
 } from '../api/index';
+import { getVisiblePanels, saveVisiblePanels, showAllPanels, hideAllPanels, resetPanels, PANEL_LABELS } from '../utils/panelManager';
 import './SettingsModal.css';
 
-export default function SettingsModal({ isOpen, onClose }) {
+// Custom event to notify when panels change
+const PANELS_CHANGED_EVENT = 'panelsChanged';export default function SettingsModal({ isOpen, onClose }) {
   const [settings, setSettings] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('location');
   const [formData, setFormData] = useState({});
+  const [visiblePanels, setVisiblePanels] = useState(getVisiblePanels());
 
   // Load settings on mount or when modal opens
   useEffect(() => {
@@ -169,6 +172,32 @@ export default function SettingsModal({ isOpen, onClose }) {
     }
   };
 
+  const handlePanelToggle = (panelName) => {
+    const updated = { ...visiblePanels, [panelName]: !visiblePanels[panelName] };
+    setVisiblePanels(updated);
+    saveVisiblePanels(updated);
+    // Emit custom event to notify HomePage
+    window.dispatchEvent(new CustomEvent(PANELS_CHANGED_EVENT, { detail: updated }));
+  };
+
+  const handleShowAllPanels = () => {
+    const all = showAllPanels();
+    setVisiblePanels(all);
+    window.dispatchEvent(new CustomEvent(PANELS_CHANGED_EVENT, { detail: all }));
+  };
+
+  const handleHideAllPanels = () => {
+    const none = hideAllPanels();
+    setVisiblePanels(none);
+    window.dispatchEvent(new CustomEvent(PANELS_CHANGED_EVENT, { detail: none }));
+  };
+
+  const handleResetPanels = () => {
+    const defaults = resetPanels();
+    setVisiblePanels(defaults);
+    window.dispatchEvent(new CustomEvent(PANELS_CHANGED_EVENT, { detail: defaults }));
+  };
+
   const handleReset = async () => {
     if (window.confirm('Are you sure you want to reset all settings to defaults?')) {
       try {
@@ -210,6 +239,12 @@ export default function SettingsModal({ isOpen, onClose }) {
             onClick={() => setActiveTab('location')}
           >
             📍 Location
+          </button>
+          <button
+            className={`tab-btn ${activeTab === 'panels' ? 'active' : ''}`}
+            onClick={() => setActiveTab('panels')}
+          >
+            📋 Panels
           </button>
           <button
             className={`tab-btn ${activeTab === 'qrz' ? 'active' : ''}`}
@@ -437,6 +472,43 @@ export default function SettingsModal({ isOpen, onClose }) {
                     Imperial (miles, mph)
                   </button>
                 </div>
+              </div>
+            </div>
+          )}
+
+          {/* Panels Tab */}
+          {activeTab === 'panels' && (
+            <div className="tab-content">
+              <div className="form-group">
+                <label>Manage Dashboard Panels</label>
+                <p className="settings-description">Show or hide panels to customize your dashboard layout.</p>
+              </div>
+
+              <div className="panels-grid">
+                {Object.entries(PANEL_LABELS).map(([panelKey, panelLabel]) => (
+                  <div key={panelKey} className="panel-toggle-item">
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={visiblePanels[panelKey] || false}
+                        onChange={() => handlePanelToggle(panelKey)}
+                      />
+                      <span>{panelLabel}</span>
+                    </label>
+                  </div>
+                ))}
+              </div>
+
+              <div className="panel-actions">
+                <button className="btn btn-small" onClick={handleShowAllPanels}>
+                  Show All
+                </button>
+                <button className="btn btn-small" onClick={handleHideAllPanels}>
+                  Hide All
+                </button>
+                <button className="btn btn-small" onClick={handleResetPanels}>
+                  Reset to Defaults
+                </button>
               </div>
             </div>
           )}

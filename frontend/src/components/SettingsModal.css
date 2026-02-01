@@ -358,3 +358,64 @@
     width: 100%;
   }
 }
+/* Panel Manager Styles */
+.panels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.panel-toggle-item {
+  display: flex;
+  align-items: center;
+}
+
+.panel-toggle-item label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #e0e0e0;
+  user-select: none;
+}
+
+.panel-toggle-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #0066cc;
+}
+
+.panel-toggle-item label:hover {
+  color: #fff;
+}
+
+.panel-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.btn-small {
+  padding: 6px 12px;
+  font-size: 12px;
+  background: #0066cc;
+  color: white;
+  border: 1px solid #0052a3;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-small:hover {
+  background: #0052a3;
+}
+
+.settings-description {
+  font-size: 13px;
+  color: #aaa;
+  margin: 8px 0;
+  font-style: italic;
+}

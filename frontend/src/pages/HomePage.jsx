@@ -21,6 +21,7 @@ import GreatCircleInfo from '../components/GreatCircleInfo';
 import SettingsModal from '../components/SettingsModal';
 import { getSpotterLocation } from '../api/spotterLocations';
 import { fetchCallsignLookup, fetchAllActivationsWithFallback, fetchAllVisibleSatellites, fetchGetSettings } from '../api';
+import { getVisiblePanels } from '../utils/panelManager';
 import './HomePage.css';
 
 const HomePage = () => {
@@ -35,10 +36,25 @@ const HomePage = () => {
   const [selectedSatellite, setSelectedSatellite] = useState(null);
   const [timeFormat, setTimeFormat] = useState('24h'); // '12h' or '24h'
   const [units, setUnits] = useState('imperial'); // 'metric' or 'imperial'
+  const [visiblePanels, setVisiblePanels] = useState(getVisiblePanels());
   
   // Load settings on component mount
   useEffect(() => {
     loadSettings();
+    // Listen for custom event when panels are toggled
+    const handlePanelsChanged = (e) => {
+      setVisiblePanels(e.detail);
+    };
+    // Also listen for storage changes (for other tabs)
+    const handleStorageChange = () => {
+      setVisiblePanels(getVisiblePanels());
+    };
+    window.addEventListener('panelsChanged', handlePanelsChanged);
+    window.addEventListener('storage', handleStorageChange);
+    return () => {
+      window.removeEventListener('panelsChanged', handlePanelsChanged);
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
   
   const loadSettings = async () => {
@@ -64,10 +80,12 @@ const HomePage = () => {
   // Collapsible panel states
   const [collapsedPanels, setCollapsedPanels] = useState({
     sunmoon: false,
+    sunmoontimes: false,
     bandconditions: false,
     ncdxf: false,
     pskreporter: false,
     spaceweather: false,
+    trend: false,
     dxcluster: false,
     activations: false,
     contests: false,
@@ -390,6 +408,7 @@ const HomePage = () => {
 
           {deLocation && (
             <>
+              {visiblePanels.sunmoon && (
               <div className={`panel ${collapsedPanels.sunmoon ? 'collapsed' : ''}`}>
                 <div className="panel-header">
                   <h3>Sun & Moon</h3>
@@ -408,7 +427,9 @@ const HomePage = () => {
                   />
                 )}
               </div>
+              )}
 
+              {visiblePanels.sunmoontimes && (
               <div className={`panel sun-moon-times-panel ${collapsedPanels.sunmoontimes ? 'collapsed' : ''}`}>
                 <div className="panel-header">
                   <h3>Sun & Moon Times</h3>
@@ -427,7 +448,9 @@ const HomePage = () => {
                   />
                 )}
               </div>
+              )}
               
+              {visiblePanels.bandconditions && (
               <div className={`panel band-conditions-panel ${collapsedPanels.bandconditions ? 'collapsed' : ''}`}>
                 <div className="panel-header">
                   <h3>Band Conditions</h3>
@@ -443,7 +466,9 @@ const HomePage = () => {
                   <BandConditionsPane />
                 )}
               </div>
+              )}
               
+              {visiblePanels.ncdxf && (
               <div className={`panel ${collapsedPanels.ncdxf ? 'collapsed' : ''}`}>
                 <div className="panel-header">
                   <h3>NCDXF Beacons</h3>
@@ -462,7 +487,9 @@ const HomePage = () => {
                   />
                 )}
               </div>
+              )}
               
+              {visiblePanels.pskreporter && (
               <div className={`panel ${collapsedPanels.pskreporter ? 'collapsed' : ''}`}>
                 <div className="panel-header">
                   <h3>PSK Reporter</h3>
@@ -482,7 +509,9 @@ const HomePage = () => {
                   />
                 )}
               </div>
+              )}
               
+              {visiblePanels.spaceweather && (
               <div className={`panel ${collapsedPanels.spaceweather ? 'collapsed' : ''}`}>
                 <div className="panel-header">
                   <h3>Space Weather</h3>
@@ -498,7 +527,9 @@ const HomePage = () => {
                   <SpaceWeatherPane />
                 )}
               </div>
+              )}
 
+              {visiblePanels.trend && (
               <div className={`panel trend-panel ${collapsedPanels.trend ? 'collapsed' : ''}`}>
                 <div className="panel-header">
                   <h3>Solar Flux Trend</h3>
@@ -514,7 +545,9 @@ const HomePage = () => {
                   <SolarFluxTrend />
                 )}
               </div>
+              )}
               
+              {visiblePanels.dxcluster && (
               <div className={`panel dx-panel ${collapsedPanels.dxcluster ? 'collapsed' : ''}`}>
                 <div className="panel-header">
                   <h3>DX Cluster</h3>
@@ -534,7 +567,9 @@ const HomePage = () => {
                   />
                 )}
               </div>
+              )}
               
+              {visiblePanels.activations && (
               <div className={`panel ${collapsedPanels.activations ? 'collapsed' : ''}`}>
                 <div className="panel-header">
                   <h3>On The Air</h3>
@@ -552,7 +587,9 @@ const HomePage = () => {
                   />
                 )}
               </div>
+              )}
 
+              {visiblePanels.contests && (
               <div className={`panel ${collapsedPanels.contests ? 'collapsed' : ''}`}>
                 <div className="panel-header">
                   <h3>Contests</h3>
@@ -568,23 +605,9 @@ const HomePage = () => {
                   <ContestsPane />
                 )}
               </div>
+              )}
 
-              <div className={`panel ${collapsedPanels.contests ? 'collapsed' : ''}`}>
-                <div className="panel-header">
-                  <h3>Contests</h3>
-                  <button 
-                    className="collapse-btn"
-                    onClick={() => togglePanel('contests')}
-                    title={collapsedPanels.contests ? 'Expand' : 'Collapse'}
-                  >
-                    {collapsedPanels.contests ? '▶' : '▼'}
-                  </button>
-                </div>
-                {!collapsedPanels.contests && (
-                  <ContestsPane />
-                )}
-              </div>
-
+              {visiblePanels.satellites && (
               <div className={`panel ${collapsedPanels.satellites ? 'collapsed' : ''}`}>
                 <div className="panel-header">
                   <h3>Satellites</h3>
@@ -605,6 +628,7 @@ const HomePage = () => {
                   />
                 )}
               </div>
+              )}
             </>
           )}
         </div>
