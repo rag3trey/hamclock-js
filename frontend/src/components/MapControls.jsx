@@ -13,7 +13,9 @@ const MapControls = ({
   deLocation,
   onClearDX,
   gridType = 'lat-lng',
-  setGridType
+  setGridType,
+  showRangeRings = false,
+  setShowRangeRings
 }) => {
   const [showGridOptions, setShowGridOptions] = useState(false);
 
@@ -91,6 +93,19 @@ const MapControls = ({
             </label>
           </div>
         )}
+      </div>
+
+      <div className="toolbar-divider"></div>
+
+      <div className="toolbar-section">
+        <label className="toolbar-checkbox" title="Toggle range rings from your location">
+          <input
+            type="checkbox"
+            checked={showRangeRings}
+            onChange={(e) => setShowRangeRings?.(e.target.checked)}
+          />
+          <span>Rings</span>
+        </label>
       </div>
 
       <div className="toolbar-divider"></div>

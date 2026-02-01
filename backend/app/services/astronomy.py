@@ -35,12 +35,18 @@ class AstronomyService:
         """Initialize ephemeris data (downloads ~20MB on first run, then cached)"""
         try:
             # Load DE421 ephemeris (2000-2053)
-            # Try to load from current directory first, then let skyfield handle it
-            try:
-                self.planets = load('de421.bsp')
-            except Exception as e1:
-                print(f"⚠️  Could not load de421.bsp from disk: {e1}")
-                print("⚠️  Attempting to download ephemeris (this may take a moment)...")
+            # Use absolute path to ensure we find the file
+            import os
+            backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            de421_path = os.path.join(backend_dir, 'de421.bsp')
+            
+            print(f"🔍 Looking for de421.bsp at: {de421_path}")
+            
+            if os.path.exists(de421_path):
+                print(f"✅ Found de421.bsp at {de421_path}")
+                self.planets = load.open(de421_path)
+            else:
+                print(f"⚠️  de421.bsp not found at {de421_path}, trying default load...")
                 self.planets = load('de421.bsp')  # Will download if needed
             
             self.earth = self.planets['earth']
@@ -105,12 +111,12 @@ class AstronomyService:
             lng: Longitude in degrees  
             date: Date to calculate for (UTC), defaults to today
             
-        Retself.earth is None or self.sun is None or self.planets is None:
-            raise RuntimeError("Astronomy service not initialized. Call initialize() first.")
-        
-        if urns:
+        Returns:
             Dict with sunrise, sunset, solar_noon times
         """
+        if self.earth is None or self.sun is None or self.planets is None:
+            raise RuntimeError("Astronomy service not initialized. Call initialize() first.")
+        
         if date is None:
             date = datetime.now(timezone.utc)
         

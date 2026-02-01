@@ -8,6 +8,7 @@ const SunMoonTimes = ({ deLocation, units = 'imperial' }) => {
   const [moonPhase, setMoonPhase] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [retryCount, setRetryCount] = useState(0);
 
   useEffect(() => {
     if (!deLocation) return;
@@ -17,21 +18,35 @@ const SunMoonTimes = ({ deLocation, units = 'imperial' }) => {
       setError(null);
       try {
         const today = new Date().toISOString().split('T')[0];
+        console.log('Fetching sun/moon data for:', deLocation, 'on', today);
         
         // Fetch sun rise/set
         const sunResponse = await fetchSunRiseSet(deLocation.latitude, deLocation.longitude, today);
+        console.log('Sun response:', sunResponse);
         setSunData(sunResponse);
+        setRetryCount(0); // Reset on success
 
         // Fetch moon rise/set
         const moonResponse = await fetchMoonRiseSet(deLocation.latitude, deLocation.longitude, today);
+        console.log('Moon response:', moonResponse);
         setMoonData(moonResponse);
 
         // Fetch moon phase
         const moonPosResponse = await fetchMoonPosition(deLocation.latitude, deLocation.longitude);
+        console.log('Moon position response:', moonPosResponse);
         setMoonPhase(moonPosResponse);
       } catch (err) {
         console.error('Error fetching sun/moon data:', err);
-        setError('Failed to load sun/moon times');
+        setError('Failed to load sun/moon times: ' + (err.message || err));
+        
+        // Retry a few times with delay
+        if (retryCount < 3) {
+          console.log('Retrying astronomy in 5 seconds...');
+          setTimeout(() => {
+            setRetryCount(retryCount + 1);
+            fetchData();
+          }, 5000);
+        }
       } finally {
         setLoading(false);
       }

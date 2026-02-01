@@ -12,6 +12,7 @@ import 'leaflet/dist/leaflet.css';
 import './WorldMap.css';
 import MapControls from './MapControls';
 import { generateMaidenheadGrid, generateCQZoneGridLines, generateITURegionGridLines } from '../utils/gridUtils';
+import { generateStandardRangeRings } from '../utils/rangeRings';
 
 // Convert TopoJSON to GeoJSON for rendering
 const worldLand = feature(worldLandTopo, worldLandTopo.objects.land);
@@ -154,7 +155,7 @@ function calculateGreatCirclePath(lat1, lng1, lat2, lng2, numPoints = 100) {
 }
 
 // Canvas map for Azimuthal projection using D3
-function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapClick, showNightShade, showGrid, gridType, zoomCenter, zoomScale }) {
+function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapClick, showNightShade, showGrid, gridType, showRangeRings, zoomCenter, zoomScale }) {
   const canvasRef = useRef(null);
   const centerLat = zoomCenter?.lat || (deLocation ? deLocation.latitude : 40);
   const centerLng = zoomCenter?.lng || (deLocation ? deLocation.longitude : 0);
@@ -335,6 +336,29 @@ function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapCl
       ctx.setLineDash([]);
     }
     
+    // Draw range rings from DE location
+    if (showRangeRings && deLocation) {
+      const rings = generateStandardRangeRings(deLocation.latitude, deLocation.longitude);
+      rings.forEach((ring, ringIndex) => {
+        ctx.strokeStyle = `rgba(100, 200, 100, ${0.3 - ringIndex * 0.05})`;
+        ctx.lineWidth = ringIndex === 0 ? 1.5 : 1;
+        ctx.beginPath();
+        
+        ring.points.forEach((point, pointIndex) => {
+          const projected = projection([point[0], point[1]]);
+          if (projected && isFinite(projected[0]) && isFinite(projected[1])) {
+            if (pointIndex === 0) {
+              ctx.moveTo(projected[0], projected[1]);
+            } else {
+              ctx.lineTo(projected[0], projected[1]);
+            }
+          }
+        });
+        
+        ctx.stroke();
+      });
+    }
+    
     // Draw bearing lines from DE to all DX spots (Azimuthal)
     if (deLocation && dxSpots && dxSpots.length > 0) {
       dxSpots.forEach((spot) => {
@@ -458,7 +482,7 @@ function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapCl
         }
       });
     }
-  }, [deLocation, dxSpots, activations, satellites, terminatorData, showNightShade, showGrid, gridType, centerLat, centerLng, zoomScale]);
+  }, [deLocation, dxSpots, activations, satellites, terminatorData, showNightShade, showGrid, gridType, showRangeRings, centerLat, centerLng, zoomScale]);
 
   const handleClick = (e) => {
     const canvas = canvasRef.current;
@@ -489,7 +513,7 @@ function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapCl
 }
 
 // Canvas map for Mercator projection using D3
-function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapClick, showNightShade, showGrid, gridType, zoomCenter, zoomScale }) {
+function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapClick, showNightShade, showGrid, gridType, showRangeRings, zoomCenter, zoomScale }) {
   const canvasRef = useRef(null);
   
   const { data: terminatorData } = useQuery({
@@ -827,7 +851,7 @@ function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
 }
 
 // Canvas map for Robinson projection using D3
-function RobinsonCanvas({ deLocation, dxSpots, activations, satellites, onMapClick, showNightShade, showGrid, gridType, zoomCenter, zoomScale }) {
+function RobinsonCanvas({ deLocation, dxSpots, activations, satellites, onMapClick, showNightShade, showGrid, gridType, showRangeRings, zoomCenter, zoomScale }) {
   const canvasRef = useRef(null);
   
   const { data: terminatorData } = useQuery({
@@ -1166,6 +1190,7 @@ const WorldMap = ({ deLocation, dxSpots, activations, satellites, autoZoomToDX, 
   const [showGrid, setShowGrid] = useState(true);
   const [gridType, setGridType] = useState('lat-lng');
   const [projection, setProjection] = useState('mercator');
+  const [showRangeRings, setShowRangeRings] = useState(false);
   const [zoom, setZoom] = useState({ center: { lat: 0, lng: 0 }, scale: 1 });
   
   const { data: terminatorData } = useQuery({
@@ -1214,6 +1239,8 @@ const WorldMap = ({ deLocation, dxSpots, activations, satellites, autoZoomToDX, 
         setShowGrid={setShowGrid}
         gridType={gridType}
         setGridType={setGridType}
+        showRangeRings={showRangeRings}
+        setShowRangeRings={setShowRangeRings}
         projection={projection}
         setProjection={setProjection}
         onZoomPreset={handleZoomPreset}
@@ -1232,6 +1259,7 @@ const WorldMap = ({ deLocation, dxSpots, activations, satellites, autoZoomToDX, 
           showNightShade={showNightShade}
           showGrid={showGrid}
           gridType={gridType}
+          showRangeRings={showRangeRings}
           zoomCenter={zoom.center}
           zoomScale={zoom.scale}
         />
@@ -1245,6 +1273,7 @@ const WorldMap = ({ deLocation, dxSpots, activations, satellites, autoZoomToDX, 
           showNightShade={showNightShade}
           showGrid={showGrid}
           gridType={gridType}
+          showRangeRings={showRangeRings}
           zoomCenter={zoom.center}
           zoomScale={zoom.scale}
         />
@@ -1258,6 +1287,7 @@ const WorldMap = ({ deLocation, dxSpots, activations, satellites, autoZoomToDX, 
           showNightShade={showNightShade}
           showGrid={showGrid}
           gridType={gridType}
+          showRangeRings={showRangeRings}
           zoomCenter={zoom.center}
           zoomScale={zoom.scale}
         />
