@@ -348,3 +348,133 @@
 .pass-set {
   color: #4fc3f7;
 }
+
+/* Light Theme Overrides */
+[data-theme="light"] .satellites-pane {
+  background-color: #ffffff;
+  border: 1px solid rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .satellites-pane.loading {
+  color: rgba(10, 20, 40, 0.6);
+}
+
+[data-theme="light"] .satellites-header {
+  border-bottom: 2px solid rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .satellites-title {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .filter-btn {
+  background: rgba(217, 119, 6, 0.1);
+  border: 1px solid rgba(217, 119, 6, 0.3);
+  color: #d97706;
+  font-weight: 700;
+}
+
+[data-theme="light"] .filter-btn:hover {
+  background: rgba(217, 119, 6, 0.2);
+  color: #d97706;
+  border-color: #d97706;
+}
+
+[data-theme="light"] .filter-btn.active {
+  background: rgba(217, 119, 6, 0.2);
+  border-color: #d97706;
+  color: #d97706;
+}
+
+[data-theme="light"] .satellites-list::-webkit-scrollbar-track {
+  background: rgba(29, 78, 216, 0.1);
+}
+
+[data-theme="light"] .satellites-list::-webkit-scrollbar-thumb {
+  background: rgba(29, 78, 216, 0.3);
+}
+
+[data-theme="light"] .satellite-item {
+  background-color: rgba(29, 78, 216, 0.05);
+  border: 1px solid rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .satellite-item:hover {
+  background-color: rgba(29, 78, 216, 0.1);
+}
+
+[data-theme="light"] .satellite-name {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .satellite-info {
+  color: #0a1428;
+}
+
+[data-theme="light"] .elevation-high {
+  color: #15803d;
+}
+
+[data-theme="light"] .elevation-medium {
+  color: #d97706;
+}
+
+[data-theme="light"] .elevation-low {
+  color: #dc2626;
+}
+
+[data-theme="light"] .pass-item {
+  background-color: rgba(29, 78, 216, 0.05);
+  border: 1px solid rgba(29, 78, 216, 0.15);
+  border-left: 3px solid #7c3aed;
+}
+
+[data-theme="light"] .pass-satellite {
+  color: #7c3aed;
+  font-weight: 700;
+}
+
+[data-theme="light"] .pass-times {
+  color: #6b7280;
+}
+
+[data-theme="light"] .pass-rise {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+[data-theme="light"] .pass-max {
+  color: #15803d;
+  font-weight: 700;
+}
+
+[data-theme="light"] .sat-name {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .sat-details {
+  color: #0a1428;
+  font-weight: 500;
+}
+
+[data-theme="light"] .sat-bearing {
+  color: #d97706;
+  font-weight: 700;
+}
+
+[data-theme="light"] .sat-elevation {
+  color: #15803d;
+  font-weight: 700;
+}
+
+[data-theme="light"] .sat-range {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+[data-theme="light"] .expand-btn {
+  color: #1d4ed8;
+}

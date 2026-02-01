@@ -19,14 +19,15 @@ const BandConditionsPane = () => {
   
   const getConditionColor = (condition) => {
     const cond = (condition || '').toLowerCase();
+    const isDarkTheme = document.documentElement.getAttribute('data-theme') !== 'light';
     switch(cond) {
-      case 'excellent': return '#00ff00';
-      case 'very good': return '#90ee90';
-      case 'good': return '#90ee90';
-      case 'fair': return '#ffff00';
-      case 'poor': return '#ff6b6b';
-      case 'very poor': return '#8b0000';
-      default: return '#888';
+      case 'excellent': return isDarkTheme ? '#00ff00' : '#15803d';
+      case 'very good': return isDarkTheme ? '#90ee90' : '#15803d';
+      case 'good': return isDarkTheme ? '#90ee90' : '#15803d';
+      case 'fair': return isDarkTheme ? '#ffff00' : '#b8860b';
+      case 'poor': return isDarkTheme ? '#ff6b6b' : '#dc2626';
+      case 'very poor': return isDarkTheme ? '#8b0000' : '#991b1b';
+      default: return isDarkTheme ? '#888' : '#666';
     }
   };
 

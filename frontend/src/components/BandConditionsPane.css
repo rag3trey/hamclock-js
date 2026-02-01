@@ -98,3 +98,57 @@
   color: rgba(150, 200, 255, 0.6);
   margin-top: 2px;
 }
+
+/* Light Theme Overrides */
+[data-theme="light"] .band-pane {
+  background: #ffffff;
+  border: 1px solid rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .band-pane.loading {
+  color: rgba(10, 20, 40, 0.6);
+}
+
+[data-theme="light"] .band-header {
+  border-bottom: 1px solid rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .band-title {
+  color: #1d4ed8;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+[data-theme="light"] .space-weather-summary {
+  color: #0a1428;
+  font-weight: 500;
+}
+
+[data-theme="light"] .sw-item strong {
+  color: #d97706;
+  font-weight: 700;
+}
+
+/* Combined: Colored borders (Option 1) + Blue background (Option 2) */
+[data-theme="light"] .band-item {
+  background: rgba(29, 78, 216, 0.08) !important;
+}
+
+[data-theme="light"] .band-item:hover {
+  background: rgba(29, 78, 216, 0.12) !important;
+}
+
+[data-theme="light"] .band-name {
+  color: #0a1428;
+  font-weight: 700;
+}
+
+[data-theme="light"] .band-condition {
+  color: #0a1428 !important;
+  font-weight: 700;
+  text-shadow: none;
+}
+
+[data-theme="light"] .band-detail {
+  color: #0a1428;
+}

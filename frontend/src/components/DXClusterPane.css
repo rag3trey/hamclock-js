@@ -423,3 +423,236 @@
   padding-top: 4px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
+/* Light Theme Overrides */
+[data-theme="light"] .dx-cluster-pane {
+  background-color: #ffffff;
+}
+
+[data-theme="light"] .dx-cluster-pane.loading {
+  color: rgba(10, 20, 40, 0.5);
+}
+
+[data-theme="light"] .dx-header {
+  border-bottom: 2px solid rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .filter-btn {
+  background: rgba(217, 119, 6, 0.1);
+  border: 1px solid rgba(217, 119, 6, 0.25);
+  color: #d97706;
+}
+
+[data-theme="light"] .filter-btn:hover {
+  background: rgba(217, 119, 6, 0.2);
+  color: #b45309;
+  border-color: rgba(217, 119, 6, 0.4);
+}
+
+[data-theme="light"] .filter-btn.active {
+  background: rgba(217, 119, 6, 0.2);
+  color: #92400e;
+  border-color: rgba(217, 119, 6, 0.5);
+}
+
+[data-theme="light"] .dx-title {
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .status-indicator.connected {
+  background-color: #15803d;
+}
+
+[data-theme="light"] .status-indicator {
+  background-color: #dc2626;
+}
+
+[data-theme="light"] .ws-status {
+  color: #dc2626;
+}
+
+[data-theme="light"] .spot-count {
+  color: rgba(10, 20, 40, 0.6);
+}
+
+[data-theme="light"] .band-btn {
+  background-color: rgba(29, 78, 216, 0.08);
+  color: rgba(10, 20, 40, 0.65);
+  border: 1px solid rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .band-btn:hover {
+  background-color: rgba(29, 78, 216, 0.15);
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .band-btn.active {
+  background-color: rgba(29, 78, 216, 0.25);
+  color: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+[data-theme="light"] .search-input {
+  background-color: #ffffff;
+  border: 1px solid rgba(29, 78, 216, 0.25);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .search-input:focus {
+  background-color: #f8fafc;
+  border-color: rgba(29, 78, 216, 0.5);
+  box-shadow: 0 0 8px rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .search-input::placeholder {
+  color: rgba(10, 20, 40, 0.4);
+}
+
+[data-theme="light"] .advanced-toggle {
+  background-color: rgba(29, 78, 216, 0.1);
+  border: 1px solid rgba(29, 78, 216, 0.25);
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .advanced-toggle:hover {
+  background-color: rgba(29, 78, 216, 0.2);
+  border-color: rgba(29, 78, 216, 0.4);
+}
+
+[data-theme="light"] .advanced-filters {
+  background-color: rgba(29, 78, 216, 0.05);
+  border: 1px solid rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .filter-group label {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .filter-slider {
+  background: rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .filter-slider::-webkit-slider-thumb {
+  background: #1d4ed8;
+}
+
+[data-theme="light"] .filter-slider::-webkit-slider-thumb:hover {
+  background: #1e40af;
+  box-shadow: 0 0 8px rgba(29, 78, 216, 0.4);
+}
+
+[data-theme="light"] .filter-slider::-moz-range-thumb {
+  background: #1d4ed8;
+}
+
+[data-theme="light"] .filter-slider::-moz-range-thumb:hover {
+  background: #1e40af;
+  box-shadow: 0 0 8px rgba(29, 78, 216, 0.4);
+}
+
+[data-theme="light"] .filter-select {
+  background-color: #ffffff;
+  border: 1px solid rgba(29, 78, 216, 0.25);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .filter-select:hover,
+[data-theme="light"] .filter-select:focus {
+  background-color: #f8fafc;
+  border-color: rgba(29, 78, 216, 0.5);
+}
+
+[data-theme="light"] .filter-select option {
+  background-color: #f8fafc;
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .dx-spots-container {
+  background-color: #ffffff;
+}
+
+[data-theme="light"] .dx-spots-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+[data-theme="light"] .dx-spots-container::-webkit-scrollbar-thumb {
+  background: rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .dx-spots-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(29, 78, 216, 0.3);
+}
+
+[data-theme="light"] .no-spots {
+  color: rgba(10, 20, 40, 0.5);
+}
+
+[data-theme="light"] .dx-spot {
+  background-color: #f8fafc;
+  border: 1px solid rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .dx-spot:hover {
+  background-color: rgba(29, 78, 216, 0.08);
+  border-color: rgba(29, 78, 216, 0.3);
+}
+
+[data-theme="light"] .watchlist-btn {
+  color: rgba(217, 119, 6, 0.5);
+}
+
+[data-theme="light"] .watchlist-btn:hover {
+  color: #d97706;
+}
+
+[data-theme="light"] .watchlist-btn.active {
+  color: #b45309;
+}
+
+[data-theme="light"] .spot-callsign {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .spot-time {
+  color: rgba(10, 20, 40, 0.55);
+}
+
+[data-theme="light"] .spot-details {
+  color: rgba(10, 20, 40, 0.65);
+}
+
+[data-theme="light"] .spot-frequency {
+  color: #15803d;
+}
+
+[data-theme="light"] .spot-spotter {
+  color: rgba(10, 20, 40, 0.5);
+}
+
+[data-theme="light"] .spot-bearing {
+  color: #d97706;
+}
+
+[data-theme="light"] .spot-distance {
+  color: #dc2626;
+}
+
+[data-theme="light"] .spot-elevation {
+  color: #15803d;
+}
+
+[data-theme="light"] .spot-comment {
+  color: rgba(10, 20, 40, 0.6);
+  border-top: 1px solid rgba(29, 78, 216, 0.1);
+}
+
+/* Light theme band colors */
+[data-theme="light"] .band-160 { background-color: rgba(220, 38, 38, 0.15); color: #dc2626; }
+[data-theme="light"] .band-80 { background-color: rgba(217, 119, 6, 0.15); color: #d97706; }
+[data-theme="light"] .band-40 { background-color: rgba(202, 138, 4, 0.15); color: #ca8a04; }
+[data-theme="light"] .band-30 { background-color: rgba(21, 128, 61, 0.15); color: #15803d; }
+[data-theme="light"] .band-20 { background-color: rgba(29, 78, 216, 0.15); color: #1d4ed8; }
+[data-theme="light"] .band-17 { background-color: rgba(29, 78, 216, 0.15); color: #1d4ed8; }
+[data-theme="light"] .band-15 { background-color: rgba(147, 51, 234, 0.15); color: #7c3aed; }
+[data-theme="light"] .band-12 { background-color: rgba(147, 51, 234, 0.15); color: #7c3aed; }
+[data-theme="light"] .band-10 { background-color: rgba(236, 72, 153, 0.15); color: #ec4899; }
+[data-theme="light"] .band-6 { background-color: rgba(59, 130, 246, 0.15); color: #3b82f6; }

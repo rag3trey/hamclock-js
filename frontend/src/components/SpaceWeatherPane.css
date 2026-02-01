@@ -128,3 +128,78 @@
   font-size: 0.75rem;
   margin-top: 4px;
 }
+
+/* Light Theme Overrides */
+[data-theme="light"] .space-weather-pane {
+  background-color: #ffffff;
+  border: 1px solid rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .space-weather-pane.loading {
+  color: rgba(10, 20, 40, 0.6);
+}
+
+[data-theme="light"] .pane-title {
+  color: #1d4ed8;
+  border-bottom-color: rgba(29, 78, 216, 0.2);
+  font-weight: 700;
+}
+
+[data-theme="light"] .condition-excellent {
+  background-color: rgba(21, 128, 61, 0.15);
+  color: #15803d;
+}
+
+[data-theme="light"] .condition-good {
+  background-color: rgba(21, 128, 61, 0.12);
+  color: #15803d;
+}
+
+[data-theme="light"] .condition-fair {
+  background-color: rgba(217, 119, 6, 0.15);
+  color: #d97706;
+}
+
+[data-theme="light"] .condition-poor {
+  background-color: rgba(220, 38, 38, 0.15);
+  color: #dc2626;
+}
+
+[data-theme="light"] .weather-metric {
+  background-color: rgba(29, 78, 216, 0.08);
+  border-color: rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .metric-label {
+  color: #0a1428;
+  font-weight: 600;
+}
+
+[data-theme="light"] .metric-value {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .metric-unit {
+  color: #6b7280;
+}
+
+[data-theme="light"] .value-excellent {
+  color: #15803d !important;
+}
+
+[data-theme="light"] .value-good {
+  color: #15803d !important;
+}
+
+[data-theme="light"] .value-fair {
+  color: #d97706 !important;
+}
+
+[data-theme="light"] .value-poor {
+  color: #dc2626 !important;
+}
+
+[data-theme="light"] .weather-updated {
+  color: #6b7280;
+}

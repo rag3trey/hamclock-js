@@ -156,13 +156,32 @@
   max-height: 400px;
   border: 1px solid rgba(45, 90, 140, 0.5);
   border-radius: 6px;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   background: rgba(15, 52, 96, 0.3);
+}
+
+.psk-spots-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.psk-spots-container::-webkit-scrollbar-track {
+  background: rgba(45, 90, 140, 0.2);
+  border-radius: 4px;
+}
+
+.psk-spots-container::-webkit-scrollbar-thumb {
+  background: rgba(79, 195, 247, 0.5);
+  border-radius: 4px;
+}
+
+.psk-spots-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(79, 195, 247, 0.7);
 }
 
 .psk-spots-header {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1.2fr 1.2fr 1fr;
+  grid-template-columns: 110px 130px 100px 90px 110px 100px;
   gap: 8px;
   padding: 10px 12px;
   background: rgba(45, 90, 140, 0.4);
@@ -173,6 +192,10 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   position: sticky;
+  top: 0;
+  z-index: 10;
+  min-width: fit-content;
+}
   top: 0;
 }
 
@@ -203,12 +226,13 @@
 
 .psk-spot-item {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1.2fr 1.2fr 1fr;
+  grid-template-columns: 110px 130px 100px 90px 110px 100px;
   gap: 8px;
   padding: 10px 12px;
   border-bottom: 1px solid rgba(45, 90, 140, 0.3);
   align-items: center;
   transition: background-color 0.2s ease;
+  min-width: fit-content;
 }
 
 .psk-spot-item:hover {
@@ -314,7 +338,7 @@
 @media (max-width: 1200px) {
   .psk-spots-header,
   .psk-spot-item {
-    grid-template-columns: 1fr 0.8fr 0.8fr 1fr 1fr 0.8fr;
+    grid-template-columns: 0.9fr 1fr 0.7fr 0.8fr 0.9fr 0.7fr;
     font-size: 11px;
   }
 }
@@ -345,4 +369,119 @@
     flex: 1;
     min-width: 150px;
   }
+}
+
+/* Light Theme Overrides */
+[data-theme="light"] .psk-reporter-pane {
+  background: #ffffff;
+  border: 1px solid rgba(29, 78, 216, 0.2);
+  color: #0a1428;
+}
+
+[data-theme="light"] .psk-header h3 {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .psk-band-select,
+[data-theme="light"] .psk-sort-select {
+  background: #f8fafc;
+  border: 1px solid rgba(29, 78, 216, 0.3);
+  color: #0a1428;
+}
+
+[data-theme="light"] .psk-band-select:hover,
+[data-theme="light"] .psk-sort-select:hover {
+  background: #e0e7ff;
+  border-color: #1d4ed8;
+}
+
+[data-theme="light"] .psk-active-bands {
+  color: #0a1428;
+}
+
+[data-theme="light"] .psk-spots-header {
+  background: rgba(29, 78, 216, 0.1);
+  border-bottom: 1px solid rgba(29, 78, 216, 0.2);
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .psk-spots-container {
+  background: rgba(29, 78, 216, 0.02);
+  border-color: rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .psk-spots-container::-webkit-scrollbar-track {
+  background: rgba(29, 78, 216, 0.1);
+}
+
+[data-theme="light"] .psk-spots-container::-webkit-scrollbar-thumb {
+  background: rgba(29, 78, 216, 0.4);
+}
+
+[data-theme="light"] .psk-spots-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(29, 78, 216, 0.6);
+}
+
+[data-theme="light"] .psk-spot-item {
+  background: #ffffff;
+  border-bottom: 1px solid rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .psk-spot-item:hover {
+  background: rgba(29, 78, 216, 0.08);
+}
+
+[data-theme="light"] .spot-call {
+  color: #1d4ed8;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+[data-theme="light"] .spot-freq {
+  color: #0a1428;
+  font-weight: 700;
+}
+
+[data-theme="light"] .spot-mode {
+  color: #0a1428;
+  font-weight: 700;
+}
+
+[data-theme="light"] .spot-snr {
+  color: #15803d;
+  font-weight: 700;
+}
+
+[data-theme="light"] .spot-reporter {
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+[data-theme="light"] .spot-dist,
+[data-theme="light"] .spot-time {
+  color: #6b7280;
+}
+
+[data-theme="light"] .psk-footer {
+  background: rgba(29, 78, 216, 0.08);
+  border-top: 1px solid rgba(29, 78, 216, 0.2);
+  color: #6b7280;
+}
+
+[data-theme="light"] .frequency {
+  color: #0a1428;
+  font-weight: 700;
+}
+
+[data-theme="light"] .band-name-small {
+  color: #0a1428;
+  background: rgba(29, 78, 216, 0.2);
+  font-weight: 700;
+}
+
+[data-theme="light"] .snr-value {
+  color: #0a1428;
+  font-weight: 700;
 }

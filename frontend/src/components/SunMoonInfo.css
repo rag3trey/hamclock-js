@@ -43,3 +43,28 @@
   color: var(--text-secondary);
   font-size: 0.8rem;
 }
+
+/* Light Theme Overrides */
+[data-theme="light"] .sun-moon-info {
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .info-section h4 {
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .info-data {
+  color: rgba(10, 20, 40, 0.65);
+}
+
+[data-theme="light"] .moon-phase-graphic svg {
+  filter: drop-shadow(0 0 4px rgba(29, 78, 216, 0.2));
+}
+
+[data-theme="light"] .phase-name {
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .illumination {
+  color: rgba(10, 20, 40, 0.6);
+}

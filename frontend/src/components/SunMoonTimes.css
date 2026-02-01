@@ -128,3 +128,53 @@
     background: rgba(74, 158, 255, 0.08);
   }
 }
+/* Light Theme Overrides */
+[data-theme="light"] .sun-moon-times {
+  background: #ffffff;
+  border: 1px solid rgba(29, 78, 216, 0.2);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .sun-moon-times.loading {
+  opacity: 0.7;
+}
+
+[data-theme="light"] .sun-moon-header {
+  border-bottom: 1px solid rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .sun-moon-header h3 {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .section-title {
+  color: #1d4ed8;
+  border-bottom-color: rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .time-row {
+  background: rgba(29, 78, 216, 0.08);
+}
+
+[data-theme="light"] .time-label {
+  color: #0a1428;
+  font-weight: 600;
+}
+
+[data-theme="light"] .time-value {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .moon-phase-row {
+  background: rgba(29, 78, 216, 0.1);
+}
+
+[data-theme="light"] .phase-label {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .error-message {
+  color: #dc2626;
+  background: rgba(220, 38, 38, 0.1);
+  border-left-color: #dc2626;
+}

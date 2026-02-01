@@ -179,3 +179,87 @@
   color: #666;
   font-size: 0.7rem;
 }
+
+/* Light Theme Overrides */
+[data-theme="light"] .ncdxf-pane {
+  background-color: #ffffff;
+  border: 1px solid rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .ncdxf-pane.loading {
+  color: rgba(10, 20, 40, 0.6);
+}
+
+[data-theme="light"] .ncdxf-header {
+  border-bottom: 2px solid rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .beacons-container::-webkit-scrollbar-track {
+  background: rgba(29, 78, 216, 0.1);
+}
+
+[data-theme="light"] .beacons-container::-webkit-scrollbar-thumb {
+  background: rgba(29, 78, 216, 0.3);
+}
+
+[data-theme="light"] .group-label {
+  color: #0a1428;
+}
+
+[data-theme="light"] .heard-label {
+  color: #15803d;
+}
+
+[data-theme="light"] .maybe-label {
+  color: #d97706;
+}
+
+[data-theme="light"] .not-heard-label {
+  color: #6b7280;
+}
+
+[data-theme="light"] .beacon-item {
+  background-color: rgba(29, 78, 216, 0.08);
+  border-left-color: #6b7280;
+}
+
+[data-theme="light"] .beacon-item.heard {
+  background-color: rgba(21, 128, 61, 0.1);
+  border-left-color: #15803d;
+}
+
+[data-theme="light"] .beacon-item.maybe {
+  background-color: rgba(217, 119, 6, 0.1);
+  border-left-color: #d97706;
+}
+
+[data-theme="light"] .beacon-item.not-heard {
+  background-color: rgba(29, 78, 216, 0.05);
+  border-left-color: #9ca3af;
+}
+
+[data-theme="light"] .beacon-item:hover {
+  background-color: rgba(29, 78, 216, 0.12);
+  border-left-color: #1d4ed8;
+}
+
+[data-theme="light"] .beacon-call {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .beacon-location {
+  color: #0a1428;
+}
+
+[data-theme="light"] .beacon-signal {
+  color: #d97706;
+}
+
+[data-theme="light"] .beacon-freq {
+  color: #6b7280;
+}
+
+[data-theme="light"] .ncdxf-footer {
+  border-top: 1px solid rgba(29, 78, 216, 0.2);
+  color: #6b7280;
+}
