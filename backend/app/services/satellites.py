@@ -312,10 +312,22 @@ class SatelliteService:
                     # Calculate duration
                     aos_time = datetime.fromisoformat(current_pass['aos']['time'])
                     los_time = datetime.fromisoformat(current_pass['los']['time'])
-                    duration = (los_time - aos_time).total_seconds() / 60
-                    current_pass['duration_minutes'] = round(duration, 1)
+                    duration_seconds = (los_time - aos_time).total_seconds()
+                    current_pass['duration_minutes'] = round(duration_seconds / 60, 1)
                     
-                    passes.append(current_pass)
+                    # Format for frontend (flatten structure for easier consumption)
+                    formatted_pass = {
+                        'rise_time': current_pass['aos']['time'],
+                        'max_elevation': current_pass['max']['elevation'] if current_pass['max'] else 0,
+                        'set_time': current_pass['los']['time'],
+                        'duration_seconds': int(duration_seconds),
+                        # Keep original for reference
+                        'aos': current_pass['aos'],
+                        'max': current_pass['max'],
+                        'los': current_pass['los']
+                    }
+                    
+                    passes.append(formatted_pass)
                     current_pass = None
         
         return passes

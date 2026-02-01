@@ -48,7 +48,10 @@ const SatellitesPane = ({ deLocation, satelliteData, onSatelliteSelect, units = 
 
   // Fetch passes for a satellite
   const fetchPasses = async (satName) => {
-    if (!deLocation) return;
+    if (!deLocation) {
+      console.warn('fetchPasses: deLocation not set');
+      return;
+    }
     
     setLoadingPasses(prev => ({ ...prev, [satName]: true }));
     try {
@@ -59,11 +62,19 @@ const SatellitesPane = ({ deLocation, satelliteData, onSatelliteSelect, units = 
         min_elevation: '10'
       });
       
-      const response = await fetch(`/api/v1/satellites/${encodeURIComponent(satName)}/passes?${params}`);
+      const url = `/api/v1/satellites/${encodeURIComponent(satName)}/passes?${params}`;
+      console.log(`Fetching passes for ${satName} from:`, url);
+      
+      const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
+        console.log(`Passes received for ${satName}:`, data);
         setPasses(prev => ({ ...prev, [satName]: data.passes || [] }));
         setExpandedSatellites(prev => ({ ...prev, [satName]: true }));
+      } else {
+        console.error(`API returned ${response.status} for ${satName}`);
+        const errorText = await response.text();
+        console.error('Error response:', errorText);
       }
     } catch (error) {
       console.error(`Error fetching passes for ${satName}:`, error);
