@@ -352,3 +352,182 @@
     width: 100%;
   }
 }
+/* Light Theme Overrides */
+[data-theme="light"] .gimbal-status {
+  background: rgba(29, 78, 216, 0.06);
+  border: 1px solid rgba(29, 78, 216, 0.25);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .gimbal-status.not-visible {
+  border-color: rgba(220, 38, 38, 0.25);
+  background: rgba(220, 38, 38, 0.08);
+}
+
+[data-theme="light"] .gimbal-status.visible {
+  border-color: rgba(21, 128, 61, 0.35);
+  background: rgba(21, 128, 61, 0.08);
+}
+
+[data-theme="light"] .gimbal-header {
+  border-bottom: 1px solid rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .gimbal-tracking {
+  color: #15803d;
+}
+
+[data-theme="light"] .gimbal-message {
+  color: rgba(10, 20, 40, 0.5);
+}
+
+[data-theme="light"] .gimbal-error {
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  color: #dc2626;
+}
+
+[data-theme="light"] .compass-svg {
+  filter: drop-shadow(0 0 8px rgba(29, 78, 216, 0.2));
+}
+
+[data-theme="light"] .compass-circle {
+  stroke: rgba(29, 78, 216, 0.25);
+}
+
+[data-theme="light"] .compass-label {
+  fill: rgba(10, 20, 40, 0.65);
+}
+
+[data-theme="light"] .compass-label.cardinal {
+  fill: #1d4ed8;
+}
+
+[data-theme="light"] .degree-markers line {
+  stroke: rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .antenna-needle {
+  stroke: #15803d;
+  filter: drop-shadow(0 0 4px rgba(21, 128, 61, 0.5));
+}
+
+[data-theme="light"] .antenna-center {
+  fill: #15803d;
+  filter: drop-shadow(0 0 4px rgba(21, 128, 61, 0.5));
+}
+
+[data-theme="light"] .elevation-box {
+  background: rgba(248, 250, 252, 0.95);
+  border: 2px solid rgba(29, 78, 216, 0.3);
+}
+
+[data-theme="light"] .elev-label {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .elev-value {
+  color: #15803d;
+}
+
+[data-theme="light"] .azimuth-display {
+  background: rgba(29, 78, 216, 0.05);
+  border: 1px solid rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .az-label {
+  color: rgba(10, 20, 40, 0.65);
+}
+
+[data-theme="light"] .az-value {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .gimbal-info {
+  background: rgba(29, 78, 216, 0.05);
+  border: 1px solid rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .info-label {
+  color: rgba(10, 20, 40, 0.65);
+}
+
+[data-theme="light"] .info-value {
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .gimbal-controls {
+  border-top: 1px solid rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .track-btn.start {
+  background: #1d4ed8;
+  border-color: #1e40af;
+  color: white;
+}
+
+[data-theme="light"] .track-btn.start:hover:not(:disabled) {
+  background: #1e40af;
+  box-shadow: 0 0 8px rgba(29, 78, 216, 0.4);
+}
+
+[data-theme="light"] .track-btn.stop {
+  background: rgba(220, 38, 38, 0.15);
+  border-color: rgba(220, 38, 38, 0.25);
+  color: #dc2626;
+}
+
+[data-theme="light"] .track-btn.stop:hover:not(:disabled) {
+  background: rgba(220, 38, 38, 0.25);
+  box-shadow: 0 0 8px rgba(220, 38, 38, 0.3);
+}
+
+[data-theme="light"] .details-btn {
+  background: rgba(29, 78, 216, 0.1);
+  border: 1px solid rgba(29, 78, 216, 0.25);
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .details-btn:hover {
+  background: rgba(29, 78, 216, 0.2);
+  border-color: rgba(29, 78, 216, 0.4);
+}
+
+[data-theme="light"] .gimbal-details {
+  background: rgba(29, 78, 216, 0.05);
+  border: 1px solid rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .detail-label {
+  color: rgba(10, 20, 40, 0.65);
+}
+
+[data-theme="light"] .detail-value {
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .detail-value.ok {
+  color: #15803d;
+}
+
+[data-theme="light"] .detail-value.fail {
+  color: #dc2626;
+}
+
+[data-theme="light"] .rotator-commands {
+  background: rgba(29, 78, 216, 0.05);
+  border: 1px solid rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .cmd-label {
+  color: rgba(10, 20, 40, 0.65);
+}
+
+[data-theme="light"] .cmd-type {
+  color: rgba(10, 20, 40, 0.6);
+}
+
+[data-theme="light"] .cmd-text {
+  background: rgba(29, 78, 216, 0.08);
+  color: #1d4ed8;
+}

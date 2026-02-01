@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import HomePage from './pages/HomePage';
 import SatellitePage from './pages/SatellitePage';
-import { fetchGetCallsign } from './api';
+import { fetchGetCallsign, fetchGetSettings } from './api';
 import './App.css';
 
 const queryClient = new QueryClient({
@@ -28,6 +28,23 @@ function App() {
       }
     };
     loadCallsign();
+  }, []);
+
+  // Initialize theme from settings or localStorage
+  useEffect(() => {
+    const initTheme = async () => {
+      try {
+        // Try to load from backend settings
+        const settings = await fetchGetSettings();
+        const theme = settings?.theme || 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (err) {
+        // Fallback to localStorage
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      }
+    };
+    initTheme();
   }, []);
 
   return (

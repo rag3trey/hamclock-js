@@ -5,19 +5,86 @@
 }
 
 /* Dark Theme (default) */
-:root {
+:root,
+[data-theme="dark"] {
+  /* Backgrounds */
   --bg-primary: #0a0e27;
   --bg-secondary: #121829;
+  --bg-tertiary: #1a1f3a;
+  --bg-elevated: #1e2540;
+  
+  /* Text */
   --text-primary: #ffffff;
   --text-secondary: #b0b8cc;
+  --text-tertiary: #7a8199;
+  --text-disabled: #4a5066;
+  
+  /* Accents */
+  --accent-primary: #4fc3f7;
+  --accent-secondary: #29b6f6;
+  --accent-success: #66bb6a;
+  --accent-warning: #ffa726;
+  --accent-error: #ef5350;
+  
+  /* Borders */
+  --border-primary: rgba(79, 195, 247, 0.3);
+  --border-secondary: rgba(255, 255, 255, 0.1);
+  --border-tertiary: rgba(255, 255, 255, 0.05);
+  
+  /* Overlays */
+  --overlay-bg: rgba(0, 0, 0, 0.8);
+  --overlay-panel: rgba(18, 24, 41, 0.95);
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+  
+  /* Map */
+  --map-land: #4a7c59;
+  --map-water: #1a3a52;
+  --map-grid: rgba(79, 195, 247, 0.2);
 }
 
 /* Light Theme */
 [data-theme="light"] {
-  --bg-primary: #f5f5f5;
+  /* Backgrounds */
+  --bg-primary: #f8fafc;
   --bg-secondary: #ffffff;
-  --text-primary: #1a1a1a;
-  --text-secondary: #666666;
+  --bg-tertiary: #f0f4f8;
+  --bg-elevated: #ffffff;
+  
+  /* Text */
+  --text-primary: #0a1428;
+  --text-secondary: #3d4556;
+  --text-tertiary: #5a6370;
+  --text-disabled: #b8bfc7;
+  
+  /* Accents */
+  --accent-primary: #1d4ed8;
+  --accent-secondary: #1e40af;
+  --accent-success: #15803d;
+  --accent-warning: #d97706;
+  --accent-error: #b91c1c;
+  
+  /* Borders */
+  --border-primary: rgba(29, 78, 216, 0.35);
+  --border-secondary: rgba(10, 20, 40, 0.18);
+  --border-tertiary: rgba(10, 20, 40, 0.1);
+  
+  /* Overlays */
+  --overlay-bg: rgba(0, 0, 0, 0.6);
+  --overlay-panel: rgba(255, 255, 255, 0.99);
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(10, 20, 40, 0.12);
+  --shadow-md: 0 2px 4px rgba(10, 20, 40, 0.16);
+  --shadow-lg: 0 8px 16px rgba(10, 20, 40, 0.2);
+  
+  /* Map */
+  --map-land: #86efac;
+  --map-water: #7dd3fc;
+  --map-grid: rgba(37, 99, 235, 0.15);
 }
 
 body {
@@ -28,10 +95,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: var(--bg-primary);
   color: var(--text-primary);
-  transition: background 0.3s, color 0.3s;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
-

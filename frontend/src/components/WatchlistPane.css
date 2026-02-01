@@ -178,3 +178,60 @@
 .watchlist-content::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
 }
+/* Light Theme Overrides */
+[data-theme="light"] .watchlist-tabs {
+  border-bottom: 1px solid rgba(10, 20, 40, 0.15);
+}
+
+[data-theme="light"] .watchlist-tabs .tab {
+  color: rgba(10, 20, 40, 0.5);
+}
+
+[data-theme="light"] .watchlist-tabs .tab:hover {
+  color: rgba(10, 20, 40, 0.75);
+}
+
+[data-theme="light"] .watchlist-tabs .tab.active {
+  color: #0a1428;
+  border-bottom-color: #1d4ed8;
+}
+
+[data-theme="light"] .watchlist-item {
+  background: rgba(10, 20, 40, 0.06);
+  border: 1px solid rgba(10, 20, 40, 0.15);
+}
+
+[data-theme="light"] .watchlist-item:hover {
+  background: rgba(10, 20, 40, 0.12);
+}
+
+[data-theme="light"] .item-name {
+  color: #0a1428;
+}
+
+[data-theme="light"] .item-id,
+[data-theme="light"] .item-details {
+  color: rgba(10, 20, 40, 0.65);
+}
+
+[data-theme="light"] .item-details span {
+  background: rgba(29, 78, 216, 0.1);
+  border: 1px solid rgba(29, 78, 216, 0.25);
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .watchlist-empty {
+  color: rgba(10, 20, 40, 0.6);
+}
+
+[data-theme="light"] .remove-btn {
+  color: #dc2626;
+}
+
+[data-theme="light"] .watchlist-content::-webkit-scrollbar-thumb {
+  background: rgba(10, 20, 40, 0.15);
+}
+
+[data-theme="light"] .watchlist-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(10, 20, 40, 0.25);
+}

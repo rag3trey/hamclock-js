@@ -402,3 +402,183 @@
     flex: 1;
   }
 }
+/* Light Theme Overrides */
+[data-theme="light"] .cat-status {
+  background: rgba(29, 78, 216, 0.06);
+  border: 1px solid rgba(29, 78, 216, 0.25);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .cat-status.connected {
+  border-color: rgba(21, 128, 61, 0.35);
+  background: rgba(21, 128, 61, 0.08);
+}
+
+[data-theme="light"] .cat-status.disconnected {
+  border-color: rgba(220, 38, 38, 0.25);
+  background: rgba(220, 38, 38, 0.08);
+}
+
+[data-theme="light"] .cat-header {
+  border-bottom: 1px solid rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .cat-indicator {
+  color: #15803d;
+}
+
+[data-theme="light"] .cat-dot {
+  background: #15803d;
+  box-shadow: 0 0 6px rgba(21, 128, 61, 0.6);
+}
+
+[data-theme="light"] .cat-error {
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  color: #dc2626;
+}
+
+[data-theme="light"] .connection-input label {
+  color: rgba(10, 20, 40, 0.65);
+}
+
+[data-theme="light"] .connection-input select {
+  background: #ffffff;
+  border: 1px solid rgba(29, 78, 216, 0.25);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .connect-btn {
+  background: #1d4ed8;
+  border: 1px solid #1d4ed8;
+  color: white;
+}
+
+[data-theme="light"] .connect-btn:hover:not(:disabled) {
+  background: #1e40af;
+  box-shadow: 0 0 8px rgba(29, 78, 216, 0.4);
+}
+
+[data-theme="light"] .no-ports-message {
+  background: rgba(217, 119, 6, 0.1);
+  border: 1px solid rgba(217, 119, 6, 0.25);
+  color: #d97706;
+}
+
+[data-theme="light"] .freq-label,
+[data-theme="light"] .mode-label,
+[data-theme="light"] .power-label {
+  color: rgba(10, 20, 40, 0.65);
+}
+
+[data-theme="light"] .freq-value,
+[data-theme="light"] .mode-value,
+[data-theme="light"] .power-value {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .freq-input-group input {
+  background: #ffffff;
+  border: 1px solid rgba(29, 78, 216, 0.25);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .freq-input-group button {
+  background: #1d4ed8;
+  border: 1px solid #1d4ed8;
+  color: white;
+}
+
+[data-theme="light"] .freq-input-group button:hover {
+  background: #1e40af;
+}
+
+[data-theme="light"] .mode-btn {
+  background: rgba(29, 78, 216, 0.1);
+  border: 1px solid rgba(29, 78, 216, 0.25);
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .mode-btn:hover {
+  background: rgba(29, 78, 216, 0.2);
+  color: #1e40af;
+}
+
+[data-theme="light"] .mode-btn.active {
+  background: #1d4ed8;
+  border-color: #1e40af;
+  color: white;
+  box-shadow: 0 0 6px rgba(29, 78, 216, 0.4);
+}
+
+[data-theme="light"] .power-slider {
+  background: rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .power-slider::-webkit-slider-thumb {
+  background: #1d4ed8;
+  box-shadow: 0 0 4px rgba(29, 78, 216, 0.6);
+}
+
+[data-theme="light"] .power-slider::-moz-range-thumb {
+  background: #1d4ed8;
+  box-shadow: 0 0 4px rgba(29, 78, 216, 0.6);
+}
+
+[data-theme="light"] .bands-label {
+  color: rgba(10, 20, 40, 0.65);
+}
+
+[data-theme="light"] .band-btn {
+  background: rgba(29, 78, 216, 0.1);
+  border: 1px solid rgba(29, 78, 216, 0.25);
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .band-btn:hover {
+  background: #1d4ed8;
+  border-color: #1e40af;
+  color: white;
+  box-shadow: 0 0 4px rgba(29, 78, 216, 0.3);
+}
+
+[data-theme="light"] .details-btn {
+  background: rgba(29, 78, 216, 0.1);
+  border: 1px solid rgba(29, 78, 216, 0.25);
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .details-btn:hover {
+  background: rgba(29, 78, 216, 0.2);
+  border-color: rgba(29, 78, 216, 0.4);
+  color: #1e40af;
+}
+
+[data-theme="light"] .disconnect-btn {
+  background: rgba(220, 38, 38, 0.15);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  color: #dc2626;
+}
+
+[data-theme="light"] .disconnect-btn:hover {
+  background: rgba(220, 38, 38, 0.25);
+  border-color: rgba(220, 38, 38, 0.4);
+  color: #b91c1c;
+}
+
+[data-theme="light"] .cat-details {
+  background: rgba(29, 78, 216, 0.05);
+  border: 1px solid rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .detail-row {
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .detail-label {
+  color: rgba(10, 20, 40, 0.65);
+}
+
+[data-theme="light"] .detail-value {
+  color: var(--text-primary);
+}

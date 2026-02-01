@@ -121,11 +121,16 @@ const PANELS_CHANGED_EVENT = 'panelsChanged';export default function SettingsMod
       setSettings(prev => ({ ...prev, theme }));
       // Apply theme to document
       document.documentElement.setAttribute('data-theme', theme);
-      console.log('Theme applied to document');
+      // Save to localStorage as backup
+      localStorage.setItem('theme', theme);
+      console.log('Theme applied to document and saved to localStorage');
     } catch (err) {
       const errorMsg = err.response?.data?.detail || err.message || 'Failed to save theme';
       setError(errorMsg);
       console.error('Error saving theme:', err);
+      // Still apply locally even if backend fails
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
     }
   };
 

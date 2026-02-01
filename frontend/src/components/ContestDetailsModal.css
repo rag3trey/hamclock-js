@@ -388,7 +388,171 @@
   background-color: rgba(0, 212, 255, 0.3);
   color: #fff;
 }
+/* Light Theme Overrides */
+[data-theme="light"] .contest-modal-overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+}
 
+[data-theme="light"] .contest-modal-content {
+  background: linear-gradient(135deg, #f0f4f8 0%, #ffffff 100%);
+  border: 2px solid rgba(29, 78, 216, 0.3);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1), 0 0 20px rgba(29, 78, 216, 0.1);
+}
+
+[data-theme="light"] .contest-modal-header {
+  border-bottom: 2px solid rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .contest-modal-header h2 {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .contest-modal-close {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .contest-modal-close:hover {
+  background-color: rgba(29, 78, 216, 0.15);
+  color: #0a1428;
+}
+
+[data-theme="light"] .contest-modal-body {
+  color: #0a1428;
+}
+
+[data-theme="light"] .contest-modal-body::-webkit-scrollbar-track {
+  background: rgba(29, 78, 216, 0.08);
+}
+
+[data-theme="light"] .contest-modal-body::-webkit-scrollbar-thumb {
+  background: rgba(29, 78, 216, 0.25);
+}
+
+[data-theme="light"] .contest-detail-section {
+  border-bottom: 1px solid rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .contest-detail-section h3 {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .contest-detail-section p {
+  color: rgba(10, 20, 40, 0.75);
+}
+
+[data-theme="light"] .schedule-item {
+  background-color: rgba(29, 78, 216, 0.08);
+}
+
+[data-theme="light"] .schedule-item label {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .schedule-item span {
+  color: #0a1428;
+}
+
+[data-theme="light"] .status-badge.active {
+  background-color: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+  border-color: #dc2626;
+}
+
+[data-theme="light"] .status-badge.upcoming {
+  background-color: rgba(217, 119, 6, 0.1);
+  color: #d97706;
+  border-color: #d97706;
+}
+
+[data-theme="light"] .status-badge.finished {
+  background-color: rgba(21, 128, 61, 0.1);
+  color: #15803d;
+  border-color: #15803d;
+}
+
+[data-theme="light"] .countdown-item {
+  background-color: rgba(29, 78, 216, 0.1);
+  border: 2px solid rgba(29, 78, 216, 0.25);
+}
+
+[data-theme="light"] .countdown-item.countdown-future {
+  background-color: rgba(29, 78, 216, 0.1);
+  border: 2px solid rgba(29, 78, 216, 0.25);
+}
+
+[data-theme="light"] .countdown-item.countdown-soon {
+  background-color: rgba(217, 119, 6, 0.15);
+  border: 2px solid #d97706;
+}
+
+[data-theme="light"] .countdown-item.countdown-imminent {
+  background-color: rgba(220, 38, 38, 0.15);
+  border: 2px solid #dc2626;
+}
+
+[data-theme="light"] .countdown-item.countdown-started {
+  background-color: rgba(21, 128, 61, 0.15);
+  border: 2px solid #15803d;
+}
+
+[data-theme="light"] .countdown-item label {
+  color: #0a1428;
+}
+
+[data-theme="light"] .countdown-text {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .band-tag {
+  background-color: rgba(21, 128, 61, 0.15);
+  border: 1px solid rgba(21, 128, 61, 0.3);
+  color: #15803d;
+}
+
+[data-theme="light"] .mode-tag {
+  background-color: rgba(29, 78, 216, 0.15);
+  border: 1px solid rgba(29, 78, 216, 0.3);
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .info-item {
+  background-color: rgba(29, 78, 216, 0.08);
+}
+
+[data-theme="light"] .info-item label {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .info-item span {
+  color: #0a1428;
+}
+
+[data-theme="light"] .contest-info-link {
+  background-color: rgba(29, 78, 216, 0.1);
+  border: 1px solid rgba(29, 78, 216, 0.3);
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .contest-info-link:hover {
+  background-color: rgba(29, 78, 216, 0.2);
+  color: #0a1428;
+  box-shadow: 0 0 10px rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .contest-modal-footer {
+  border-top: 2px solid rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .btn-secondary {
+  background-color: rgba(29, 78, 216, 0.1);
+  border: 1px solid rgba(29, 78, 216, 0.3);
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .btn-secondary:hover {
+  background-color: rgba(29, 78, 216, 0.2);
+  color: #0a1428;
+}
 /* Mobile responsiveness */
 @media (max-width: 600px) {
   .contest-modal-content {

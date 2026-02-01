@@ -1,45 +1,40 @@
 import React from 'react';
+import './ActivationPane.css';
 
 const ActivationPane = ({ activations }) => {
   if (!activations || activations.length === 0) {
     return (
-      <div style={{ padding: '12px', textAlign: 'center', color: '#888' }}>
+      <div className="activation-empty">
         No active SOTA/POTA activations
       </div>
     );
   }
 
   return (
-    <div style={{ padding: '8px', fontSize: '12px' }}>
-      <div style={{ marginBottom: '8px', fontWeight: 'bold', borderBottom: '1px solid #444', paddingBottom: '4px' }}>
+    <div className="activation-pane">
+      <div className="activation-header">
         Active Activations: {activations.length}
       </div>
-      <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
+      <div className="activation-list">
         {activations.slice(0, 15).map((activation, index) => (
           <div
             key={index}
-            style={{
-              marginBottom: '8px',
-              padding: '6px',
-              backgroundColor: activation.type === 'SOTA' ? 'rgba(74, 158, 255, 0.1)' : 'rgba(156, 39, 176, 0.1)',
-              borderLeft: `3px solid ${activation.type === 'SOTA' ? '#4a9eff' : '#9c27b0'}`,
-              borderRadius: '2px'
-            }}
+            className={`activation-item ${activation.type === 'SOTA' ? 'activation-item-sota' : 'activation-item-pota'}`}
           >
-            <div style={{ fontWeight: 'bold', color: '#fff' }}>
+            <div className="activation-callsign">
               {activation.callsign}
               {activation.type === 'SOTA' ? ' ⛏️' : ' 🏕️'}
             </div>
-            <div style={{ color: '#aaa', fontSize: '11px' }}>
+            <div className="activation-name">
               {activation.name}
             </div>
-            <div style={{ color: '#888', fontSize: '10px' }}>
+            <div className="activation-details">
               {activation.reference}
               {activation.frequency && ` · ${activation.frequency} MHz`}
               {activation.mode && ` · ${activation.mode}`}
             </div>
             {activation.altitude && (
-              <div style={{ color: '#888', fontSize: '10px' }}>
+              <div className="activation-altitude">
                 {activation.altitude}m
               </div>
             )}
