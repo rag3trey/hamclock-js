@@ -1,0 +1,132 @@
+.callsign-info-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.callsign-trigger {
+  cursor: help;
+  border-bottom: 1px dotted rgba(79, 195, 247, 0.5);
+  transition: all 0.2s;
+}
+
+.callsign-trigger:hover {
+  border-bottom-color: rgba(79, 195, 247, 0.8);
+}
+
+.callsign-text {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  color: #4fc3f7;
+}
+
+.callsign-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid rgba(79, 195, 247, 0.4);
+  border-radius: 6px;
+  padding: 12px;
+  min-width: 240px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.callsign-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid rgba(20, 20, 20, 0.95);
+}
+
+.tooltip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(79, 195, 247, 0.2);
+}
+
+.tooltip-header strong {
+  color: #fff;
+  font-size: 14px;
+}
+
+.prefix-badge {
+  background: rgba(79, 195, 247, 0.2);
+  color: #4fc3f7;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid rgba(79, 195, 247, 0.3);
+}
+
+.tooltip-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  gap: 8px;
+}
+
+.info-row .label {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.info-row .value {
+  color: #0f0;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  text-align: right;
+}
+
+/* For bottom-positioned tooltips (when near top of screen) */
+.callsign-tooltip.bottom {
+  bottom: auto;
+  top: 100%;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.callsign-tooltip.bottom::after {
+  top: auto;
+  bottom: 100%;
+  border-top: none;
+  border-bottom: 6px solid rgba(20, 20, 20, 0.95);
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 600px) {
+  .callsign-tooltip {
+    min-width: 200px;
+    padding: 10px;
+  }
+
+  .info-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .info-row .value {
+    text-align: left;
+  }
+}
