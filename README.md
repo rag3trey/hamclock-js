@@ -9,14 +9,23 @@ A modern web-based rewrite of ESPHamClock using **Python FastAPI** backend and *
 ## 🎯 Features
 
 - **Real-time World Map** with customizable projections (Mercator, Azimuthal, Robinson)
+  - Multiple grid overlay options: Lat/Lng, Maidenhead Locator, CQ Zones, ITU Regions
+  - Range rings and night shade overlay
+  - Satellite positions and trails
+  - Great circle path visualization
 - **Satellite Tracking** with SGP4/SDP4 orbit propagation and pass predictions
 - **Astronomical Calculations** - Sun/Moon position, rise/set times, phases
 - **Day/Night Terminator** overlay on world map
 - **Space Weather** monitoring (Solar Flux, A-Index, K-Index, Solar Wind)
-- **DX Cluster** integration for real-time amateur radio spots
+- **Radio Contests Calendar** with favorites, countdown timers, and live status tracking
+- **DX Cluster** integration for real-time amateur radio spots with bearing visualization
+- **SOTA/POTA Activations** (On The Air) display with markers
 - **WebSocket** support for live updates
 - **Location Management** for DE (home station) and DX (remote station)
-- **Great Circle Path** visualization between locations
+- **Maidenhead Locator** square calculation and display
+- **Radio Band Conditions** monitoring and propagation forecasts
+- **QRZ.com Integration** for call sign lookup
+- **PSK Reporter** integration for digital mode spots
 
 ## 📋 Table of Contents
 
@@ -209,6 +218,33 @@ API base URL is auto-configured in `frontend/src/api/index.js`:
    - Monitor space weather (solar flux, K-index)
    - Connect to DX Cluster for real-time spots
    - View band propagation conditions
+   - Browse radio contests calendar with live countdowns
+   - Toggle map grid overlays (Lat/Lng, Maidenhead, CQ Zones, ITU Regions)
+
+---
+
+## 🗺️ Map Grid System
+
+The map supports four different grid overlay types accessible via the Grid dropdown:
+
+| Grid Type | Spacing | Use Case |
+|-----------|---------|----------|
+| **Lat/Lng** | 30° longitude × 20° latitude | Traditional latitude/longitude grid |
+| **Maidenhead** | 2° × 1° | Maidenhead locator squares (HF radio) |
+| **CQ Zones** | 45° longitude × 15° latitude | CQ zone divisions |
+| **ITU Regions** | 3 vertical lines (-20°, +40°, +170°) | ITU radio regulation regions |
+
+---
+
+## 📻 Radio Contests Calendar
+
+Track amateur radio contests with:
+- **12-16 major contests** covering HF, VHF, UHF, and FM bands
+- **Live countdowns** showing time until contest start
+- **Favorite marking** with star system (persistent storage)
+- **Detailed information** including bands, modes, and official links
+- **Color-coded status** (upcoming, active, finished)
+- **Filter options** (all, upcoming, active, favorites)
 
 ---
 
