@@ -164,6 +164,40 @@
   gap: 12px;
 }
 
+.contest-name-with-star {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.contest-star-btn {
+  background: none;
+  border: none;
+  color: #ffc107;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.contest-star-btn:hover {
+  background-color: rgba(255, 193, 7, 0.2);
+  transform: scale(1.15);
+}
+
+.contest-star-btn.favorited {
+  color: #ffeb3b;
+  text-shadow: 0 0 8px rgba(255, 235, 59, 0.5);
+}
+
 .contest-name {
   font-weight: 600;
   color: var(--text-primary, #fff);

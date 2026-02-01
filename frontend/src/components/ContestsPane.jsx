@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchUpcomingContests } from '../api/contests';
+import { getFavorites, isFavorite, toggleFavorite } from '../utils/contestFavorites';
 import ContestDetailsModal from './ContestDetailsModal';
 import './ContestsPane.css';
 
 const ContestsPane = () => {
   const [contests, setContests] = useState([]);
-  const [filterStatus, setFilterStatus] = useState('all'); // 'all', 'upcoming', 'active'
+  const [filterStatus, setFilterStatus] = useState('all'); // 'all', 'upcoming', 'active', 'favorites'
   const [sortBy, setSortBy] = useState('start'); // 'start', 'duration', 'name'
   const [daysAhead, setDaysAhead] = useState(30);
   const [selectedContest, setSelectedContest] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [favorites, setFavorites] = useState(new Set());
 
   // Fetch contests
   const { data: contestsData, isLoading, error, refetch } = useQuery({
@@ -20,16 +22,30 @@ const ContestsPane = () => {
     enabled: true,
   });
 
+  // Load favorites on mount and listen for changes
+  useEffect(() => {
+    setFavorites(getFavorites());
+
+    const handleFavoritesChanged = () => {
+      setFavorites(getFavorites());
+    };
+
+    window.addEventListener('favoritesChanged', handleFavoritesChanged);
+    return () => window.removeEventListener('favoritesChanged', handleFavoritesChanged);
+  }, []);
+
   // Update contests when data arrives
   useEffect(() => {
     if (contestsData?.contests) {
       let filtered = [...contestsData.contests];
 
-      // Apply status filter
+      // Apply status/favorites filter
       if (filterStatus === 'upcoming') {
         filtered = filtered.filter(c => c.status === 'upcoming');
       } else if (filterStatus === 'active') {
         filtered = filtered.filter(c => c.status === 'active');
+      } else if (filterStatus === 'favorites') {
+        filtered = filtered.filter(c => favorites.has(c.name));
       }
 
       // Apply sorting
@@ -42,7 +58,7 @@ const ContestsPane = () => {
 
       setContests(filtered);
     }
-  }, [contestsData, filterStatus, sortBy]);
+  }, [contestsData, filterStatus, sortBy, favorites]);
 
   const getStatusClass = (status) => {
     switch (status) {
@@ -118,6 +134,7 @@ const ContestsPane = () => {
               <option value="all">All</option>
               <option value="upcoming">Upcoming</option>
               <option value="active">Active</option>
+              <option value="favorites">★ Favorites ({favorites.size})</option>
             </select>
           </div>
 
@@ -151,7 +168,19 @@ const ContestsPane = () => {
               style={{ cursor: 'pointer' }}
             >
               <div className="contest-top">
-                <div className="contest-name">{contest.name}</div>
+                <div className="contest-name-with-star">
+                  <button 
+                    className={`contest-star-btn ${isFavorite(contest.name) ? 'favorited' : ''}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleFavorite(contest.name);
+                    }}
+                    title={isFavorite(contest.name) ? 'Remove from favorites' : 'Add to favorites'}
+                  >
+                    {isFavorite(contest.name) ? '★' : '☆'}
+                  </button>
+                  <div className="contest-name">{contest.name}</div>
+                </div>
                 <div className={`contest-status ${getStatusClass(contest.status)}`}>
                   {getStatusLabel(contest.status)}
                 </div>

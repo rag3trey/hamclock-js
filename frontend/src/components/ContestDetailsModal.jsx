@@ -3,10 +3,24 @@
  * Shows detailed information about a selected contest
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { isFavorite, toggleFavorite } from '../utils/contestFavorites';
 import './ContestDetailsModal.css';
 
 export default function ContestDetailsModal({ contest, isOpen, onClose }) {
+  const [isFav, setIsFav] = useState(false);
+
+  useEffect(() => {
+    if (contest) {
+      setIsFav(isFavorite(contest.name));
+    }
+  }, [contest]);
+
+  const handleFavoriteToggle = () => {
+    const newStatus = toggleFavorite(contest.name);
+    setIsFav(newStatus);
+  };
+
   if (!isOpen || !contest) return null;
 
   const formatDateTime = (dateString) => {
@@ -35,7 +49,16 @@ export default function ContestDetailsModal({ contest, isOpen, onClose }) {
       <div className="contest-modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="contest-modal-header">
           <h2>{contest.name}</h2>
-          <button className="contest-modal-close" onClick={onClose}>✕</button>
+          <div className="header-buttons">
+            <button 
+              className={`contest-favorite-btn ${isFav ? 'favorited' : ''}`}
+              onClick={handleFavoriteToggle}
+              title={isFav ? 'Remove from favorites' : 'Add to favorites'}
+            >
+              {isFav ? '★' : '☆'}
+            </button>
+            <button className="contest-modal-close" onClick={onClose}>✕</button>
+          </div>
         </div>
 
         <div className="contest-modal-body">

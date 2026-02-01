@@ -60,6 +60,39 @@
   color: #00d4ff;
   font-size: 1.4em;
   font-weight: bold;
+  flex: 1;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.contest-favorite-btn {
+  background: none;
+  border: none;
+  color: #ffc107;
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.contest-favorite-btn:hover {
+  background-color: rgba(255, 193, 7, 0.2);
+  transform: scale(1.1);
+}
+
+.contest-favorite-btn.favorited {
+  color: #ffeb3b;
+  text-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
 }
 
 .contest-modal-close {
@@ -81,6 +114,38 @@
 .contest-modal-close:hover {
   background-color: rgba(0, 212, 255, 0.2);
   color: #fff;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.contest-favorite-btn {
+  background: none;
+  border: none;
+  color: #ffc107;
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.contest-favorite-btn:hover {
+  background-color: rgba(255, 193, 7, 0.2);
+  transform: scale(1.1);
+}
+
+.contest-favorite-btn.favorited {
+  color: #ffeb3b;
+  text-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
 }
 
 .contest-modal-body {
