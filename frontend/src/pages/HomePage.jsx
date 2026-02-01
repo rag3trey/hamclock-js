@@ -9,6 +9,7 @@ import NCDXFBeaconsPane from '../components/NCDXFBeaconsPane';
 import PSKReporterPane from '../components/PSKReporterPane';
 import DXClusterPane from '../components/DXClusterPane';
 import ActivationPane from '../components/ActivationPane';
+import ContestsPane from '../components/ContestsPane';
 import SatellitesPane from '../components/SatellitesPane';
 import GPSStatus from '../components/GPSStatus';
 import CATStatus from '../components/CATStatus';
@@ -69,6 +70,7 @@ const HomePage = () => {
     spaceweather: false,
     dxcluster: false,
     activations: false,
+    contests: false,
     satellites: false
   });
   
@@ -548,6 +550,38 @@ const HomePage = () => {
                   <ActivationPane 
                     activations={activations}
                   />
+                )}
+              </div>
+
+              <div className={`panel ${collapsedPanels.contests ? 'collapsed' : ''}`}>
+                <div className="panel-header">
+                  <h3>Contests</h3>
+                  <button 
+                    className="collapse-btn"
+                    onClick={() => togglePanel('contests')}
+                    title={collapsedPanels.contests ? 'Expand' : 'Collapse'}
+                  >
+                    {collapsedPanels.contests ? '▶' : '▼'}
+                  </button>
+                </div>
+                {!collapsedPanels.contests && (
+                  <ContestsPane />
+                )}
+              </div>
+
+              <div className={`panel ${collapsedPanels.contests ? 'collapsed' : ''}`}>
+                <div className="panel-header">
+                  <h3>Contests</h3>
+                  <button 
+                    className="collapse-btn"
+                    onClick={() => togglePanel('contests')}
+                    title={collapsedPanels.contests ? 'Expand' : 'Collapse'}
+                  >
+                    {collapsedPanels.contests ? '▶' : '▼'}
+                  </button>
+                </div>
+                {!collapsedPanels.contests && (
+                  <ContestsPane />
                 )}
               </div>
 
