@@ -17,10 +17,40 @@
 .dx-header {
   padding: 12px 15px;
   border-bottom: 2px solid rgba(79, 195, 247, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .panel .dx-header {
   padding-top: 16px;
+}
+
+.filter-btn {
+  background: rgba(255, 200, 0, 0.1);
+  border: 1px solid rgba(255, 200, 0, 0.3);
+  color: rgba(255, 200, 0, 0.6);
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.filter-btn:hover {
+  background: rgba(255, 200, 0, 0.2);
+  color: rgba(255, 200, 0, 0.8);
+  border-color: rgba(255, 200, 0, 0.5);
+}
+
+.filter-btn.active {
+  background: rgba(255, 200, 0, 0.2);
+  color: #ffff00;
+  border-color: rgba(255, 200, 0, 0.7);
 }
 
 .dx-title {
@@ -298,6 +328,25 @@
   align-items: center;
   gap: 8px;
   margin-bottom: 4px;
+}
+
+.watchlist-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 8px;
+  color: rgba(255, 200, 0, 0.5);
+  transition: all 0.2s;
+}
+
+.watchlist-btn:hover {
+  color: rgba(255, 200, 0, 0.8);
+  transform: scale(1.2);
+}
+
+.watchlist-btn.active {
+  color: #ffff00;
 }
 
 .spot-callsign {

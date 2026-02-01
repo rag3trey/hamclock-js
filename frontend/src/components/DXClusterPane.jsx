@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchDXSpots } from '../api';
 import { formatDistance } from '../utils/units';
+import { isDXInWatchlist, addDXToWatchlist, removeDXFromWatchlist } from '../utils/watchlistManager';
 import useWebSocket from '../hooks/useWebSocket';
 import QRZInfo from './QRZInfo';
 import './DXClusterPane.css';
@@ -16,6 +17,8 @@ const DXClusterPane = ({ onSpotClick, deLocation, units = 'imperial' }) => {
   const [minElevation, setMinElevation] = useState(0);
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [sortBy, setSortBy] = useState('time'); // 'time', 'frequency', 'distance', 'elevation'
+  const [watchlist, setWatchlist] = useState({});
+  const [showWatchlistOnly, setShowWatchlistOnly] = useState(false);
   
   // WebSocket hook for real-time spot updates
   const { isConnected, subscribe } = useWebSocket({
@@ -59,6 +62,23 @@ const DXClusterPane = ({ onSpotClick, deLocation, units = 'imperial' }) => {
     }
   }, [dxData, spots.length]);
 
+  // Listen for watchlist changes
+  useEffect(() => {
+    const handleWatchlistChange = () => {
+      // Update watchlist status for all spots
+      const updatedWatchlist = {};
+      spots.forEach(spot => {
+        updatedWatchlist[spot.callsign] = isDXInWatchlist(spot.callsign);
+      });
+      setWatchlist(updatedWatchlist);
+    };
+    
+    window.addEventListener('watchlistChanged', handleWatchlistChange);
+    // Initial load
+    handleWatchlistChange();
+    return () => window.removeEventListener('watchlistChanged', handleWatchlistChange);
+  }, [spots]);
+
   if (isLoading && spots.length === 0) return <div className="dx-cluster-pane loading">Loading spots...</div>;
   if (spots.length === 0) return <div className="dx-cluster-pane">No data</div>;
   
@@ -79,6 +99,19 @@ const DXClusterPane = ({ onSpotClick, deLocation, units = 'imperial' }) => {
     if (onSpotClick) {
       // Pass the full spot data to the callback
       onSpotClick(spot);
+    }
+  };
+
+  const handleWatchlistToggle = (e, callsign, details) => {
+    e.stopPropagation();
+    if (watchlist[callsign]) {
+      removeDXFromWatchlist(callsign);
+    } else {
+      addDXToWatchlist(callsign, {
+        frequency: details.frequency,
+        mode: details.mode,
+        country: details.country
+      });
     }
   };
 
@@ -126,9 +159,23 @@ const DXClusterPane = ({ onSpotClick, deLocation, units = 'imperial' }) => {
         <div className="dx-title">
           <span className={`status-indicator ${wsConnected ? 'connected' : 'disconnected'}`}></span>
           DX Cluster
-          <span className="spot-count">({filteredSpots.length}/{spots.length})</span>
+          <span className="spot-count">({
+            showWatchlistOnly
+              ? filteredSpots.filter(s => watchlist[s.callsign]).length
+              : filteredSpots.length
+          }/{spots.length})</span>
           {wsConnected && <span className="ws-status" title="Real-time WebSocket">🔴 Live</span>}
         </div>
+        
+        {Object.values(watchlist).some(v => v) && (
+          <button 
+            className={`filter-btn ${showWatchlistOnly ? 'active' : ''}`}
+            onClick={() => setShowWatchlistOnly(!showWatchlistOnly)}
+            title="Show watchlist only"
+          >
+            ⭐ {Object.values(watchlist).filter(v => v).length}
+          </button>
+        )}
         
         <div className="band-filter">
           {bands.map(band => (
@@ -193,7 +240,10 @@ const DXClusterPane = ({ onSpotClick, deLocation, units = 'imperial' }) => {
           </div>
         ) : (
           <div className="dx-spots-list">
-            {filteredSpots.map((spot, index) => (
+            {(showWatchlistOnly 
+              ? filteredSpots.filter(s => watchlist[s.callsign]) 
+              : filteredSpots
+            ).map((spot, index) => (
               <div 
                 key={`${spot.callsign}-${spot.frequency}-${index}`} 
                 className="dx-spot"
@@ -201,6 +251,17 @@ const DXClusterPane = ({ onSpotClick, deLocation, units = 'imperial' }) => {
                 title="Click to see details"
               >
               <div className="spot-header">
+                  <button 
+                    className={`watchlist-btn ${watchlist[spot.callsign] ? 'active' : ''}`}
+                    onClick={(e) => handleWatchlistToggle(e, spot.callsign, { 
+                      frequency: spot.frequency, 
+                      mode: spot.mode,
+                      country: spot.country 
+                    })}
+                    title={watchlist[spot.callsign] ? 'Remove from watchlist' : 'Add to watchlist'}
+                  >
+                    {watchlist[spot.callsign] ? '⭐' : '☆'}
+                  </button>
                   <span 
                     className="spot-callsign"
                     onClick={(e) => {

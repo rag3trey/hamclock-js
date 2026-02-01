@@ -11,6 +11,7 @@ import DXClusterPane from '../components/DXClusterPane';
 import ActivationPane from '../components/ActivationPane';
 import ContestsPane from '../components/ContestsPane';
 import SatellitesPane from '../components/SatellitesPane';
+import WatchlistPane from '../components/WatchlistPane';
 import GPSStatus from '../components/GPSStatus';
 import CATStatus from '../components/CATStatus';
 import GimbalStatus from '../components/GimbalStatus';
@@ -89,7 +90,8 @@ const HomePage = () => {
     dxcluster: false,
     activations: false,
     contests: false,
-    satellites: false
+    satellites: false,
+    watchlist: false
   });
   
   const [dxSpotMarker, setDxSpotMarker] = useState(null);
@@ -627,6 +629,24 @@ const HomePage = () => {
                     onSatelliteSelect={setSelectedSatellite}
                     units={units}
                   />
+                )}
+              </div>
+              )}
+
+              {visiblePanels.watchlist && (
+              <div className={`panel ${collapsedPanels.watchlist ? 'collapsed' : ''}`}>
+                <div className="panel-header">
+                  <h3>⭐ Watchlist</h3>
+                  <button 
+                    className="collapse-btn"
+                    onClick={() => togglePanel('watchlist')}
+                    title={collapsedPanels.watchlist ? 'Expand' : 'Collapse'}
+                  >
+                    {collapsedPanels.watchlist ? '▶' : '▼'}
+                  </button>
+                </div>
+                {!collapsedPanels.watchlist && (
+                  <WatchlistPane />
                 )}
               </div>
               )}

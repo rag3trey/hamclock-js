@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { formatDistance } from '../utils/units';
+import { isSatelliteInWatchlist, addSatelliteToWatchlist, removeSatelliteFromWatchlist } from '../utils/watchlistManager';
 import useWebSocket from '../hooks/useWebSocket';
 import './SatellitesPane.css';
 
@@ -10,6 +11,8 @@ const SatellitesPane = ({ deLocation, satelliteData, onSatelliteSelect, units = 
   const [passes, setPasses] = useState({});
   const [loadingPasses, setLoadingPasses] = useState({});
   const [expandedSatellites, setExpandedSatellites] = useState({});
+  const [watchlist, setWatchlist] = useState({});
+  const [showWatchlistOnly, setShowWatchlistOnly] = useState(false);
   
   // WebSocket hook for real-time satellite updates
   const { isConnected, subscribe } = useWebSocket({
@@ -45,6 +48,23 @@ const SatellitesPane = ({ deLocation, satelliteData, onSatelliteSelect, units = 
       }
     }
   }, [satelliteData]);
+
+  // Listen for watchlist changes
+  useEffect(() => {
+    const handleWatchlistChange = () => {
+      // Update watchlist status for all satellites
+      const updatedWatchlist = {};
+      satellites.forEach(sat => {
+        updatedWatchlist[sat.name] = isSatelliteInWatchlist(sat.name);
+      });
+      setWatchlist(updatedWatchlist);
+    };
+    
+    window.addEventListener('watchlistChanged', handleWatchlistChange);
+    // Initial load
+    handleWatchlistChange();
+    return () => window.removeEventListener('watchlistChanged', handleWatchlistChange);
+  }, [satellites]);
 
   // Fetch passes for a satellite
   const fetchPasses = async (satName) => {
@@ -126,6 +146,15 @@ const SatellitesPane = ({ deLocation, satelliteData, onSatelliteSelect, units = 
     }
   };
 
+  const handleWatchlistToggle = (e, satName, satLabel) => {
+    e.stopPropagation();
+    if (watchlist[satName]) {
+      removeSatelliteFromWatchlist(satName);
+    } else {
+      addSatelliteToWatchlist(satName, satLabel);
+    }
+  };
+
   return (
     <div className="satellites-pane">
       <div className="satellites-header">
@@ -135,15 +164,31 @@ const SatellitesPane = ({ deLocation, satelliteData, onSatelliteSelect, units = 
           <span className="sat-count">({satellites.length} visible)</span>
           {wsConnected && <span className="ws-status" title="Real-time WebSocket">🔴 Live</span>}
         </div>
+        {Object.values(watchlist).some(v => v) && (
+          <button 
+            className={`filter-btn ${showWatchlistOnly ? 'active' : ''}`}
+            onClick={() => setShowWatchlistOnly(!showWatchlistOnly)}
+            title="Show watchlist only"
+          >
+            ⭐ {Object.values(watchlist).filter(v => v).length}
+          </button>
+        )}
       </div>
 
       <div className="satellites-content">
         {/* Visible Satellites */}
         {satellites && satellites.length > 0 ? (
           <div className="section">
-            <div className="section-title">Currently Visible ({satellites.length})</div>
+            <div className="section-title">Currently Visible ({
+              showWatchlistOnly 
+                ? satellites.filter(s => watchlist[s.name]).length 
+                : satellites.length
+            })</div>
             <div className="satellites-list">
-              {satellites.map((sat, index) => (
+              {(showWatchlistOnly 
+                ? satellites.filter(s => watchlist[s.name]) 
+                : satellites
+              ).map((sat, index) => (
                 <div key={`${sat.name}-${index}`} className="satellite-item-container">
                   <div 
                     className={`satellite-item visible ${expandedSatellites[sat.name] ? 'expanded' : ''}`}
@@ -153,6 +198,13 @@ const SatellitesPane = ({ deLocation, satelliteData, onSatelliteSelect, units = 
                     }}
                   >
                     <div className="sat-main">
+                      <button 
+                        className={`watchlist-btn ${watchlist[sat.name] ? 'active' : ''}`}
+                        onClick={(e) => handleWatchlistToggle(e, sat.name, sat.name)}
+                        title={watchlist[sat.name] ? 'Remove from watchlist' : 'Add to watchlist'}
+                      >
+                        {watchlist[sat.name] ? '⭐' : '☆'}
+                      </button>
                       <div className="sat-name">🔴 {sat.name}</div>
                       <div className="sat-details">
                         <span className="sat-bearing">

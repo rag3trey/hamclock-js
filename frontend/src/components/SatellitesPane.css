@@ -17,6 +17,9 @@
 .satellites-header {
   padding: 12px 15px;
   border-bottom: 2px solid rgba(79, 195, 247, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .satellites-title {
@@ -26,6 +29,30 @@
   color: #fff;
   font-size: 1.1rem;
   font-weight: bold;
+}
+
+.filter-btn {
+  background: rgba(255, 200, 0, 0.1);
+  border: 1px solid rgba(255, 200, 0, 0.3);
+  color: rgba(255, 200, 0, 0.6);
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  background: rgba(255, 200, 0, 0.2);
+  color: rgba(255, 200, 0, 0.8);
+  border-color: rgba(255, 200, 0, 0.5);
+}
+
+.filter-btn.active {
+  background: rgba(255, 200, 0, 0.2);
+  color: #ffff00;
+  border-color: rgba(255, 200, 0, 0.7);
 }
 
 .satellite-icon {
@@ -135,6 +162,27 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  align-items: flex-start;
+}
+
+.watchlist-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 8px;
+  color: rgba(255, 200, 0, 0.5);
+  transition: all 0.2s;
+  margin-bottom: 4px;
+}
+
+.watchlist-btn:hover {
+  color: rgba(255, 200, 0, 0.8);
+  transform: scale(1.2);
+}
+
+.watchlist-btn.active {
+  color: #ffff00;
 }
 
 .sat-name {
