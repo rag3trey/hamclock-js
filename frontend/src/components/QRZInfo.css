@@ -235,6 +235,104 @@
   border-radius: 2px;
 }
 
+/* Light mode styling */
+[data-theme="light"] .qrz-info-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-color: #d1d5db;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .qrz-header {
+  border-bottom-color: #e5e7eb;
+  background-color: rgba(29, 78, 216, 0.05);
+}
+
+[data-theme="light"] .qrz-header h3 {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .qrz-close {
+  color: #6b7280;
+}
+
+[data-theme="light"] .qrz-close:hover {
+  color: #111827;
+}
+
+[data-theme="light"] .qrz-field {
+  background-color: rgba(29, 78, 216, 0.08);
+  border-left-color: #1d4ed8;
+}
+
+[data-theme="light"] .qrz-label {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .qrz-value {
+  color: #0a1428;
+}
+
+[data-theme="light"] .qrz-value a {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .qrz-value a:hover {
+  color: #1e40af;
+}
+
+[data-theme="light"] .qrz-loading {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .qrz-loading::after {
+  background: #1d4ed8;
+}
+
+[data-theme="light"] .qrz-error {
+  background-color: rgba(220, 38, 38, 0.1);
+  border-color: #fca5a5;
+  color: #991b1b;
+}
+
+[data-theme="light"] .qrz-not-found {
+  color: #6b7280;
+}
+
+[data-theme="light"] .qrz-content::-webkit-scrollbar-track {
+  background: rgba(29, 78, 216, 0.05);
+}
+
+[data-theme="light"] .qrz-content::-webkit-scrollbar-thumb {
+  background: rgba(29, 78, 216, 0.3);
+}
+
+[data-theme="light"] .qrz-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(29, 78, 216, 0.5);
+}
+
+[data-theme="light"] .qrz-photo {
+  border-color: #1d4ed8;
+  box-shadow: 0 4px 12px rgba(29, 78, 216, 0.15);
+}
+
+[data-theme="light"] .qrz-bio {
+  background-color: rgba(29, 78, 216, 0.08);
+  border-color: #bfdbfe;
+}
+
+[data-theme="light"] .qrz-bio-text {
+  color: #0a1428;
+}
+
+[data-theme="light"] .qrz-bio-text::-webkit-scrollbar-track {
+  background: rgba(29, 78, 216, 0.05);
+}
+
+[data-theme="light"] .qrz-bio-text::-webkit-scrollbar-thumb {
+  background: rgba(29, 78, 216, 0.3);
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   .qrz-info-card {
