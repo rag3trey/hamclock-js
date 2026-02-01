@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchUpcomingContests } from '../api/contests';
+import ContestDetailsModal from './ContestDetailsModal';
 import './ContestsPane.css';
 
 const ContestsPane = () => {
@@ -8,6 +9,8 @@ const ContestsPane = () => {
   const [filterStatus, setFilterStatus] = useState('all'); // 'all', 'upcoming', 'active'
   const [sortBy, setSortBy] = useState('start'); // 'start', 'duration', 'name'
   const [daysAhead, setDaysAhead] = useState(30);
+  const [selectedContest, setSelectedContest] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   // Fetch contests
   const { data: contestsData, isLoading, error, refetch } = useQuery({
@@ -78,6 +81,15 @@ const ContestsPane = () => {
 
   return (
     <div className="contests-pane">
+      <ContestDetailsModal 
+        contest={selectedContest} 
+        isOpen={showModal} 
+        onClose={() => {
+          setShowModal(false);
+          setSelectedContest(null);
+        }}
+      />
+      
       <div className="contests-header">
         <h3>📅 Radio Contests</h3>
         <div className="contests-controls">
@@ -129,7 +141,15 @@ const ContestsPane = () => {
           <div className="no-contests">No contests found for the selected filters.</div>
         ) : (
           contests.map((contest, idx) => (
-            <div key={idx} className={`contest-item ${getStatusClass(contest.status)}`}>
+            <div 
+              key={idx} 
+              className={`contest-item ${getStatusClass(contest.status)}`}
+              onClick={() => {
+                setSelectedContest(contest);
+                setShowModal(true);
+              }}
+              style={{ cursor: 'pointer' }}
+            >
               <div className="contest-top">
                 <div className="contest-name">{contest.name}</div>
                 <div className={`contest-status ${getStatusClass(contest.status)}`}>
