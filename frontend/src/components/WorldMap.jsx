@@ -224,14 +224,89 @@ function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapCl
       ctx.globalAlpha = 1.0;
     }
     
-    // Draw graticule (grid lines)
-    const graticule = geoGraticule().step([30, 20]);
+    // Draw grid based on type
     if (showGrid) {
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-      ctx.lineWidth = 0.5;
-      ctx.beginPath();
-      path(graticule());
-      ctx.stroke();
+      if (gridType === 'maidenhead') {
+        const bounds = projection.invert([0, 0]);
+        const boundsMax = projection.invert([width, height]);
+        const minLat = Math.min(bounds[1], boundsMax[1]);
+        const maxLat = Math.max(bounds[1], boundsMax[1]);
+        const minLng = Math.min(bounds[0], boundsMax[0]);
+        const maxLng = Math.max(bounds[0], boundsMax[0]);
+        
+        ctx.strokeStyle = 'rgba(100, 200, 255, 0.25)';
+        ctx.lineWidth = 0.8;
+        ctx.beginPath();
+        
+        ctx.strokeStyle = 'rgba(100, 200, 255, 0.25)';
+        ctx.lineWidth = 0.8;
+        ctx.beginPath();
+        
+        const gridLines = generateMaidenheadGrid(minLat, maxLat, minLng, maxLng);
+        gridLines?.forEach(line => {
+          line.coordinates?.forEach((point, i) => {
+            const projected = projection(point);
+            if (projected) {
+              if (i === 0) ctx.moveTo(projected[0], projected[1]);
+              else ctx.lineTo(projected[0], projected[1]);
+            }
+          });
+        });
+        ctx.stroke();
+        ctx.stroke();
+      } else if (gridType === 'cq-zones') {
+        const bounds = projection.invert([0, 0]);
+        const boundsMax = projection.invert([width, height]);
+        const minLat = Math.min(bounds[1], boundsMax[1]);
+        const maxLat = Math.max(bounds[1], boundsMax[1]);
+        const minLng = Math.min(bounds[0], boundsMax[0]);
+        const maxLng = Math.max(bounds[0], boundsMax[0]);
+        
+        const gridLines = generateCQZoneGridLines(minLat, maxLat, minLng, maxLng);
+        gridLines?.forEach(line => {
+          ctx.strokeStyle = line.style?.color || 'rgba(255, 200, 100, 0.3)';
+          ctx.lineWidth = line.style?.width || 1;
+          ctx.beginPath();
+          line.coordinates?.forEach((point, i) => {
+            const projected = projection(point);
+            if (projected) {
+              if (i === 0) ctx.moveTo(projected[0], projected[1]);
+              else ctx.lineTo(projected[0], projected[1]);
+            }
+          });
+          ctx.stroke();
+        });
+      } else if (gridType === 'itu-regions') {
+        const bounds = projection.invert([0, 0]);
+        const boundsMax = projection.invert([width, height]);
+        const minLat = Math.min(bounds[1], boundsMax[1]);
+        const maxLat = Math.max(bounds[1], boundsMax[1]);
+        const minLng = Math.min(bounds[0], boundsMax[0]);
+        const maxLng = Math.max(bounds[0], boundsMax[0]);
+        
+        const gridLines = generateITURegionGridLines(minLat, maxLat, minLng, maxLng);
+        gridLines?.forEach(line => {
+          ctx.strokeStyle = line.style?.color || 'rgba(255, 150, 50, 0.6)';
+          ctx.lineWidth = line.style?.width || 2.5;
+          ctx.beginPath();
+          line.coordinates?.forEach((point, i) => {
+            const projected = projection(point);
+            if (projected) {
+              if (i === 0) ctx.moveTo(projected[0], projected[1]);
+              else ctx.lineTo(projected[0], projected[1]);
+            }
+          });
+          ctx.stroke();
+        });
+      } else {
+        // Default: Lat/Lng
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        const graticule = geoGraticule().step([30, 20]);
+        path(graticule());
+        ctx.stroke();
+      }
     }
     
     if (showNightShade && terminatorData?.points?.length) {
@@ -581,14 +656,89 @@ function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
       ctx.globalAlpha = 1.0;
     }
     
-    // Draw graticule (grid lines)
-    const graticule = geoGraticule().step([30, 20]);
+    // Draw grid based on type
     if (showGrid) {
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-      ctx.lineWidth = 0.5;
-      ctx.beginPath();
-      path(graticule());
-      ctx.stroke();
+      if (gridType === 'maidenhead') {
+        const bounds = projection.invert([0, 0]);
+        const boundsMax = projection.invert([width, height]);
+        const minLat = Math.min(bounds[1], boundsMax[1]);
+        const maxLat = Math.max(bounds[1], boundsMax[1]);
+        const minLng = Math.min(bounds[0], boundsMax[0]);
+        const maxLng = Math.max(bounds[0], boundsMax[0]);
+        
+        ctx.strokeStyle = 'rgba(100, 200, 255, 0.25)';
+        ctx.lineWidth = 0.8;
+        ctx.beginPath();
+        
+        ctx.strokeStyle = 'rgba(100, 200, 255, 0.25)';
+        ctx.lineWidth = 0.8;
+        ctx.beginPath();
+        
+        const gridLines = generateMaidenheadGrid(minLat, maxLat, minLng, maxLng);
+        gridLines?.forEach(line => {
+          line.coordinates?.forEach((point, i) => {
+            const projected = projection(point);
+            if (projected) {
+              if (i === 0) ctx.moveTo(projected[0], projected[1]);
+              else ctx.lineTo(projected[0], projected[1]);
+            }
+          });
+        });
+        ctx.stroke();
+        ctx.stroke();
+      } else if (gridType === 'cq-zones') {
+        const bounds = projection.invert([0, 0]);
+        const boundsMax = projection.invert([width, height]);
+        const minLat = Math.min(bounds[1], boundsMax[1]);
+        const maxLat = Math.max(bounds[1], boundsMax[1]);
+        const minLng = Math.min(bounds[0], boundsMax[0]);
+        const maxLng = Math.max(bounds[0], boundsMax[0]);
+        
+        const gridLines = generateCQZoneGridLines(minLat, maxLat, minLng, maxLng);
+        gridLines?.forEach(line => {
+          ctx.strokeStyle = line.style?.color || 'rgba(255, 200, 100, 0.3)';
+          ctx.lineWidth = line.style?.width || 1;
+          ctx.beginPath();
+          line.coordinates?.forEach((point, i) => {
+            const projected = projection(point);
+            if (projected) {
+              if (i === 0) ctx.moveTo(projected[0], projected[1]);
+              else ctx.lineTo(projected[0], projected[1]);
+            }
+          });
+          ctx.stroke();
+        });
+      } else if (gridType === 'itu-regions') {
+        const bounds = projection.invert([0, 0]);
+        const boundsMax = projection.invert([width, height]);
+        const minLat = Math.min(bounds[1], boundsMax[1]);
+        const maxLat = Math.max(bounds[1], boundsMax[1]);
+        const minLng = Math.min(bounds[0], boundsMax[0]);
+        const maxLng = Math.max(bounds[0], boundsMax[0]);
+        
+        const gridLines = generateITURegionGridLines(minLat, maxLat, minLng, maxLng);
+        gridLines?.forEach(line => {
+          ctx.strokeStyle = line.style?.color || 'rgba(255, 150, 50, 0.6)';
+          ctx.lineWidth = line.style?.width || 2.5;
+          ctx.beginPath();
+          line.coordinates?.forEach((point, i) => {
+            const projected = projection(point);
+            if (projected) {
+              if (i === 0) ctx.moveTo(projected[0], projected[1]);
+              else ctx.lineTo(projected[0], projected[1]);
+            }
+          });
+          ctx.stroke();
+        });
+      } else {
+        // Default: Lat/Lng
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        const graticule = geoGraticule().step([30, 20]);
+        path(graticule());
+        ctx.stroke();
+      }
     }
     
     // Draw night shade if enabled
@@ -937,14 +1087,89 @@ function RobinsonCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
       ctx.globalAlpha = 1.0;
     }
     
-    // Draw graticule (grid lines)
-    const graticule = geoGraticule().step([30, 20]);
+    // Draw grid based on type
     if (showGrid) {
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-      ctx.lineWidth = 0.5;
-      ctx.beginPath();
-      path(graticule());
-      ctx.stroke();
+      if (gridType === 'maidenhead') {
+        const bounds = projection.invert([0, 0]);
+        const boundsMax = projection.invert([width, height]);
+        const minLat = Math.min(bounds[1], boundsMax[1]);
+        const maxLat = Math.max(bounds[1], boundsMax[1]);
+        const minLng = Math.min(bounds[0], boundsMax[0]);
+        const maxLng = Math.max(bounds[0], boundsMax[0]);
+        
+        ctx.strokeStyle = 'rgba(100, 200, 255, 0.25)';
+        ctx.lineWidth = 0.8;
+        ctx.beginPath();
+        
+        ctx.strokeStyle = 'rgba(100, 200, 255, 0.25)';
+        ctx.lineWidth = 0.8;
+        ctx.beginPath();
+        
+        const gridLines = generateMaidenheadGrid(minLat, maxLat, minLng, maxLng);
+        gridLines?.forEach(line => {
+          line.coordinates?.forEach((point, i) => {
+            const projected = projection(point);
+            if (projected) {
+              if (i === 0) ctx.moveTo(projected[0], projected[1]);
+              else ctx.lineTo(projected[0], projected[1]);
+            }
+          });
+        });
+        ctx.stroke();
+        ctx.stroke();
+      } else if (gridType === 'cq-zones') {
+        const bounds = projection.invert([0, 0]);
+        const boundsMax = projection.invert([width, height]);
+        const minLat = Math.min(bounds[1], boundsMax[1]);
+        const maxLat = Math.max(bounds[1], boundsMax[1]);
+        const minLng = Math.min(bounds[0], boundsMax[0]);
+        const maxLng = Math.max(bounds[0], boundsMax[0]);
+        
+        const gridLines = generateCQZoneGridLines(minLat, maxLat, minLng, maxLng);
+        gridLines?.forEach(line => {
+          ctx.strokeStyle = line.style?.color || 'rgba(255, 200, 100, 0.3)';
+          ctx.lineWidth = line.style?.width || 1;
+          ctx.beginPath();
+          line.coordinates?.forEach((point, i) => {
+            const projected = projection(point);
+            if (projected) {
+              if (i === 0) ctx.moveTo(projected[0], projected[1]);
+              else ctx.lineTo(projected[0], projected[1]);
+            }
+          });
+          ctx.stroke();
+        });
+      } else if (gridType === 'itu-regions') {
+        const bounds = projection.invert([0, 0]);
+        const boundsMax = projection.invert([width, height]);
+        const minLat = Math.min(bounds[1], boundsMax[1]);
+        const maxLat = Math.max(bounds[1], boundsMax[1]);
+        const minLng = Math.min(bounds[0], boundsMax[0]);
+        const maxLng = Math.max(bounds[0], boundsMax[0]);
+        
+        const gridLines = generateITURegionGridLines(minLat, maxLat, minLng, maxLng);
+        gridLines?.forEach(line => {
+          ctx.strokeStyle = line.style?.color || 'rgba(255, 150, 50, 0.6)';
+          ctx.lineWidth = line.style?.width || 2.5;
+          ctx.beginPath();
+          line.coordinates?.forEach((point, i) => {
+            const projected = projection(point);
+            if (projected) {
+              if (i === 0) ctx.moveTo(projected[0], projected[1]);
+              else ctx.lineTo(projected[0], projected[1]);
+            }
+          });
+          ctx.stroke();
+        });
+      } else {
+        // Default: Lat/Lng
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        const graticule = geoGraticule().step([30, 20]);
+        path(graticule());
+        ctx.stroke();
+      }
     }
     
     if (showNightShade && terminatorData?.points?.length) {

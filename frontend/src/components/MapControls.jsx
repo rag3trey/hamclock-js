@@ -75,8 +75,8 @@ const MapControls = ({
               <input
                 type="radio"
                 name="gridType"
-                value="cq"
-                checked={gridType === 'cq'}
+                value="cq-zones"
+                checked={gridType === 'cq-zones'}
                 onChange={(e) => setGridType(e.target.value)}
               />
               <span>CQ Zones</span>
@@ -85,8 +85,8 @@ const MapControls = ({
               <input
                 type="radio"
                 name="gridType"
-                value="itu"
-                checked={gridType === 'itu'}
+                value="itu-regions"
+                checked={gridType === 'itu-regions'}
                 onChange={(e) => setGridType(e.target.value)}
               />
               <span>ITU Regions</span>

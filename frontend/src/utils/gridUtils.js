@@ -110,25 +110,25 @@ export function generateMaidenheadGrid(minLat, maxLat, minLng, maxLng, level = '
     latStep = 1;
   }
   
-  // Vertical lines (longitude)
+  // Vertical lines (longitude) - constant longitude, varying latitude
   const startLng = Math.floor(minLng / lngStep) * lngStep;
   for (let lng = startLng; lng <= maxLng; lng += lngStep) {
     if (lng >= minLng && lng <= maxLng) {
       lines.push({
         type: 'line',
-        coordinates: [[minLat, lng], [maxLat, lng]],
+        coordinates: [[lng, minLat], [lng, maxLat]],
         level
       });
     }
   }
   
-  // Horizontal lines (latitude)
+  // Horizontal lines (latitude) - constant latitude, varying longitude
   const startLat = Math.floor(minLat / latStep) * latStep;
   for (let lat = startLat; lat <= maxLat; lat += latStep) {
     if (lat >= minLat && lat <= maxLat) {
       lines.push({
         type: 'line',
-        coordinates: [[lat, minLng], [lat, maxLng]],
+        coordinates: [[minLng, lat], [maxLng, lat]],
         level
       });
     }
@@ -142,14 +142,47 @@ export function generateMaidenheadGrid(minLat, maxLat, minLng, maxLng, level = '
  * CQ Zones are numbered 1-40
  */
 export function generateCQZoneGridLines(minLat, maxLat, minLng, maxLng) {
-  // This is a simplified representation
-  // In reality, CQ zones are irregular regions
-  // For now, returning approximate lines
   const lines = [];
   
-  // Approximate CQ zone boundaries (very simplified)
-  // Zone boundaries don't follow lat/lng lines, so this is complex
-  // Leaving as placeholder for future implementation
+  // CQ Zones are roughly based on latitude bands and longitude divisions
+  // This is a simplified grid representation of CQ zone boundaries
+  // Using 15-degree latitude bands and 45-degree longitude divisions for distinctiveness
+  
+  // Approximate zone latitude boundaries
+  const latBoundaries = [];
+  for (let lat = -90; lat <= 90; lat += 15) {
+    latBoundaries.push(lat);
+  }
+  
+  // Approximate zone longitude boundaries (45-degree divisions - different from lat/lng)
+  const lngBoundaries = [];
+  for (let lng = -180; lng <= 180; lng += 45) {
+    lngBoundaries.push(lng);
+  }
+  
+  // Draw horizontal lines (constant latitude)
+  for (let lat of latBoundaries) {
+    if (lat >= minLat && lat <= maxLat) {
+      lines.push({
+        type: 'line',
+        coordinates: [[minLng, lat], [maxLng, lat]],
+        level: 'cq-zone',
+        style: { color: 'rgba(255, 200, 0, 0.8)', width: 2 }
+      });
+    }
+  }
+  
+  // Draw vertical lines (constant longitude)
+  for (let lng of lngBoundaries) {
+    if (lng >= minLng && lng <= maxLng) {
+      lines.push({
+        type: 'line',
+        coordinates: [[lng, minLat], [lng, maxLat]],
+        level: 'cq-zone',
+        style: { color: 'rgba(255, 200, 0, 0.8)', width: 2 }
+      });
+    }
+  }
   
   return lines;
 }
@@ -163,31 +196,43 @@ export function generateCQZoneGridLines(minLat, maxLat, minLng, maxLng) {
 export function generateITURegionGridLines(minLat, maxLat, minLng, maxLng) {
   const lines = [];
   
-  // Approximate ITU region boundaries
-  // Region 1/2 boundary at ~20W longitude
-  // Region 2/3 boundary at ~170E longitude
-  // Region 1/3 boundary at ~40E longitude
+  // ITU region boundaries (vertical lines at specific longitudes)
+  // Region 1: Europe, Africa, Middle East, Russia (0° to ~40°E, 20°W to 0°)
+  // Region 2: North/South America, Greenland (40°W to 20°E roughly)
+  // Region 3: Asia-Pacific (40°E to 170°E, 170°W onward)
   
-  lines.push({
-    type: 'line',
-    name: 'ITU R1/R2',
-    coordinates: [[-90, -20], [90, -20]],
-    level: 'itu'
-  });
+  // Region 1/2 boundary at 20°W longitude (vertical line)
+  if (-20 >= minLng && -20 <= maxLng) {
+    lines.push({
+      type: 'line',
+      name: 'ITU R1/R2',
+      coordinates: [[-20, minLat], [-20, maxLat]],
+      level: 'itu',
+      style: { color: 'rgba(255, 0, 0, 0.9)', width: 4 }
+    });
+  }
   
-  lines.push({
-    type: 'line',
-    name: 'ITU R2/R3',
-    coordinates: [[-90, 170], [90, 170]],
-    level: 'itu'
-  });
+  // Region 2/3 boundary at 170°E longitude (vertical line)
+  if (170 >= minLng && 170 <= maxLng) {
+    lines.push({
+      type: 'line',
+      name: 'ITU R2/R3',
+      coordinates: [[170, minLat], [170, maxLat]],
+      level: 'itu',
+      style: { color: 'rgba(255, 0, 0, 0.9)', width: 4 }
+    });
+  }
   
-  lines.push({
-    type: 'line',
-    name: 'ITU R1/R3',
-    coordinates: [[-90, 40], [90, 40]],
-    level: 'itu'
-  });
+  // Region 1/3 boundary at 40°E longitude (vertical line)
+  if (40 >= minLng && 40 <= maxLng) {
+    lines.push({
+      type: 'line',
+      name: 'ITU R1/R3',
+      coordinates: [[40, minLat], [40, maxLat]],
+      level: 'itu',
+      style: { color: 'rgba(255, 0, 0, 0.9)', width: 4 }
+    });
+  }
   
   return lines;
 }
