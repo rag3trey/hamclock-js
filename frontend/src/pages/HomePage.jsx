@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import WorldMap from '../components/WorldMap';
 import SunMoonInfo from '../components/SunMoonInfo';
+import SunMoonTimes from '../components/SunMoonTimes';
 import SpaceWeatherPane from '../components/SpaceWeatherPane';
 import SolarFluxTrend from '../components/SolarFluxTrend';
 import BandConditionsPane from '../components/BandConditionsPane';
@@ -402,6 +403,25 @@ const HomePage = () => {
                   <SunMoonInfo
                     latitude={deLocation.latitude}
                     longitude={deLocation.longitude}
+                  />
+                )}
+              </div>
+
+              <div className={`panel sun-moon-times-panel ${collapsedPanels.sunmoontimes ? 'collapsed' : ''}`}>
+                <div className="panel-header">
+                  <h3>Sun & Moon Times</h3>
+                  <button 
+                    className="collapse-btn"
+                    onClick={() => togglePanel('sunmoontimes')}
+                    title={collapsedPanels.sunmoontimes ? 'Expand' : 'Collapse'}
+                  >
+                    {collapsedPanels.sunmoontimes ? '▶' : '▼'}
+                  </button>
+                </div>
+                {!collapsedPanels.sunmoontimes && deLocation && (
+                  <SunMoonTimes
+                    deLocation={deLocation}
+                    units={units}
                   />
                 )}
               </div>

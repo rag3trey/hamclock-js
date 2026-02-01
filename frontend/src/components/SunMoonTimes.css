@@ -1,0 +1,130 @@
+.sun-moon-times {
+  background: rgba(10, 15, 30, 0.8);
+  border: 1px solid rgba(74, 158, 255, 0.3);
+  border-radius: 6px;
+  padding: 12px;
+  color: #e0e0e0;
+  font-size: 12px;
+  font-family: 'Courier New', monospace;
+}
+
+.sun-moon-times.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  opacity: 0.7;
+}
+
+.sun-moon-header {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(74, 158, 255, 0.2);
+}
+
+.sun-moon-header h3 {
+  margin: 0;
+  font-size: 13px;
+  color: #4a9eff;
+  font-weight: 600;
+}
+
+.sun-moon-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.sun-section,
+.moon-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.section-title {
+  font-weight: 600;
+  color: #81d4fa;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(129, 212, 250, 0.2);
+}
+
+.time-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 6px;
+  background: rgba(74, 158, 255, 0.05);
+  border-radius: 3px;
+  gap: 8px;
+}
+
+.time-label {
+  color: #b0b0b0;
+  flex-shrink: 0;
+}
+
+.time-value {
+  color: #4a9eff;
+  font-weight: 600;
+  text-align: right;
+  flex: 1;
+}
+
+.moon-phase-row {
+  background: rgba(129, 212, 250, 0.1);
+  padding: 6px 8px;
+  margin-top: 4px;
+  justify-content: center;
+  gap: 8px;
+}
+
+.phase-emoji {
+  font-size: 14px;
+}
+
+.phase-label {
+  color: #81d4fa;
+  font-weight: 600;
+}
+
+.error-message {
+  color: #ff6b6b;
+  font-size: 11px;
+  margin-top: 8px;
+  padding: 6px;
+  background: rgba(255, 107, 107, 0.1);
+  border-left: 2px solid #ff6b6b;
+  border-radius: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sun-moon-content {
+    grid-template-columns: 1fr;
+  }
+
+  .sun-moon-times {
+    font-size: 11px;
+  }
+
+  .sun-moon-header h3 {
+    font-size: 12px;
+  }
+}
+
+/* Dark theme adjustments */
+@media (prefers-color-scheme: dark) {
+  .sun-moon-times {
+    background: rgba(5, 10, 20, 0.9);
+    border-color: rgba(74, 158, 255, 0.2);
+  }
+
+  .time-row {
+    background: rgba(74, 158, 255, 0.08);
+  }
+}
