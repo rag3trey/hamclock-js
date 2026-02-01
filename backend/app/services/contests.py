@@ -97,6 +97,60 @@ MAJOR_CONTESTS = [
         "bands": ["160m", "80m", "40m", "20m", "15m", "10m"],
         "modes": ["FT8"],
         "url": "https://www.ft8.org"
+    },
+    {
+        "name": "ARRL VHF/UHF Contest",
+        "start_date": "2026-01-18 18:00",
+        "end_date": "2026-01-19 03:00",
+        "description": "ARRL VHF/UHF Contest - SSB & CW",
+        "bands": ["6m", "2m", "70cm", "33cm", "23cm"],
+        "modes": ["CW", "SSB"],
+        "url": "https://www.arrl.org/contests"
+    },
+    {
+        "name": "ARRL January VHF Sweepstakes",
+        "start_date": "2026-01-25 18:00",
+        "end_date": "2026-01-26 03:00",
+        "description": "VHF Sweepstakes - SSB & CW",
+        "bands": ["6m", "2m", "70cm"],
+        "modes": ["CW", "SSB"],
+        "url": "https://www.arrl.org/contests"
+    },
+    {
+        "name": "FM Simplex Contest",
+        "start_date": "2026-04-12 14:00",
+        "end_date": "2026-04-12 19:00",
+        "description": "FM Simplex Contest on 2m & 70cm",
+        "bands": ["2m", "70cm"],
+        "modes": ["FM"],
+        "url": "https://www.arrl.org/contests"
+    },
+    {
+        "name": "ARRL UHF Contest",
+        "start_date": "2026-08-16 18:00",
+        "end_date": "2026-08-17 03:00",
+        "description": "ARRL UHF Contest - 222 MHz, 432 MHz, and up",
+        "bands": ["1.3GHz", "2.3GHz", "3.4GHz", "5.7GHz"],
+        "modes": ["CW", "SSB", "FM"],
+        "url": "https://www.arrl.org/contests"
+    },
+    {
+        "name": "ARRL EME Contest",
+        "start_date": "2026-10-10 18:00",
+        "end_date": "2026-10-12 03:00",
+        "description": "Earth-Moon-Earth (EME) Contest",
+        "bands": ["6m", "2m", "70cm", "33cm"],
+        "modes": ["CW", "SSB"],
+        "url": "https://www.arrl.org/contests"
+    },
+    {
+        "name": "Winter Field Day",
+        "start_date": "2026-01-02 19:00",
+        "end_date": "2026-01-03 19:00",
+        "description": "Winter Field Day - Phone, CW & Digital",
+        "bands": ["160m", "80m", "40m", "20m", "15m", "10m"],
+        "modes": ["CW", "SSB", "RTTY", "PSK"],
+        "url": "https://www.arrl.org/contests"
     }
 ]
 
