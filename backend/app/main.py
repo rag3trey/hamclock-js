@@ -13,7 +13,7 @@ import json
 from typing import List, Optional
 
 from .config import settings
-from .routers import astronomy, satellites, spaceweather, dxcluster, config, maps, band_conditions, ncdxf, psk_reporter, maidenhead, qrz, activations, gps, cat, gimbal
+from .routers import astronomy, satellites, spaceweather, dxcluster, config, maps, band_conditions, ncdxf, psk_reporter, maidenhead, qrz, activations, gps, cat, gimbal, contests
 from .routers import settings as settings_router
 from .services.websocket_manager import WebSocketManager
 from .services.background_tasks import BackgroundTaskManager
@@ -107,6 +107,7 @@ app.include_router(qrz.router, prefix="/api/v1", tags=["QRZ Callbook"])
 app.include_router(gps.router, prefix="/api/v1/gps", tags=["GPS"])
 app.include_router(cat.router, prefix="/api/v1/cat", tags=["CAT Control"])
 app.include_router(gimbal.router, prefix="/api/v1/gimbal", tags=["Antenna Tracking"])
+app.include_router(contests.router, tags=["Contests"])
 app.include_router(settings_router.router, prefix="/api/v1", tags=["Settings"])
 app.include_router(config.router, prefix="/api/v1/config", tags=["Configuration"])
 app.include_router(maps.router, prefix="/api/v1/maps", tags=["Maps"])

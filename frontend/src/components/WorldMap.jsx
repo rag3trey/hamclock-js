@@ -694,6 +694,24 @@ function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
       ctx.stroke();
       ctx.setLineDash([]);
     }
+
+    // Draw range rings (Mercator)
+    if (showRangeRings && deLocation) {
+      const rings = generateStandardRangeRings(deLocation.latitude, deLocation.longitude);
+      rings.forEach((ring, ringIndex) => {
+        ctx.strokeStyle = `rgba(100, 200, 100, ${0.3 - ringIndex * 0.05})`;
+        ctx.lineWidth = ringIndex === 0 ? 1.5 : 1;
+        ctx.beginPath();
+        ring.points.forEach((point, pointIndex) => {
+          const projected = projection([point[0], point[1]]);
+          if (projected && isFinite(projected[0]) && isFinite(projected[1])) {
+            if (pointIndex === 0) ctx.moveTo(projected[0], projected[1]);
+            else ctx.lineTo(projected[0], projected[1]);
+          }
+        });
+        ctx.stroke();
+      });
+    }
     
     // Draw bearing lines from DE to all DX spots
     if (deLocation && dxSpots && dxSpots.length > 0) {
@@ -1029,6 +1047,24 @@ function RobinsonCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
       path(gcPath);
       ctx.stroke();
       ctx.setLineDash([]);
+    }
+
+    // Draw range rings (Robinson)
+    if (showRangeRings && deLocation) {
+      const rings = generateStandardRangeRings(deLocation.latitude, deLocation.longitude);
+      rings.forEach((ring, ringIndex) => {
+        ctx.strokeStyle = `rgba(100, 200, 100, ${0.3 - ringIndex * 0.05})`;
+        ctx.lineWidth = ringIndex === 0 ? 1.5 : 1;
+        ctx.beginPath();
+        ring.points.forEach((point, pointIndex) => {
+          const projected = projection([point[0], point[1]]);
+          if (projected && isFinite(projected[0]) && isFinite(projected[1])) {
+            if (pointIndex === 0) ctx.moveTo(projected[0], projected[1]);
+            else ctx.lineTo(projected[0], projected[1]);
+          }
+        });
+        ctx.stroke();
+      });
     }
     
     // Draw bearing lines from DE to all DX spots (Robinson)
