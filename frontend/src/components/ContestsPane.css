@@ -248,7 +248,52 @@
   font-weight: 500;
 }
 
-.time-row .time {
+.countdown-row {
+  grid-column: 1 / -1;
+  padding: 6px 8px;
+  border-radius: 3px;
+  background-color: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.countdown-row.countdown-future {
+  color: #0099ff;
+}
+
+.countdown-row.countdown-soon {
+  background-color: rgba(245, 158, 11, 0.2);
+  border-color: rgba(245, 158, 11, 0.5);
+  color: #f59e0b;
+  font-weight: bold;
+}
+
+.countdown-row.countdown-imminent {
+  background-color: rgba(255, 107, 107, 0.2);
+  border-color: rgba(255, 107, 107, 0.5);
+  color: #ff6b6b;
+  font-weight: bold;
+  animation: pulse 1s infinite;
+}
+
+.countdown-row.countdown-started {
+  background-color: rgba(76, 222, 128, 0.2);
+  border-color: rgba(76, 222, 128, 0.5);
+  color: #4ade80;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.countdown {
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+}.time-row .time {
   color: var(--text-primary, #fff);
   font-family: 'Monaco', 'Courier New', monospace;
   font-size: 11px;

@@ -5,14 +5,23 @@
 
 import React, { useState, useEffect } from 'react';
 import { isFavorite, toggleFavorite } from '../utils/contestFavorites';
+import { calculateCountdown, getCountdownIcon, getCountdownClass } from '../utils/contestCountdown';
 import './ContestDetailsModal.css';
 
 export default function ContestDetailsModal({ contest, isOpen, onClose }) {
   const [isFav, setIsFav] = useState(false);
+  const [countdown, setCountdown] = useState(null);
 
   useEffect(() => {
     if (contest) {
       setIsFav(isFavorite(contest.name));
+      setCountdown(calculateCountdown(contest.start));
+
+      const interval = setInterval(() => {
+        setCountdown(calculateCountdown(contest.start));
+      }, 1000);
+
+      return () => clearInterval(interval);
     }
   }, [contest]);
 
@@ -91,6 +100,12 @@ export default function ContestDetailsModal({ contest, isOpen, onClose }) {
                 <label>Starts:</label>
                 <span>{formatDateTime(contest.start)}</span>
               </div>
+              {countdown && (
+                <div className={`schedule-item countdown-item ${getCountdownClass(countdown)}`}>
+                  <label>{getCountdownIcon(countdown)}</label>
+                  <span className="countdown-text">{countdown.display}</span>
+                </div>
+              )}
               <div className="schedule-item">
                 <label>Ends:</label>
                 <span>{calculateEndTime(contest.end)}</span>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchUpcomingContests } from '../api/contests';
 import { getFavorites, isFavorite, toggleFavorite } from '../utils/contestFavorites';
+import { calculateCountdown, getCountdownIcon, getCountdownClass } from '../utils/contestCountdown';
 import ContestDetailsModal from './ContestDetailsModal';
 import './ContestsPane.css';
 
@@ -13,6 +14,7 @@ const ContestsPane = () => {
   const [selectedContest, setSelectedContest] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [favorites, setFavorites] = useState(new Set());
+  const [countdowns, setCountdowns] = useState({});
 
   // Fetch contests
   const { data: contestsData, isLoading, error, refetch } = useQuery({
@@ -59,6 +61,23 @@ const ContestsPane = () => {
       setContests(filtered);
     }
   }, [contestsData, filterStatus, sortBy, favorites]);
+
+  // Update countdowns every second
+  useEffect(() => {
+    if (contests.length === 0) return;
+
+    const updateCountdowns = () => {
+      const newCountdowns = {};
+      contests.forEach(contest => {
+        newCountdowns[contest.name] = calculateCountdown(contest.start);
+      });
+      setCountdowns(newCountdowns);
+    };
+
+    updateCountdowns();
+    const interval = setInterval(updateCountdowns, 1000);
+    return () => clearInterval(interval);
+  }, [contests]);
 
   const getStatusClass = (status) => {
     switch (status) {
@@ -191,6 +210,12 @@ const ContestsPane = () => {
                   <span className="label">Start:</span>
                   <span className="time">{contest.start_display}</span>
                 </div>
+                {countdowns[contest.name] && (
+                  <div className={`time-row countdown-row ${getCountdownClass(countdowns[contest.name])}`}>
+                    <span className="label">{getCountdownIcon(countdowns[contest.name])}</span>
+                    <span className="countdown">{countdowns[contest.name].display}</span>
+                  </div>
+                )}
                 <div className="time-row">
                   <span className="label">End:</span>
                   <span className="time">{contest.end_display}</span>

@@ -250,6 +250,52 @@
   text-align: right;
 }
 
+.countdown-item {
+  background-color: rgba(0, 212, 255, 0.15);
+  border: 2px solid #00d4ff;
+}
+
+.countdown-item.countdown-future {
+  background-color: rgba(0, 212, 255, 0.15);
+  border: 2px solid #00d4ff;
+}
+
+.countdown-item.countdown-soon {
+  background-color: rgba(245, 158, 11, 0.2);
+  border: 2px solid #f59e0b;
+}
+
+.countdown-item.countdown-imminent {
+  background-color: rgba(255, 107, 107, 0.2);
+  border: 2px solid #ff6b6b;
+  animation: pulse-modal 1s infinite;
+}
+
+.countdown-item.countdown-started {
+  background-color: rgba(76, 222, 128, 0.2);
+  border: 2px solid #4ade80;
+}
+
+.countdown-item label {
+  color: #fff;
+  font-size: 1.2em;
+}
+
+.countdown-text {
+  color: #fff;
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes pulse-modal {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
 .bands-list,
 .modes-list {
   display: flex;
