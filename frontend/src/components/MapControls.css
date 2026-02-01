@@ -222,3 +222,61 @@
     height: 20px;
   }
 }
+
+.grid-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.grid-options-btn {
+  background: transparent;
+  border: 1px solid #4a9eff;
+  color: #4a9eff;
+  padding: 4px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.grid-options-btn:hover {
+  background: rgba(74, 158, 255, 0.1);
+  color: #81d4fa;
+}
+
+.grid-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(0, 0, 0, 0.95);
+  border: 1px solid #4a9eff;
+  border-radius: 4px;
+  padding: 8px 0;
+  min-width: 140px;
+  z-index: 1001;
+  margin-top: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+}
+
+.grid-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  color: #e0e0e0;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.grid-option:hover {
+  background: rgba(74, 158, 255, 0.15);
+  color: #81d4fa;
+}
+
+.grid-option input[type="radio"] {
+  cursor: pointer;
+  accent-color: #4a9eff;
+}

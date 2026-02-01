@@ -12,6 +12,10 @@ const DXClusterPane = ({ onSpotClick, deLocation, units = 'imperial' }) => {
   const [selectedCallsign, setSelectedCallsign] = useState(null);
   const [spots, setSpots] = useState([]);
   const [wsConnected, setWsConnected] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [minElevation, setMinElevation] = useState(0);
+  const [showAdvanced, setShowAdvanced] = useState(false);
+  const [sortBy, setSortBy] = useState('time'); // 'time', 'frequency', 'distance', 'elevation'
   
   // WebSocket hook for real-time spot updates
   const { isConnected, subscribe } = useWebSocket({
@@ -54,7 +58,7 @@ const DXClusterPane = ({ onSpotClick, deLocation, units = 'imperial' }) => {
       setSpots(dxData.spots);
     }
   }, [dxData, spots.length]);
-  
+
   if (isLoading && spots.length === 0) return <div className="dx-cluster-pane loading">Loading spots...</div>;
   if (spots.length === 0) return <div className="dx-cluster-pane">No data</div>;
   
@@ -77,6 +81,44 @@ const DXClusterPane = ({ onSpotClick, deLocation, units = 'imperial' }) => {
       onSpotClick(spot);
     }
   };
+
+  // Filter and sort spots
+  const filteredSpots = spots
+    .filter(spot => {
+      // Band filter
+      if (selectedBand !== 'all' && spot.band !== selectedBand) return false;
+      
+      // Search filter (callsign or spotter)
+      if (searchQuery) {
+        const query = searchQuery.toUpperCase();
+        if (!spot.callsign.toUpperCase().includes(query) && 
+            !spot.spotter.toUpperCase().includes(query)) {
+          return false;
+        }
+      }
+      
+      // Elevation filter
+      if (minElevation > 0 && spot.elevation !== undefined) {
+        if (spot.elevation < minElevation) return false;
+      }
+      
+      return true;
+    })
+    .sort((a, b) => {
+      switch(sortBy) {
+        case 'frequency':
+          return b.frequency - a.frequency;
+        case 'distance':
+          if (!a.distance || !b.distance) return 0;
+          return a.distance - b.distance;
+        case 'elevation':
+          if (!a.elevation || !b.elevation) return 0;
+          return b.elevation - a.elevation;
+        case 'time':
+        default:
+          return new Date(b.time) - new Date(a.time);
+      }
+    });
   
   return (
     <div className="dx-cluster-pane">
@@ -84,7 +126,7 @@ const DXClusterPane = ({ onSpotClick, deLocation, units = 'imperial' }) => {
         <div className="dx-title">
           <span className={`status-indicator ${wsConnected ? 'connected' : 'disconnected'}`}></span>
           DX Cluster
-          <span className="spot-count">({spots.length} spots)</span>
+          <span className="spot-count">({filteredSpots.length}/{spots.length})</span>
           {wsConnected && <span className="ws-status" title="Real-time WebSocket">🔴 Live</span>}
         </div>
         
@@ -99,18 +141,59 @@ const DXClusterPane = ({ onSpotClick, deLocation, units = 'imperial' }) => {
             </button>
           ))}
         </div>
+
+        <div className="dx-search-bar">
+          <input
+            type="text"
+            placeholder="Search callsign/spotter..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input"
+          />
+          <button 
+            className="advanced-toggle"
+            onClick={() => setShowAdvanced(!showAdvanced)}
+            title="Advanced filters"
+          >
+            ⚙️
+          </button>
+        </div>
+
+        {showAdvanced && (
+          <div className="advanced-filters">
+            <div className="filter-group">
+              <label>Min Elevation: {minElevation}°</label>
+              <input
+                type="range"
+                min="0"
+                max="90"
+                value={minElevation}
+                onChange={(e) => setMinElevation(Number(e.target.value))}
+                className="filter-slider"
+              />
+            </div>
+            
+            <div className="filter-group">
+              <label>Sort by:</label>
+              <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="filter-select">
+                <option value="time">Time (Newest)</option>
+                <option value="frequency">Frequency</option>
+                <option value="distance">Distance</option>
+                <option value="elevation">Elevation</option>
+              </select>
+            </div>
+          </div>
+        )}
       </div>
       
       <div className="dx-spots-container">
-        {spots.length === 0 ? (
+        {filteredSpots.length === 0 ? (
           <div className="no-spots">
-            {wsConnected ? 'Waiting for spots...' : 'Connecting...'}
+            {wsConnected ? 'No spots match filters' : 'Connecting...'}
           </div>
         ) : (
           <div className="dx-spots-list">
-            {spots
-              .filter(spot => selectedBand === 'all' || spot.band === selectedBand)
-              .map((spot, index) => (
+            {filteredSpots.map((spot, index) => (
               <div 
                 key={`${spot.callsign}-${spot.frequency}-${index}`} 
                 className="dx-spot"
@@ -146,6 +229,11 @@ const DXClusterPane = ({ onSpotClick, deLocation, units = 'imperial' }) => {
                         📍 {formatDistance(spot.distance, units)}
                       </span>
                     </>
+                  )}
+                  {spot.elevation !== undefined && (
+                    <span className="spot-elevation">
+                      ⬆️ {Math.round(spot.elevation)}°
+                    </span>
                   )}
                 </div>
                 {spot.comment && (

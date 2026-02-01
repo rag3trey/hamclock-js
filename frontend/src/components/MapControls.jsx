@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './MapControls.css';
 
 const MapControls = ({
@@ -11,8 +11,12 @@ const MapControls = ({
   onZoomPreset,
   dxSpots,
   deLocation,
-  onClearDX
+  onClearDX,
+  gridType = 'lat-lng',
+  setGridType
 }) => {
+  const [showGridOptions, setShowGridOptions] = useState(false);
+
   return (
     <div className="map-toolbar">
       <div className="toolbar-section">
@@ -24,14 +28,69 @@ const MapControls = ({
           />
           <span>Night</span>
         </label>
-        <label className="toolbar-checkbox" title="Toggle coordinate grid">
-          <input
-            type="checkbox"
-            checked={showGrid}
-            onChange={(e) => setShowGrid(e.target.checked)}
-          />
-          <span>Grid</span>
-        </label>
+        <div className="grid-control">
+          <label className="toolbar-checkbox" title="Toggle coordinate grid">
+            <input
+              type="checkbox"
+              checked={showGrid}
+              onChange={(e) => setShowGrid(e.target.checked)}
+            />
+            <span>Grid</span>
+          </label>
+          {showGrid && setGridType && (
+            <button 
+              className="grid-options-btn"
+              onClick={() => setShowGridOptions(!showGridOptions)}
+              title="Grid type options"
+            >
+              ▼
+            </button>
+          )}
+        </div>
+        {showGrid && showGridOptions && setGridType && (
+          <div className="grid-options">
+            <label className="grid-option">
+              <input
+                type="radio"
+                name="gridType"
+                value="lat-lng"
+                checked={gridType === 'lat-lng'}
+                onChange={(e) => setGridType(e.target.value)}
+              />
+              <span>Lat/Lng</span>
+            </label>
+            <label className="grid-option">
+              <input
+                type="radio"
+                name="gridType"
+                value="maidenhead"
+                checked={gridType === 'maidenhead'}
+                onChange={(e) => setGridType(e.target.value)}
+              />
+              <span>Maidenhead</span>
+            </label>
+            <label className="grid-option">
+              <input
+                type="radio"
+                name="gridType"
+                value="cq"
+                checked={gridType === 'cq'}
+                onChange={(e) => setGridType(e.target.value)}
+              />
+              <span>CQ Zones</span>
+            </label>
+            <label className="grid-option">
+              <input
+                type="radio"
+                name="gridType"
+                value="itu"
+                checked={gridType === 'itu'}
+                onChange={(e) => setGridType(e.target.value)}
+              />
+              <span>ITU Regions</span>
+            </label>
+          </div>
+        )}
       </div>
 
       <div className="toolbar-divider"></div>

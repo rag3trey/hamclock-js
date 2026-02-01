@@ -6,6 +6,10 @@ import './SatellitesPane.css';
 const SatellitesPane = ({ deLocation, satelliteData, onSatelliteSelect, units = 'imperial' }) => {
   const [satellites, setSatellites] = useState(satelliteData?.visible_positions || satelliteData?.visible || []);
   const [wsConnected, setWsConnected] = useState(false);
+  const [selectedSatellite, setSelectedSatellite] = useState(null);
+  const [passes, setPasses] = useState({});
+  const [loadingPasses, setLoadingPasses] = useState({});
+  const [expandedSatellites, setExpandedSatellites] = useState({});
   
   // WebSocket hook for real-time satellite updates
   const { isConnected, subscribe } = useWebSocket({
@@ -41,7 +45,33 @@ const SatellitesPane = ({ deLocation, satelliteData, onSatelliteSelect, units = 
       }
     }
   }, [satelliteData]);
-  
+
+  // Fetch passes for a satellite
+  const fetchPasses = async (satName) => {
+    if (!deLocation) return;
+    
+    setLoadingPasses(prev => ({ ...prev, [satName]: true }));
+    try {
+      const params = new URLSearchParams({
+        lat: deLocation.latitude,
+        lng: deLocation.longitude,
+        hours: '48',
+        min_elevation: '10'
+      });
+      
+      const response = await fetch(`/api/v1/satellites/${encodeURIComponent(satName)}/passes?${params}`);
+      if (response.ok) {
+        const data = await response.json();
+        setPasses(prev => ({ ...prev, [satName]: data.passes || [] }));
+        setExpandedSatellites(prev => ({ ...prev, [satName]: true }));
+      }
+    } catch (error) {
+      console.error(`Error fetching passes for ${satName}:`, error);
+    } finally {
+      setLoadingPasses(prev => ({ ...prev, [satName]: false }));
+    }
+  };
+
   if (!deLocation) {
     return <div className="satellites-pane">Set location in Settings to track satellites</div>;
   }
@@ -60,7 +90,9 @@ const SatellitesPane = ({ deLocation, satelliteData, onSatelliteSelect, units = 
       const date = new Date(isoString);
       const hours = date.getUTCHours().toString().padStart(2, '0');
       const minutes = date.getUTCMinutes().toString().padStart(2, '0');
-      return `${hours}:${minutes}Z`;
+      const day = date.getUTCDate();
+      const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+      return `${month}/${day} ${hours}:${minutes}Z`;
     } catch {
       return isoString.substring(11, 16) + 'Z';
     }
@@ -70,6 +102,17 @@ const SatellitesPane = ({ deLocation, satelliteData, onSatelliteSelect, units = 
     if (!seconds) return 'N/A';
     const minutes = Math.round(seconds / 60);
     return `${minutes}m`;
+  };
+
+  const toggleSatelliteExpand = (satName) => {
+    setExpandedSatellites(prev => ({
+      ...prev,
+      [satName]: !prev[satName]
+    }));
+    
+    if (!expandedSatellites[satName] && !passes[satName]) {
+      fetchPasses(satName);
+    }
   };
 
   return (
@@ -90,24 +133,67 @@ const SatellitesPane = ({ deLocation, satelliteData, onSatelliteSelect, units = 
             <div className="section-title">Currently Visible ({satellites.length})</div>
             <div className="satellites-list">
               {satellites.map((sat, index) => (
-                <div 
-                  key={`${sat.name}-${index}`} 
-                  className="satellite-item visible"
-                  onClick={() => onSatelliteSelect?.(sat.name)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <div className="sat-name">🔴 {sat.name}</div>
-                  <div className="sat-details">
-                    <span className="sat-bearing">
-                      🧭 {Math.round(sat.azimuth || 0)}°
-                    </span>
-                    <span className="sat-elevation">
-                      ⬆️ {Math.round(sat.elevation || 0)}°
-                    </span>
-                    <span className="sat-range">
-                      📍 {formatDistance(sat.range_km || 0, units)}
-                    </span>
+                <div key={`${sat.name}-${index}`} className="satellite-item-container">
+                  <div 
+                    className={`satellite-item visible ${expandedSatellites[sat.name] ? 'expanded' : ''}`}
+                    onClick={() => {
+                      onSatelliteSelect?.(sat.name);
+                      setSelectedSatellite(sat.name);
+                    }}
+                  >
+                    <div className="sat-main">
+                      <div className="sat-name">🔴 {sat.name}</div>
+                      <div className="sat-details">
+                        <span className="sat-bearing">
+                          🧭 {Math.round(sat.azimuth || 0)}°
+                        </span>
+                        <span className="sat-elevation">
+                          ⬆️ {Math.round(sat.elevation || 0)}°
+                        </span>
+                        <span className="sat-range">
+                          📍 {formatDistance(sat.range_km || 0, units)}
+                        </span>
+                      </div>
+                    </div>
+                    <button 
+                      className="expand-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleSatelliteExpand(sat.name);
+                      }}
+                      title={expandedSatellites[sat.name] ? 'Hide passes' : 'Show passes'}
+                    >
+                      {expandedSatellites[sat.name] ? '▼' : '▶'}
+                    </button>
                   </div>
+
+                  {/* Expanded pass details */}
+                  {expandedSatellites[sat.name] && (
+                    <div className="satellite-passes">
+                      {loadingPasses[sat.name] ? (
+                        <div className="passes-loading">Loading passes...</div>
+                      ) : passes[sat.name] && passes[sat.name].length > 0 ? (
+                        <div className="passes-table">
+                          <div className="passes-table-header">
+                            <div className="col-rise">Rise</div>
+                            <div className="col-max">Max El</div>
+                            <div className="col-set">Set</div>
+                            <div className="col-duration">Duration</div>
+                          </div>
+                          {passes[sat.name].slice(0, 5).map((pass, pidx) => (
+                            <div key={pidx} className="passes-table-row">
+                              <div className="col-rise">🌅 {formatTime(pass.rise_time)}</div>
+                              <div className="col-max">⬆️ {Math.round(pass.max_elevation || 0)}°</div>
+                              <div className="col-set">🌇 {formatTime(pass.set_time)}</div>
+                              <div className="col-duration">⏱️ {formatDuration(pass.duration_seconds)}</div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="passes-empty">No passes in next 48 hours</div>
+                      )}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -118,10 +204,10 @@ const SatellitesPane = ({ deLocation, satelliteData, onSatelliteSelect, units = 
           </div>
         )}
 
-        {/* Upcoming Passes */}
+        {/* Upcoming Passes Summary */}
         {satelliteData.upcoming_passes && satelliteData.upcoming_passes.length > 0 ? (
-          <div className="section">
-            <div className="section-title">Next Passes</div>
+          <div className="section upcoming-passes-section">
+            <div className="section-title">Next Passes (All Satellites)</div>
             <div className="passes-list">
               {satelliteData.upcoming_passes.slice(0, 5).map((pass, index) => (
                 <div key={index} className="pass-item">
@@ -135,11 +221,7 @@ const SatellitesPane = ({ deLocation, satelliteData, onSatelliteSelect, units = 
               ))}
             </div>
           </div>
-        ) : (
-          <div className="section">
-            <div className="section-title">No upcoming passes</div>
-          </div>
-        )}
+        ) : null}
       </div>
     </div>
   );

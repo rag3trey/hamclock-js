@@ -15,6 +15,7 @@ import GimbalStatus from '../components/GimbalStatus';
 import ClockDisplay from '../components/ClockDisplay';
 import LocationSelector from '../components/LocationSelector';
 import MaidenheadDisplay from '../components/MaidenheadDisplay';
+import GreatCircleInfo from '../components/GreatCircleInfo';
 import SettingsModal from '../components/SettingsModal';
 import { getSpotterLocation } from '../api/spotterLocations';
 import { fetchCallsignLookup, fetchAllActivationsWithFallback, fetchAllVisibleSatellites, fetchGetSettings } from '../api';
@@ -319,6 +320,11 @@ const HomePage = () => {
                     latitude={dxSpots[0].latitude}
                     longitude={dxSpots[0].longitude}
                     label="DX Grid"
+                  />
+                  <GreatCircleInfo
+                    deLocation={deLocation}
+                    dxSpot={dxSpots[0]}
+                    distanceUnits={units === 'imperial' ? 'miles' : 'km'}
                   />
                 </>
               )}

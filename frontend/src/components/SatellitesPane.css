@@ -97,12 +97,27 @@
   gap: 8px;
 }
 
+.satellite-item-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .satellite-item {
   background-color: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(79, 195, 247, 0.15);
   border-left: 3px solid #ff6b6b;
-  border-radius: 4px;
+  border-radius: 4px 4px 0 0;
   padding: 8px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.satellite-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(79, 195, 247, 0.3);
 }
 
 .satellite-item.visible {
@@ -110,11 +125,22 @@
   background-color: rgba(76, 175, 80, 0.08);
 }
 
+.satellite-item.expanded {
+  border-radius: 4px 4px 0 0;
+  border-bottom: none;
+}
+
+.sat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .sat-name {
   color: #4fc3f7;
   font-weight: bold;
   font-size: 0.95rem;
-  margin-bottom: 4px;
   font-family: 'Courier New', monospace;
 }
 
@@ -142,6 +168,89 @@
 
 .sat-range {
   color: #ff9999;
+}
+
+.expand-btn {
+  background: none;
+  border: none;
+  color: #4fc3f7;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: all 0.2s ease;
+}
+
+.expand-btn:hover {
+  color: #81daf5;
+}
+
+/* Expanded satellite passes */
+.satellite-passes {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(79, 195, 247, 0.15);
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  padding: 10px;
+  margin-bottom: 8px;
+}
+
+.passes-loading,
+.passes-empty {
+  color: #888;
+  font-size: 0.85rem;
+  padding: 8px;
+  text-align: center;
+}
+
+.passes-table {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.75rem;
+}
+
+.passes-table-header {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr 1fr 0.9fr;
+  gap: 8px;
+  padding: 6px 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  border-bottom: 1px solid rgba(79, 195, 247, 0.2);
+  color: #4fc3f7;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.passes-table-row {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr 1fr 0.9fr;
+  gap: 8px;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 2px;
+  color: #aaa;
+  align-items: center;
+}
+
+.passes-table-row:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.col-rise,
+.col-set {
+  color: #ff9999;
+}
+
+.col-max {
+  color: #81c784;
+  text-align: center;
+}
+
+.col-duration {
+  color: #ffd700;
+  text-align: right;
 }
 
 .passes-list {

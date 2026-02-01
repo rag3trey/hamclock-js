@@ -1163,6 +1163,7 @@ function RobinsonCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
 const WorldMap = ({ deLocation, dxSpots, activations, satellites, autoZoomToDX, onZoomComplete, onMapClick, onClearDX }) => {
   const [showNightShade, setShowNightShade] = useState(true);
   const [showGrid, setShowGrid] = useState(true);
+  const [gridType, setGridType] = useState('lat-lng');
   const [projection, setProjection] = useState('mercator');
   const [zoom, setZoom] = useState({ center: { lat: 0, lng: 0 }, scale: 1 });
   
@@ -1210,6 +1211,8 @@ const WorldMap = ({ deLocation, dxSpots, activations, satellites, autoZoomToDX, 
         setShowNightShade={setShowNightShade}
         showGrid={showGrid}
         setShowGrid={setShowGrid}
+        gridType={gridType}
+        setGridType={setGridType}
         projection={projection}
         setProjection={setProjection}
         onZoomPreset={handleZoomPreset}
