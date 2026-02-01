@@ -1,51 +1,51 @@
-.callsign-info-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.callsign-trigger {
-  cursor: help;
-  border-bottom: 1px dotted rgba(79, 195, 247, 0.5);
-  transition: all 0.2s;
-}
-
-.callsign-trigger:hover {
-  border-bottom-color: rgba(79, 195, 247, 0.8);
-}
-
-.callsign-text {
-  font-family: 'Courier New', monospace;
-  font-weight: bold;
-  color: #4fc3f7;
-}
-
 .callsign-tooltip {
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-bottom: 8px;
-  background: rgba(20, 20, 20, 0.95);
-  border: 1px solid rgba(79, 195, 247, 0.4);
-  border-radius: 6px;
-  padding: 12px;
-  min-width: 240px;
-  z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
+  background: rgba(20, 20, 20, 0.98);
+  border: 1px solid rgba(79, 195, 247, 0.5);
+  border-radius: 8px;
+  padding: 10px 12px;
+  min-width: 180px;
+  max-width: 260px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+  font-size: 13px;
+  color: #ccc;
+  visibility: visible;
+  opacity: 1;
 }
 
-.callsign-tooltip::after {
+.callsign-tooltip.above::after {
   content: '';
   position: absolute;
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  width: 0;
-  height: 0;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-top: 6px solid rgba(20, 20, 20, 0.95);
+  border-top: 6px solid rgba(20, 20, 20, 0.98);
+}
+
+.callsign-tooltip.below::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid rgba(20, 20, 20, 0.98);
+}
+
+.tooltip-country {
+  font-weight: bold;
+  color: #4fc3f7;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.tooltip-content > div {
+  margin: 3px 0;
+  line-height: 1.4;
 }
 
 .tooltip-header {
@@ -97,21 +97,6 @@
   font-weight: 600;
   font-family: 'Courier New', monospace;
   text-align: right;
-}
-
-/* For bottom-positioned tooltips (when near top of screen) */
-.callsign-tooltip.bottom {
-  bottom: auto;
-  top: 100%;
-  margin-bottom: 0;
-  margin-top: 8px;
-}
-
-.callsign-tooltip.bottom::after {
-  top: auto;
-  bottom: 100%;
-  border-top: none;
-  border-bottom: 6px solid rgba(20, 20, 20, 0.95);
 }
 
 /* Responsive: stack on small screens */

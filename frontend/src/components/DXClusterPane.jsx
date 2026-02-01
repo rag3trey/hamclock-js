@@ -4,6 +4,7 @@ import { fetchDXSpots } from '../api';
 import { formatDistance } from '../utils/units';
 import { isDXInWatchlist, addDXToWatchlist, removeDXFromWatchlist } from '../utils/watchlistManager';
 import useWebSocket from '../hooks/useWebSocket';
+import CallsignInfo from './CallsignInfo';
 import QRZInfo from './QRZInfo';
 import './DXClusterPane.css';
 
@@ -262,17 +263,27 @@ const DXClusterPane = ({ onSpotClick, deLocation, units = 'imperial' }) => {
                   >
                     {watchlist[spot.callsign] ? '⭐' : '☆'}
                   </button>
-                  <span 
-                    className="spot-callsign"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedCallsign(spot.callsign);
-                    }}
-                    title="Click to view QRZ info"
-                    style={{ cursor: 'pointer' }}
-                  >
-                    {spot.callsign}
-                  </span>
+                  <CallsignInfo callsign={spot.callsign}>
+                    <span 
+                      className="spot-callsign"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        // Extract home callsign from portable notation
+                        // ZL2/G0MRF -> G0MRF, G0MRF/VP2 -> G0MRF
+                        let callsignToLookup = spot.callsign;
+                        if (spot.callsign.includes('/')) {
+                          const parts = spot.callsign.split('/');
+                          // Typically the longer part is the home callsign
+                          callsignToLookup = parts[0].length > parts[1].length ? parts[0] : parts[1];
+                        }
+                        setSelectedCallsign(callsignToLookup);
+                      }}
+                      title="Click to view QRZ info"
+                      style={{ cursor: 'pointer' }}
+                    >
+                      {spot.callsign}
+                    </span>
+                  </CallsignInfo>
                   <span className={`spot-band band-${spot.band.replace('m', '')}`}>
                     {spot.band}
                   </span>

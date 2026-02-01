@@ -272,19 +272,56 @@ const DXCC_DATABASE = {
 export function lookupCallsign(callsign) {
   if (!callsign) return null;
 
-  const upperCallsign = callsign.toUpperCase();
+  let upperCallsign = callsign.toUpperCase();
   
+  // Handle portable callsigns (e.g., ZL2/G0MRF or G0MRF/VP2)
+  // The prefix (operating location) is typically BEFORE the slash
+  // If not found before, try after the slash
+  let prefix = upperCallsign;
+  let slashIndex = upperCallsign.indexOf('/');
+  
+  if (slashIndex !== -1) {
+    // Try the part before the slash first (standard: operating location/home call)
+    prefix = upperCallsign.substring(0, slashIndex);
+    
+    // If we find a match with the first part, return it
+    if (prefix.length >= 1) {
+      const beforeSlash = tryPrefixMatch(prefix);
+      if (beforeSlash) return beforeSlash;
+    }
+    
+    // If not found, try the part after the slash (alternative format)
+    prefix = upperCallsign.substring(slashIndex + 1);
+  }
+  
+  return tryPrefixMatch(prefix);
+}
+
+/**
+ * Try to match a prefix against the database
+ */
+function tryPrefixMatch(prefix) {
+  if (!prefix) return null;
+
   // Try exact 2-letter prefix first
-  if (upperCallsign.length >= 2) {
-    const prefix2 = upperCallsign.substring(0, 2);
+  if (prefix.length >= 2) {
+    const prefix2 = prefix.substring(0, 2);
     if (DXCC_DATABASE[prefix2]) {
       return { prefix: prefix2, ...DXCC_DATABASE[prefix2] };
     }
   }
 
+  // Try exact 3-letter prefix
+  if (prefix.length >= 3) {
+    const prefix3 = prefix.substring(0, 3);
+    if (DXCC_DATABASE[prefix3]) {
+      return { prefix: prefix3, ...DXCC_DATABASE[prefix3] };
+    }
+  }
+
   // Try 1-letter prefix
-  if (upperCallsign.length >= 1) {
-    const prefix1 = upperCallsign.substring(0, 1);
+  if (prefix.length >= 1) {
+    const prefix1 = prefix.substring(0, 1);
     if (DXCC_DATABASE[prefix1]) {
       return { prefix: prefix1, ...DXCC_DATABASE[prefix1] };
     }
