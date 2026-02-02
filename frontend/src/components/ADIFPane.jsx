@@ -108,7 +108,6 @@ const ADIFPane = () => {
     <div className="adif-pane">
       {/* Header */}
       <div className="adif-header">
-        <div className="adif-title">📋 QSO Log</div>
         <label className="upload-btn">
           {uploading ? 'Uploading...' : '📤 Upload'}
           <input

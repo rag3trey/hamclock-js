@@ -169,7 +169,7 @@ html[data-theme="light"] .rss-empty {
 
 :root[data-theme="light"] .rss-entry,
 html[data-theme="light"] .rss-entry {
-  background: #fafafa;
+  background: #f0f0f0;
   border-left-color: #0056b3;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
@@ -197,10 +197,16 @@ html[data-theme="light"] .rss-entry:hover {
   font-size: 1rem;
   font-weight: 600;
   flex: 1;
+  color: #e0e0e0;
+}
+
+:root[data-theme="light"] .rss-entry-title,
+html[data-theme="light"] .rss-entry-title {
+  color: #0d0d0d;
 }
 
 .rss-entry-title a {
-  color: #007bff;
+  color: #64b5f6;
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -214,7 +220,7 @@ html[data-theme="light"] .rss-entry:hover {
 }
 
 .rss-entry-title a:hover {
-  color: #0056b3;
+  color: #90caf9;
   text-decoration: underline;
 }
 
@@ -226,8 +232,8 @@ html[data-theme="light"] .rss-entry:hover {
   padding: 0.25rem 0.75rem;
   font-size: 0.75rem;
   font-weight: 600;
-  background: #e3f2fd;
-  color: #1565c0;
+  background: #1e3a5f;
+  color: #90caf9;
   border-radius: 12px;
   white-space: nowrap;
   flex-shrink: 0;
@@ -247,7 +253,7 @@ html[data-theme="light"] .rss-entry:hover {
   display: flex;
   gap: 1rem;
   font-size: 0.8rem;
-  color: #666;
+  color: #999;
   margin-bottom: 0.75rem;
   flex-wrap: wrap;
 }
@@ -257,7 +263,7 @@ html[data-theme="light"] .rss-entry:hover {
 }
 
 .rss-feed-pane[data-theme="dark"] .rss-entry-meta {
-  color: #aaa;
+  color: #b0b0b0;
 }
 
 .rss-entry-date,
@@ -290,16 +296,16 @@ html[data-theme="light"] .rss-entry:hover {
 .rss-entry-summary {
   font-size: 0.9rem;
   line-height: 1.5;
-  color: #555;
+  color: #bbb;
   margin-bottom: 0.75rem;
 }
 
 .rss-feed-pane[data-theme="light"] .rss-entry-summary {
-  color: #333;
+  color: #0d0d0d;
 }
 
 .rss-feed-pane[data-theme="dark"] .rss-entry-summary {
-  color: #bbb;
+  color: #d0d0d0;
 }
 
 .rss-entry-footer {

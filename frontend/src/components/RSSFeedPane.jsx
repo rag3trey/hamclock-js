@@ -73,8 +73,6 @@ const RSSFeedPane = () => {
           >
             <option value="all">All Feeds</option>
             <option value="news">News</option>
-            <option value="magazine">Magazine</option>
-            <option value="dx">DX News</option>
             <option value="repeaters">Repeaters</option>
           </select>
           

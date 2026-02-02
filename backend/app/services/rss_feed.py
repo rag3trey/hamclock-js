@@ -12,23 +12,13 @@ import aiohttp
 # Popular ham radio RSS feeds
 DEFAULT_FEEDS = [
     {
-        'name': 'ARRL News',
-        'url': 'http://www.arrl.org/news/feeds/arrl-news.xml',
+        'name': 'ARRL',
+        'url': 'https://www.arrl.org/arrl.rss',
         'category': 'news'
     },
     {
-        'name': 'QST Magazine',
-        'url': 'http://www.arrl.org/news/feeds/qst-online.xml',
-        'category': 'magazine'
-    },
-    {
-        'name': 'ARRL DX News',
-        'url': 'http://www.arrl.org/news/feeds/arrl-dx-news.xml',
-        'category': 'dx'
-    },
-    {
         'name': 'RepeaterBook Blog',
-        'url': 'https://blog.repeaterbook.com/feed/',
+        'url': 'https://repeaterbook.groups.io/g/repeaterbook/rss',
         'category': 'repeaters'
     }
 ]
