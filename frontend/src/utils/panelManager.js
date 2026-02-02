@@ -15,6 +15,7 @@ const PANEL_DEFAULTS = {
   contests: true,
   satellites: true,
   watchlist: true,
+  rss: true,
 };
 
 const PANEL_LABELS = {
@@ -30,6 +31,7 @@ const PANEL_LABELS = {
   contests: '📅 Radio Contests',
   satellites: '🛰️ Satellites',
   watchlist: '⭐ Watchlist',
+  rss: '📰 RSS Feeds',
 };
 
 const STORAGE_KEY = 'hamclock_visible_panels';

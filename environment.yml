@@ -28,6 +28,7 @@ dependencies:
       - aioredis==2.0.1
       - celery==5.3.6
       - celery[redis]==5.3.6
+      - feedparser==6.0.10
       - fastapi-cors==0.0.6
       - python-dotenv==1.0.0
       - pydantic==2.5.3

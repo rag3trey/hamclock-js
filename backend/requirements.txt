@@ -23,6 +23,9 @@ geopy==2.4.1
 httpx==0.26.0
 aiohttp==3.9.1
 
+# RSS Feed Parsing
+feedparser==6.0.10
+
 # Serial Communication (for GPS/CAT support)
 pyserial==3.5
 

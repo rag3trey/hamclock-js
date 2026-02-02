@@ -41,15 +41,6 @@ export default function MobileMenu({ callsign, onThemeToggle, currentTheme }) {
             {currentTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
           </button>
 
-          <a href="#settings" className="menu-item" onClick={(e) => {
-            e.preventDefault();
-            // Trigger settings modal if available
-            window.dispatchEvent(new Event('openSettings'));
-            closeMenu();
-          }}>
-            ⚙️ Settings
-          </a>
-
           {callsign && (
             <div className="menu-footer">
               <div className="menu-callsign">Callsign: <strong>{callsign}</strong></div>

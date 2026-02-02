@@ -12,6 +12,7 @@ import ActivationPane from '../components/ActivationPane';
 import ContestsPane from '../components/ContestsPane';
 import SatellitesPane from '../components/SatellitesPane';
 import WatchlistPane from '../components/WatchlistPane';
+import RSSFeedPane from '../components/RSSFeedPane';
 import GPSStatus from '../components/GPSStatus';
 import CATStatus from '../components/CATStatus';
 import GimbalStatus from '../components/GimbalStatus';
@@ -91,7 +92,8 @@ const HomePage = () => {
     activations: false,
     contests: false,
     satellites: false,
-    watchlist: false
+    watchlist: false,
+    rss: false
   });
   
   const [dxSpotMarker, setDxSpotMarker] = useState(null);
@@ -652,6 +654,24 @@ const HomePage = () => {
                 )}
               </div>
               )}
+
+            {visiblePanels.rss && (
+              <div className="info-panel">
+                <div className="panel-header">
+                  <h3>📰 RSS Feeds</h3>
+                  <button
+                    className="collapse-btn"
+                    onClick={() => togglePanel('rss')}
+                    title={collapsedPanels.rss ? 'Expand' : 'Collapse'}
+                  >
+                    {collapsedPanels.rss ? '▶' : '▼'}
+                  </button>
+                </div>
+                {!collapsedPanels.rss && (
+                  <RSSFeedPane />
+                )}
+              </div>
+            )}
             </>
           )}
         </div>
