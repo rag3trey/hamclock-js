@@ -13,7 +13,7 @@ import json
 from typing import List, Optional
 
 from .config import settings
-from .routers import astronomy, satellites, spaceweather, dxcluster, config, maps, band_conditions, ncdxf, psk_reporter, maidenhead, qrz, activations, gps, cat, gimbal, contests, rss, adif, weather
+from .routers import astronomy, satellites, spaceweather, dxcluster, config, maps, band_conditions, ncdxf, psk_reporter, maidenhead, qrz, activations, gps, cat, gimbal, contests, rss, adif, weather, dxpeditions
 from .routers import settings as settings_router
 from .services.websocket_manager import WebSocketManager
 from .services.background_tasks import BackgroundTaskManager
@@ -111,6 +111,7 @@ app.include_router(contests.router, tags=["Contests"])
 app.include_router(rss.router, tags=["RSS Feeds"])
 app.include_router(adif.router, tags=["ADIF Logs"])
 app.include_router(weather.router, tags=["Weather"])
+app.include_router(dxpeditions.router, prefix="/api/v1/dxpeditions", tags=["DX-Peditions"])
 app.include_router(settings_router.router, prefix="/api/v1", tags=["Settings"])
 app.include_router(config.router, prefix="/api/v1/config", tags=["Configuration"])
 app.include_router(maps.router, prefix="/api/v1/maps", tags=["Maps"])

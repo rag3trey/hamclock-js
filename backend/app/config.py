@@ -40,6 +40,7 @@ class Settings(BaseSettings):
     # Satellite TLE Update
     TLE_UPDATE_INTERVAL: int = 86400  # 24 hours in seconds
     CELESTRAK_TLE_URL: str = "https://celestrak.org/NORAD/elements/gp.php?GROUP=amateur&FORMAT=tle"
+    CELESTRAK_SUPPLEMENTAL_TLE_URL: str = "https://celestrak.org/NORAD/elements/supplemental/sup-gp.php?FILE=starlink&FORMAT=tle"
     
     # Space Weather Update
     SPACEWX_UPDATE_INTERVAL: int = 300  # 5 minutes

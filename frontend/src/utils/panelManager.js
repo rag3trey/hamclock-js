@@ -17,6 +17,7 @@ const PANEL_DEFAULTS = {
   watchlist: true,
   rss: true,
   adif: true,
+  dxpedition: true,
   weather: true,
 };
 
@@ -35,6 +36,7 @@ const PANEL_LABELS = {
   watchlist: '⭐ Watchlist',
   rss: '📰 RSS Feeds',
   adif: '📋 QSO Log',
+  dxpedition: '📡 DX-Peditions',
   weather: '🌦️ Weather',
 };
 

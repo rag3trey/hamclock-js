@@ -15,6 +15,7 @@ import WatchlistPane from '../components/WatchlistPane';
 import RSSFeedPane from '../components/RSSFeedPane';
 import ADIFPane from '../components/ADIFPane';
 import WeatherPane from '../components/WeatherPane';
+import DXpeditionPane from '../components/DXpeditionPane';
 import GPSStatus from '../components/GPSStatus';
 import CATStatus from '../components/CATStatus';
 import GimbalStatus from '../components/GimbalStatus';
@@ -102,6 +103,7 @@ const HomePage = () => {
     watchlist: false,
     rss: false,
     adif: false,
+    dxpedition: false,
     weather: false
   });
   
@@ -716,6 +718,26 @@ const HomePage = () => {
                     latitude={deLocation?.latitude || 40.7128} 
                     longitude={deLocation?.longitude || -74.0060}
                     temperatureUnit={temperatureUnit}
+                  />
+                )}
+              </div>
+            )}
+
+            {visiblePanels.dxpedition && (
+              <div className="panel">
+                <div className="panel-header">
+                  <h3>📡 DX-Peditions</h3>
+                  <button
+                    className="collapse-btn"
+                    onClick={() => togglePanel('dxpedition')}
+                    title={collapsedPanels.dxpedition ? 'Expand' : 'Collapse'}
+                  >
+                    {collapsedPanels.dxpedition ? '▶' : '▼'}
+                  </button>
+                </div>
+                {!collapsedPanels.dxpedition && (
+                  <DXpeditionPane 
+                    deLocation={deLocation}
                   />
                 )}
               </div>

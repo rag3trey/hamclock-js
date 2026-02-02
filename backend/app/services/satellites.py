@@ -78,6 +78,7 @@ class SatelliteService:
             headers = {
                 'User-Agent': 'HamClock-Ground-Station/1.0'
             }
+            print(f"🔄 Fetching TLEs from: {settings.CELESTRAK_TLE_URL}")
             async with httpx.AsyncClient() as client:
                 response = await client.get(
                     settings.CELESTRAK_TLE_URL, 
@@ -89,6 +90,8 @@ class SatelliteService:
                 
                 # Parse TLE data
                 tle_lines = response.text.strip().split('\n')
+                print(f"📡 Fetched {len(tle_lines)} lines from CelesTrak")
+                print(f"   First few lines: {tle_lines[:6]}")
                 
                 # Process TLEs (3 lines per satellite: name, line1, line2)
                 i = 0
@@ -101,6 +104,11 @@ class SatelliteService:
                     
                     # Skip empty lines
                     if not name or not line1 or not line2:
+                        i += 1
+                        continue
+                    
+                    # Validate TLE lines (should start with 1 and 2)
+                    if not line1.startswith('1 ') or not line2.startswith('2 '):
                         i += 1
                         continue
                     
@@ -123,10 +131,10 @@ class SatelliteService:
                 if satellites:
                     self.satellites = satellites
                     self.last_tle_update = datetime.now(timezone.utc)
-                    print(f"✅ Updated TLEs for {len(satellites)} satellites")
+                    print(f"✅ Updated TLEs for {len(satellites)} satellites from CelesTrak")
                     return len(satellites)
                 else:
-                    print(f"⚠️  No satellites parsed from TLE data, using demo satellites")
+                    print(f"⚠️  No satellites parsed from CelesTrak TLE data, using demo satellites")
                     self._init_demo_satellites()
                     return len(self.satellites)
                 
@@ -136,6 +144,71 @@ class SatelliteService:
             # Fall back to demo satellites if fetch fails
             self._init_demo_satellites()
             return len(self.satellites)
+    
+    async def update_supplemental_tles(self):
+        """
+        Fetch supplemental TLE data from CelesTrak
+        Provides additional satellite constellations not in the main amateur radio group
+        """
+        try:
+            headers = {
+                'User-Agent': 'HamClock-Ground-Station/1.0'
+            }
+            async with httpx.AsyncClient() as client:
+                response = await client.get(
+                    settings.CELESTRAK_SUPPLEMENTAL_TLE_URL,
+                    timeout=30.0,
+                    headers=headers,
+                    follow_redirects=True
+                )
+                response.raise_for_status()
+                
+                # Parse TLE data
+                tle_lines = response.text.strip().split('\n')
+                
+                # Process TLEs (3 lines per satellite: name, line1, line2)
+                i = 0
+                supplemental_sats = {}
+                
+                while i < len(tle_lines) - 2:
+                    name = tle_lines[i].strip()
+                    line1 = tle_lines[i + 1].strip()
+                    line2 = tle_lines[i + 2].strip()
+                    
+                    # Skip empty lines
+                    if not name or not line1 or not line2:
+                        i += 1
+                        continue
+                    
+                    # Create EarthSatellite object
+                    try:
+                        sat = EarthSatellite(line1, line2, name, self.ts)
+                        supplemental_sats[name] = {
+                            'satellite': sat,
+                            'tle': {
+                                'name': name,
+                                'line1': line1,
+                                'line2': line2
+                            }
+                        }
+                    except Exception as e:
+                        print(f"Error parsing supplemental TLE for {name}: {e}")
+                    
+                    i += 3
+                
+                if supplemental_sats:
+                    # Add supplemental sats to the main satellite dict
+                    self.satellites.update(supplemental_sats)
+                    self.last_tle_update = datetime.now(timezone.utc)
+                    print(f"✅ Updated {len(supplemental_sats)} supplemental TLEs from Celestrak")
+                    return len(supplemental_sats)
+                else:
+                    print(f"⚠️  No supplemental satellites parsed from TLE data")
+                    return 0
+                
+        except Exception as e:
+            print(f"❌ Error updating supplemental TLEs: {e}")
+            return 0
     
     def get_satellite(self, name: str) -> Optional[EarthSatellite]:
         """Get satellite by name"""
