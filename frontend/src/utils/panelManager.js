@@ -16,6 +16,7 @@ const PANEL_DEFAULTS = {
   satellites: true,
   watchlist: true,
   rss: true,
+  adif: true,
 };
 
 const PANEL_LABELS = {
@@ -32,6 +33,7 @@ const PANEL_LABELS = {
   satellites: '🛰️ Satellites',
   watchlist: '⭐ Watchlist',
   rss: '📰 RSS Feeds',
+  adif: '📋 QSO Log',
 };
 
 const STORAGE_KEY = 'hamclock_visible_panels';

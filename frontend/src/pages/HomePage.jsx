@@ -13,6 +13,7 @@ import ContestsPane from '../components/ContestsPane';
 import SatellitesPane from '../components/SatellitesPane';
 import WatchlistPane from '../components/WatchlistPane';
 import RSSFeedPane from '../components/RSSFeedPane';
+import ADIFPane from '../components/ADIFPane';
 import GPSStatus from '../components/GPSStatus';
 import CATStatus from '../components/CATStatus';
 import GimbalStatus from '../components/GimbalStatus';
@@ -93,7 +94,8 @@ const HomePage = () => {
     contests: false,
     satellites: false,
     watchlist: false,
-    rss: false
+    rss: false,
+    adif: false
   });
   
   const [dxSpotMarker, setDxSpotMarker] = useState(null);
@@ -669,6 +671,23 @@ const HomePage = () => {
                 </div>
                 {!collapsedPanels.rss && (
                   <RSSFeedPane />
+                )}
+              </div>
+            )}
+            {visiblePanels.adif && (
+              <div className="side-panel">
+                <div className="panel-header">
+                  <span>📋 QSO Log</span>
+                  <button
+                    className="collapse-btn"
+                    onClick={() => togglePanel('adif')}
+                    title={collapsedPanels.adif ? 'Expand' : 'Collapse'}
+                  >
+                    {collapsedPanels.adif ? '▶' : '▼'}
+                  </button>
+                </div>
+                {!collapsedPanels.adif && (
+                  <ADIFPane />
                 )}
               </div>
             )}

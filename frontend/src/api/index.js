@@ -658,4 +658,83 @@ export const getVisibleSatellites = async (observerLat, observerLon, observerAlt
   }
 };
 
+// ADIF Log API
+export const uploadADIFLog = async (file, logName = 'main') => {
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('name', logName);
+    
+    const response = await api.post('/api/v1/adif/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('ADIF upload error:', error);
+    throw error;
+  }
+};
+
+export const fetchADIFQSOs = async (logName = 'main', limit = 100, band = null, mode = null) => {
+  try {
+    const response = await api.get('/api/v1/adif/qsos', {
+      params: { name: logName, limit, band, mode },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('ADIF QSOs fetch error:', error);
+    throw error;
+  }
+};
+
+export const fetchWorkedGrids = async (logName = 'main') => {
+  try {
+    const response = await api.get('/api/v1/adif/grids', {
+      params: { name: logName },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Worked grids fetch error:', error);
+    throw error;
+  }
+};
+
+export const fetchWorkedCountries = async (logName = 'main') => {
+  try {
+    const response = await api.get('/api/v1/adif/countries', {
+      params: { name: logName },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Worked countries fetch error:', error);
+    throw error;
+  }
+};
+
+export const fetchADIFStatistics = async (logName = 'main') => {
+  try {
+    const response = await api.get('/api/v1/adif/statistics', {
+      params: { name: logName },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('ADIF statistics fetch error:', error);
+    throw error;
+  }
+};
+
+export const searchADIFQSOs = async (callsign, logName = 'main') => {
+  try {
+    const response = await api.get('/api/v1/adif/search', {
+      params: { call: callsign, name: logName },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('ADIF search error:', error);
+    throw error;
+  }
+};
+
 export default api;
