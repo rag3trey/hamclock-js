@@ -17,7 +17,7 @@ DEFAULT_FEEDS = [
         'category': 'news'
     },
     {
-        'name': 'RepeaterBook Blog',
+        'name': 'RepeaterBook',
         'url': 'https://repeaterbook.groups.io/g/repeaterbook/rss',
         'category': 'repeaters'
     }
