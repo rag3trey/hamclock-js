@@ -103,3 +103,30 @@
 .gps-panel {
   padding: 0;
 }
+
+/* Light mode styling */
+[data-theme="light"] .info-bar {
+  background: rgba(29, 78, 216, 0.08);
+}
+
+[data-theme="light"] .map-container {
+  background: rgba(29, 78, 216, 0.08);
+}
+
+[data-theme="light"] .panel {
+  background: rgba(29, 78, 216, 0.08);
+}
+
+[data-theme="light"] .panel h3 {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .collapse-btn {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .collapse-btn:hover {
+  background-color: rgba(29, 78, 216, 0.15);
+  color: #1e40af;
+}

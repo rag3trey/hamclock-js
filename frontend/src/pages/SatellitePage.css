@@ -320,34 +320,21 @@
   font-family: 'Monaco', 'Courier New', monospace;
 }
 
-.pass-detail {
-  color: #7ec8ff;
-  font-weight: 500;
-  text-align: right;
-  font-size: 12px;
+[data-theme="light"] .pass-detail {
+  color: #0a1428;
+  font-weight: 700;
 }
 
-.pass-footer {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 8px 0 0 0;
-  border-top: 1px solid rgba(45, 90, 140, 0.4);
-  margin-top: 8px;
-  font-size: 12px;
-  color: #b0c4de;
+[data-theme="light"] .pass-footer {
+  border-top-color: rgba(29, 78, 216, 0.1);
+  color: #6b7280;
 }
 
-.passes-note {
-  padding: 12px;
-  background: rgba(45, 90, 140, 0.15);
-  border: 1px dashed #2d5a8c;
-  border-radius: 4px;
-  text-align: center;
-  font-size: 12px;
-  color: #9db4c4;
-  margin-top: 1rem;
-  text-transform: uppercase;
+[data-theme="light"] .passes-note {
+  background: rgba(29, 78, 216, 0.1);
+  border-color: rgba(29, 78, 216, 0.3);
+  color: #6b7280;
+}
   letter-spacing: 0.5px;
 }
 
@@ -387,3 +374,137 @@
   .passes-panel {
     order: 2;
   }
+}
+
+/* Light mode styling */
+[data-theme="light"] .satellite-page {
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+}
+
+[data-theme="light"] .page-header h2 {
+  color: #111827;
+}
+
+[data-theme="light"] .subtitle {
+  color: #6b7280;
+}
+
+[data-theme="light"] .location-banner {
+  background: rgba(59, 130, 246, 0.1);
+  border-left-color: #3b82f6;
+  color: #1f2937;
+}
+
+[data-theme="light"] .controls-panel {
+  background: #ffffff;
+  border-color: #e5e7eb;
+}
+
+[data-theme="light"] .controls-panel h3 {
+  color: #111827;
+}
+
+[data-theme="light"] .control-group label {
+  color: #374151;
+}
+
+[data-theme="light"] .control-select {
+  background: #ffffff;
+  border-color: #d1d5db;
+  color: #111827;
+}
+
+[data-theme="light"] .control-select:hover {
+  border-color: #3b82f6;
+}
+
+[data-theme="light"] .control-select:focus {
+  border-color: #3b82f6;
+}
+
+[data-theme="light"] .location-display {
+  background: #f3f4f6;
+  border-left-color: #3b82f6;
+}
+
+[data-theme="light"] .location-display div {
+  color: #1f2937;
+}
+
+[data-theme="light"] .control-slider {
+  background: #e5e7eb;
+}
+
+[data-theme="light"] .control-slider::-webkit-slider-thumb {
+  background: #3b82f6;
+}
+
+[data-theme="light"] .control-slider::-moz-range-thumb {
+  background: #3b82f6;
+}
+
+[data-theme="light"] .slider-note {
+  color: #6b7280;
+}
+
+[data-theme="light"] .passes-panel {
+  background: #ffffff;
+  border-color: #e5e7eb;
+}
+
+[data-theme="light"] .passes-panel h3 {
+  color: #111827;
+}
+
+[data-theme="light"] .loading {
+  color: #6b7280;
+}
+
+[data-theme="light"] .no-passes {
+  color: #6b7280;
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+[data-theme="light"] .passes-day-header {
+  background: #dbeafe;
+  border-left-color: #3b82f6;
+  color: #1e40af;
+}
+
+[data-theme="light"] .pass-card {
+  background: #f9fafb;
+  border-color: #e5e7eb;
+  border-left-color: #3b82f6;
+}
+
+[data-theme="light"] .pass-card:hover {
+  background: #f3f4f6;
+}
+
+[data-theme="light"] .pass-header {
+  background: #eff6ff;
+  color: #1e40af;
+  border-bottom-color: #e5e7eb;
+}
+
+[data-theme="light"] .pass-row {
+  border-bottom-color: #f3f4f6;
+}
+
+[data-theme="light"] .pass-label {
+  color: #6b7280;
+}
+
+[data-theme="light"] .pass-value {
+  color: #111827;
+}
+
+[data-theme="light"] .pass-detail {
+  color: #374151;
+}
+
+[data-theme="light"] .pass-footer {
+  border-top-color: #f3f4f6;
+  color: #6b7280;
+}
