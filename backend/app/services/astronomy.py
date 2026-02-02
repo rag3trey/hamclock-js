@@ -10,12 +10,14 @@ This module provides high-precision astronomical calculations including:
 - Solar and lunar data
 """
 
-from skyfield.api import load, wgs84, N, S, E, W
+from skyfield.api import load, wgs84, N, S, E, W, Loader
 from skyfield import almanac
 from datetime import datetime, timezone, timedelta
 from typing import Tuple, Dict, List, Optional
 import math
 import numpy as np
+import os
+import traceback
 
 
 class AstronomyService:
@@ -36,15 +38,20 @@ class AstronomyService:
         try:
             # Load DE421 ephemeris (2000-2053)
             # Use absolute path to ensure we find the file
-            import os
-            backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            # __file__ is /path/to/backend/app/services/astronomy.py
+            # We need to go up 2 levels to get to backend/
+            services_dir = os.path.dirname(os.path.abspath(__file__))
+            app_dir = os.path.dirname(services_dir)
+            backend_dir = os.path.dirname(app_dir)
             de421_path = os.path.join(backend_dir, 'de421.bsp')
             
             print(f"🔍 Looking for de421.bsp at: {de421_path}")
             
             if os.path.exists(de421_path):
                 print(f"✅ Found de421.bsp at {de421_path}")
-                self.planets = load.open(de421_path)
+                # Create a loader that uses the backend directory
+                loader = Loader(backend_dir)
+                self.planets = loader('de421.bsp')
             else:
                 print(f"⚠️  de421.bsp not found at {de421_path}, trying default load...")
                 self.planets = load('de421.bsp')  # Will download if needed
@@ -53,8 +60,14 @@ class AstronomyService:
             self.sun = self.planets['sun']
             self.moon = self.planets['moon']
             print("✅ Astronomy ephemeris loaded successfully")
+            print(f"   Earth: {self.earth}")
+            print(f"   Sun: {self.sun}")
+            print(f"   Moon: {self.moon}")
         except Exception as e:
             print(f"❌ CRITICAL: Could not load astronomy ephemeris: {e}")
+            print(f"   Exception type: {type(e).__name__}")
+            print("   Full traceback:")
+            traceback.print_exc()
             print("This is a fatal error - astronomy calculations will not work")
             raise
     
