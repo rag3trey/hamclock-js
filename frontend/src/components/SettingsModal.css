@@ -419,3 +419,201 @@
   margin: 8px 0;
   font-style: italic;
 }
+
+/* Light mode styling */
+[data-theme="light"] .settings-modal {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-color: #d1d5db;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .settings-header {
+  border-bottom-color: #e5e7eb;
+  color: #0a1428;
+}
+
+[data-theme="light"] .settings-header h2 {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .close-btn {
+  color: #6b7280;
+}
+
+[data-theme="light"] .close-btn:hover {
+  color: #111827;
+}
+
+[data-theme="light"] .settings-tabs {
+  border-bottom-color: #e5e7eb;
+  background-color: rgba(29, 78, 216, 0.05);
+}
+
+[data-theme="light"] .tab-btn {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+[data-theme="light"] .tab-btn:hover {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .tab-btn.active {
+  color: #1d4ed8;
+  border-bottom-color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .settings-content {
+  color: #0a1428;
+}
+
+[data-theme="light"] .form-group label {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .form-group input,
+[data-theme="light"] .form-group select {
+  background-color: #ffffff;
+  border-color: #d1d5db;
+  color: #0a1428;
+}
+
+[data-theme="light"] .form-group input:focus,
+[data-theme="light"] .form-group select:focus {
+  border-color: #1d4ed8;
+  box-shadow: 0 0 8px rgba(29, 78, 216, 0.2);
+  background-color: #f8fafc;
+}
+
+[data-theme="light"] .form-group input::placeholder {
+  color: #9ca3af;
+}
+
+[data-theme="light"] .form-group small {
+  color: #6b7280;
+}
+
+[data-theme="light"] .form-group small a {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .form-group small a:hover {
+  color: #1e40af;
+}
+
+[data-theme="light"] .theme-btn,
+[data-theme="light"] .format-btn,
+[data-theme="light"] .service-btn {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+[data-theme="light"] .theme-btn:hover,
+[data-theme="light"] .format-btn:hover,
+[data-theme="light"] .service-btn:hover {
+  border-color: #9ca3af;
+  color: #0a1428;
+}
+
+[data-theme="light"] .theme-btn.active,
+[data-theme="light"] .format-btn.active,
+[data-theme="light"] .service-btn.active {
+  background-color: rgba(29, 78, 216, 0.15);
+  border-color: #1d4ed8;
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .btn-primary {
+  background-color: rgba(29, 78, 216, 0.15);
+  color: #1d4ed8;
+  border-color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .btn-primary:hover {
+  background-color: rgba(29, 78, 216, 0.25);
+}
+
+[data-theme="light"] .btn-secondary {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+[data-theme="light"] .btn-secondary:hover {
+  background-color: #e5e7eb;
+  border-color: #9ca3af;
+  color: #0a1428;
+}
+
+[data-theme="light"] .btn-danger {
+  background-color: rgba(220, 38, 38, 0.15);
+  border-color: #fca5a5;
+  color: #dc2626;
+  font-weight: 700;
+}
+
+[data-theme="light"] .btn-danger:hover {
+  background-color: rgba(220, 38, 38, 0.25);
+}
+
+[data-theme="light"] .error-message {
+  background-color: rgba(220, 38, 38, 0.1);
+  border-color: #fca5a5;
+  color: #991b1b;
+}
+
+[data-theme="light"] .loading-spinner {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .help-text {
+  background-color: rgba(29, 78, 216, 0.08);
+  border-left-color: #1d4ed8;
+  color: #6b7280;
+}
+
+[data-theme="light"] .settings-footer {
+  border-top-color: #e5e7eb;
+}
+
+[data-theme="light"] .info-box {
+  background-color: rgba(29, 78, 216, 0.08);
+  border-color: rgba(29, 78, 216, 0.3);
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .panel-toggle-item label {
+  color: #0a1428;
+  font-weight: 500;
+}
+
+[data-theme="light"] .panel-toggle-item input[type="checkbox"] {
+  accent-color: #1d4ed8;
+}
+
+[data-theme="light"] .panel-toggle-item label:hover {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .btn-small {
+  background: #1d4ed8;
+  border-color: #1e40af;
+  color: white;
+  font-weight: 700;
+}
+
+[data-theme="light"] .btn-small:hover {
+  background: #1e40af;
+}
+
+[data-theme="light"] .settings-description {
+  color: #6b7280;
+}

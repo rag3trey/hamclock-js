@@ -18,3 +18,13 @@
   font-weight: bold;
   font-family: 'Courier New', monospace;
 }
+
+/* Light mode styling */
+[data-theme="light"] .clock-label {
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+[data-theme="light"] .clock-time {
+  color: #0a1428;
+}

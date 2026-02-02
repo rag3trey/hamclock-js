@@ -139,3 +139,90 @@
   border-top: 1px solid rgba(100, 150, 200, 0.2);
   margin-top: 8px;
 }
+
+/* Light mode styling */
+[data-theme="light"] .band-propagation-pane {
+  background: rgba(29, 78, 216, 0.05);
+  border-color: rgba(29, 78, 216, 0.3);
+  scrollbar-color: rgba(29, 78, 216, 0.4) rgba(29, 78, 216, 0.1);
+}
+
+[data-theme="light"] .band-propagation-pane::-webkit-scrollbar-track {
+  background: rgba(29, 78, 216, 0.1);
+}
+
+[data-theme="light"] .band-propagation-pane::-webkit-scrollbar-thumb {
+  background: rgba(29, 78, 216, 0.4);
+}
+
+[data-theme="light"] .band-propagation-pane::-webkit-scrollbar-thumb:hover {
+  background: rgba(29, 78, 216, 0.6);
+}
+
+[data-theme="light"] .band-propagation-pane.loading {
+  color: #6b7280;
+}
+
+[data-theme="light"] .band-header {
+  border-bottom-color: rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .band-title {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .space-weather-summary {
+  color: #6b7280;
+}
+
+[data-theme="light"] .solar-flux {
+  color: #d97706;
+  font-weight: 700;
+}
+
+[data-theme="light"] .k-index {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+[data-theme="light"] .a-index {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .band-card {
+  background: rgba(29, 78, 216, 0.08);
+  border-left-color: #1d4ed8;
+}
+
+[data-theme="light"] .band-card:hover {
+  background: rgba(29, 78, 216, 0.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .band-name {
+  color: #0a1428;
+  font-weight: 700;
+}
+
+[data-theme="light"] .band-condition {
+  color: #1d4ed8;
+  text-shadow: none;
+  font-weight: 700;
+}
+
+[data-theme="light"] .band-muf {
+  color: #6b7280;
+  font-weight: 600;
+}
+
+[data-theme="light"] .band-fcrit {
+  color: #6b7280;
+  font-weight: 600;
+}
+
+[data-theme="light"] .band-timestamp {
+  color: #9ca3af;
+  border-top-color: rgba(29, 78, 216, 0.2);
+}

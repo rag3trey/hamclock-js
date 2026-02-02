@@ -140,3 +140,50 @@
     gap: 2px;
   }
 }
+
+/* Light mode styling */
+[data-theme="light"] .maidenhead-display {
+  background: rgba(29, 78, 216, 0.08);
+  border-color: rgba(29, 78, 216, 0.3);
+}
+
+[data-theme="light"] .maidenhead-display label {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .grid-value {
+  color: #15803d;
+  text-shadow: 0 0 8px rgba(21, 128, 61, 0.2);
+}
+
+[data-theme="light"] .grid-value.loading {
+  color: #6b7280;
+  text-shadow: none;
+}
+
+[data-theme="light"] .grid-value.error {
+  color: #dc2626;
+  text-shadow: none;
+}
+
+[data-theme="light"] .precision-btn {
+  background: rgba(29, 78, 216, 0.1);
+  border-color: rgba(29, 78, 216, 0.3);
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .precision-btn:hover {
+  background: rgba(29, 78, 216, 0.15);
+  border-color: rgba(29, 78, 216, 0.5);
+  color: #1e40af;
+}
+
+[data-theme="light"] .precision-btn.active {
+  background: rgba(29, 78, 216, 0.2);
+  border-color: #1d4ed8;
+  color: #0a1428;
+  text-shadow: none;
+  box-shadow: 0 0 8px rgba(29, 78, 216, 0.2);
+}

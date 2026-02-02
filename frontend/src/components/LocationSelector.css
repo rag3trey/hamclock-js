@@ -15,3 +15,16 @@
 .location-coords {
   font-family: 'Courier New', monospace;
 }
+
+/* Light mode styling */
+[data-theme="light"] .location-selector {
+  background: rgba(29, 78, 216, 0.08);
+}
+
+[data-theme="light"] .location-label {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .location-coords {
+  color: #0a1428;
+}

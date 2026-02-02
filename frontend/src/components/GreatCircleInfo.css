@@ -167,3 +167,64 @@
     border-left-color: #00ff00;
   }
 }
+
+/* Light mode styling */
+[data-theme="light"] .great-circle-info {
+  background: linear-gradient(135deg, rgba(29, 78, 216, 0.08), rgba(29, 78, 216, 0.05));
+  border-color: #bfdbfe;
+  color: #0a1428;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .gc-header {
+  border-bottom-color: rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .gc-header h3 {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .gc-callsign {
+  color: #d97706;
+  font-weight: 700;
+}
+
+[data-theme="light"] .gc-item {
+  background: rgba(29, 78, 216, 0.08);
+  border-left-color: #15803d;
+}
+
+[data-theme="light"] .gc-label {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .gc-value {
+  color: #15803d;
+  font-weight: 700;
+}
+
+[data-theme="light"] .gc-value .bearing {
+  color: #d97706;
+  font-weight: 700;
+}
+
+[data-theme="light"] .gc-value .cardinal {
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+[data-theme="light"] .gc-details {
+  border-top-color: rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .gc-detail-label {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .gc-detail-value {
+  color: #0a1428;
+  font-weight: 600;
+}

@@ -19,3 +19,12 @@
   width: 100%;
   height: auto;
 }
+
+/* Light mode styling */
+[data-theme="light"] .map-controls {
+  background: rgba(29, 78, 216, 0.08);
+}
+
+[data-theme="light"] .map-canvas {
+  border-color: rgba(29, 78, 216, 0.3);
+}

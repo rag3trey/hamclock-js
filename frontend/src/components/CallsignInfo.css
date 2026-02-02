@@ -115,3 +115,49 @@
     text-align: left;
   }
 }
+
+/* Light mode styling */
+[data-theme="light"] .callsign-tooltip {
+  background: rgba(255, 255, 255, 0.98);
+  border-color: rgba(29, 78, 216, 0.5);
+  color: #0a1428;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .callsign-tooltip.above::after {
+  border-top-color: rgba(255, 255, 255, 0.98);
+}
+
+[data-theme="light"] .callsign-tooltip.below::after {
+  border-bottom-color: rgba(255, 255, 255, 0.98);
+}
+
+[data-theme="light"] .tooltip-country {
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+[data-theme="light"] .tooltip-header {
+  border-bottom-color: rgba(29, 78, 216, 0.2);
+}
+
+[data-theme="light"] .tooltip-header strong {
+  color: #0a1428;
+}
+
+[data-theme="light"] .prefix-badge {
+  background: rgba(29, 78, 216, 0.1);
+  color: #1d4ed8;
+  border-color: rgba(29, 78, 216, 0.3);
+  font-weight: 700;
+}
+
+[data-theme="light"] .info-row .label {
+  color: #6b7280;
+  font-weight: 600;
+}
+
+[data-theme="light"] .info-row .value {
+  color: #15803d;
+  font-weight: 700;
+}

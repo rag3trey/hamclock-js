@@ -33,6 +33,31 @@ export default function SolarFluxTrend() {
     }
   }, [data]);
 
+  // Listen for theme changes
+  useEffect(() => {
+    const handleThemeChange = () => {
+      if (data && canvasRef.current) {
+        drawChart();
+      }
+    };
+
+    // Check for theme changes on the document element
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'data-theme') {
+          handleThemeChange();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+
+    return () => observer.disconnect();
+  }, [data]);
+
   const drawChart = () => {
     const canvas = canvasRef.current;
     if (!canvas || !data || data.length === 0) return;
