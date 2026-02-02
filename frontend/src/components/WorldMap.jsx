@@ -157,8 +157,8 @@ function calculateGreatCirclePath(lat1, lng1, lat2, lng2, numPoints = 100) {
 // Canvas map for Azimuthal projection using D3
 function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapClick, showNightShade, showGrid, gridType, showRangeRings, zoomCenter, zoomScale, visiblePanels, onWheel, dragDistanceRef }) {
   const canvasRef = useRef(null);
-  const centerLat = zoomCenter?.lat || (deLocation ? deLocation.latitude : 40);
-  const centerLng = zoomCenter?.lng || (deLocation ? deLocation.longitude : 0);
+  const centerLat = zoomCenter ? zoomCenter.lat : (deLocation ? deLocation.latitude : 40);
+  const centerLng = zoomCenter ? zoomCenter.lng : (deLocation ? deLocation.longitude : 0);
   
   const { data: terminatorData } = useQuery({
     queryKey: ['terminator'],
@@ -557,7 +557,7 @@ function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapCl
         }
       });
     }
-  }, [deLocation, dxSpots, activations, satellites, terminatorData, showNightShade, showGrid, gridType, showRangeRings, centerLat, centerLng, zoomScale, visiblePanels]);
+  }, [deLocation, dxSpots, activations, satellites, terminatorData, showNightShade, showGrid, gridType, showRangeRings, zoomCenter, zoomScale, visiblePanels]);
 
   const handleClick = (e) => {
     // Don't register clicks if there was a drag
@@ -1583,9 +1583,9 @@ function CanvasMapContainer({ children, onZoomChange, projection }) {
     
     onZoomChange((prev) => {
       if (projection === 'azimuthal') {
-        // For azimuthal: rotate like a globe
-        // Horizontal drag rotates longitude, vertical drag rotates latitude
-        const rotationSpeed = 0.3; // Adjust for globe-like feel
+        // For azimuthal: rotate like a globe - direct and responsive
+        // Higher rotation speed makes it feel more like grabbing and rotating a physical globe
+        const rotationSpeed = 0.6; // degrees per pixel - more responsive globe feel
         const dLng = -dx * rotationSpeed;
         const dLat = dy * rotationSpeed;
         
@@ -1722,7 +1722,7 @@ const WorldMap = ({ deLocation, dxSpots, activations, satellites, autoZoomToDX, 
   
   // Define preset bounds
   const presetBounds = {
-    world: { lat: 0, lng: 0, scale: 1 },
+    world: deLocation ? { lat: deLocation.latitude, lng: deLocation.longitude, scale: 1 } : { lat: 0, lng: 0, scale: 1 },
     na: { lat: 40, lng: -100, scale: 2.2 },
     eu: { lat: 50, lng: 10, scale: 2.5 },
     asia: { lat: 30, lng: 100, scale: 2 },
