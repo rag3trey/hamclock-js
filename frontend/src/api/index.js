@@ -325,6 +325,11 @@ export const fetchSetUnits = async (units) => {
   return response.data;
 };
 
+export const fetchSetTemperatureUnit = async (temperatureUnit) => {
+  const response = await api.post(`/api/v1/settings/temperature-unit/${temperatureUnit}`);
+  return response.data;
+};
+
 export const fetchSetCallsign = async (callsign) => {
   const response = await api.post(`/api/v1/settings/callsign/${callsign}`);
   return response.data;

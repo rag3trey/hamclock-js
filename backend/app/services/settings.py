@@ -23,6 +23,7 @@ class UserSettings(BaseModel):
     elevation_angle_default: int = 10  # degrees
     satellite_lookahead_hours: int = 24
     units: str = "metric"  # metric or imperial
+    temperature_unit: str = "celsius"  # celsius, fahrenheit, or kelvin
 
     class Config:
         json_schema_extra = {
@@ -155,6 +156,13 @@ class SettingsService:
             self.update_settings(units=units)
         else:
             raise ValueError(f"Invalid units: {units}")
+
+    def set_temperature_unit(self, temperature_unit: str) -> None:
+        """Set temperature unit (celsius, fahrenheit, or kelvin)."""
+        if temperature_unit in ("celsius", "fahrenheit", "kelvin"):
+            self.update_settings(temperature_unit=temperature_unit)
+        else:
+            raise ValueError(f"Invalid temperature unit: {temperature_unit}")
 
     def reset_to_defaults(self) -> UserSettings:
         """Reset all settings to defaults."""

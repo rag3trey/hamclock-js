@@ -7,6 +7,7 @@ import {
   fetchSetTheme,
   fetchSetTimeFormat,
   fetchSetUnits,
+  fetchSetTemperatureUnit,
   fetchSetCallsign,
   fetchResetSettings,
 } from '../api/index';
@@ -159,6 +160,20 @@ const PANELS_CHANGED_EVENT = 'panelsChanged';export default function SettingsMod
       const errorMsg = err.response?.data?.detail || err.message || 'Failed to save units';
       setError(errorMsg);
       console.error('Error saving units:', err);
+    }
+  };
+
+  const handleTemperatureUnitChange = async (temperatureUnit) => {
+    try {
+      setError(null);
+      console.log('Saving temperature unit:', temperatureUnit);
+      await fetchSetTemperatureUnit(temperatureUnit);
+      setFormData(prev => ({ ...prev, temperature_unit: temperatureUnit }));
+      setSettings(prev => ({ ...prev, temperature_unit: temperatureUnit }));
+    } catch (err) {
+      const errorMsg = err.response?.data?.detail || err.message || 'Failed to save temperature unit';
+      setError(errorMsg);
+      console.error('Error saving temperature unit:', err);
     }
   };
 
@@ -475,6 +490,30 @@ const PANELS_CHANGED_EVENT = 'panelsChanged';export default function SettingsMod
                     onClick={() => handleUnitsChange('imperial')}
                   >
                     Imperial (miles, mph)
+                  </button>
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label>Temperature Unit</label>
+                <div className="format-selector">
+                  <button
+                    className={`format-btn ${formData.temperature_unit === 'celsius' ? 'active' : ''}`}
+                    onClick={() => handleTemperatureUnitChange('celsius')}
+                  >
+                    Celsius (°C)
+                  </button>
+                  <button
+                    className={`format-btn ${formData.temperature_unit === 'fahrenheit' ? 'active' : ''}`}
+                    onClick={() => handleTemperatureUnitChange('fahrenheit')}
+                  >
+                    Fahrenheit (°F)
+                  </button>
+                  <button
+                    className={`format-btn ${formData.temperature_unit === 'kelvin' ? 'active' : ''}`}
+                    onClick={() => handleTemperatureUnitChange('kelvin')}
+                  >
+                    Kelvin (K)
                   </button>
                 </div>
               </div>

@@ -17,6 +17,7 @@ const PANEL_DEFAULTS = {
   watchlist: true,
   rss: true,
   adif: true,
+  weather: true,
 };
 
 const PANEL_LABELS = {
@@ -34,6 +35,7 @@ const PANEL_LABELS = {
   watchlist: '⭐ Watchlist',
   rss: '📰 RSS Feeds',
   adif: '📋 QSO Log',
+  weather: '🌦️ Weather',
 };
 
 const STORAGE_KEY = 'hamclock_visible_panels';

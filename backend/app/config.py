@@ -31,6 +31,7 @@ class Settings(BaseSettings):
     # API Keys (optional, for external services)
     NOAA_API_KEY: str = ""
     CELESTRAK_API_KEY: str = ""
+    OPENWEATHER_API_KEY: str = ""
     
     # DX Cluster
     DX_CLUSTER_HOST: str = "dxc.nc7j.com"

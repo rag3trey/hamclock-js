@@ -14,6 +14,7 @@ import SatellitesPane from '../components/SatellitesPane';
 import WatchlistPane from '../components/WatchlistPane';
 import RSSFeedPane from '../components/RSSFeedPane';
 import ADIFPane from '../components/ADIFPane';
+import WeatherPane from '../components/WeatherPane';
 import GPSStatus from '../components/GPSStatus';
 import CATStatus from '../components/CATStatus';
 import GimbalStatus from '../components/GimbalStatus';
@@ -39,6 +40,7 @@ const HomePage = () => {
   const [selectedSatellite, setSelectedSatellite] = useState(null);
   const [timeFormat, setTimeFormat] = useState('24h'); // '12h' or '24h'
   const [units, setUnits] = useState('imperial'); // 'metric' or 'imperial'
+  const [temperatureUnit, setTemperatureUnit] = useState('celsius'); // 'celsius', 'fahrenheit', or 'kelvin'
   const [visiblePanels, setVisiblePanels] = useState(getVisiblePanels());
   
   // Load settings on component mount
@@ -75,6 +77,10 @@ const HomePage = () => {
       if (settings.units) {
         setUnits(settings.units);
       }
+      // Apply temperature unit
+      if (settings.temperature_unit) {
+        setTemperatureUnit(settings.temperature_unit);
+      }
     } catch (err) {
       console.error('Failed to load settings:', err);
     }
@@ -95,7 +101,8 @@ const HomePage = () => {
     satellites: false,
     watchlist: false,
     rss: false,
-    adif: false
+    adif: false,
+    weather: false
   });
   
   const [dxSpotMarker, setDxSpotMarker] = useState(null);
@@ -688,6 +695,28 @@ const HomePage = () => {
                 </div>
                 {!collapsedPanels.adif && (
                   <ADIFPane />
+                )}
+              </div>
+            )}
+
+            {visiblePanels.weather && (
+              <div className="panel">
+                <div className="panel-header">
+                  <h3>🌦️ Weather</h3>
+                  <button
+                    className="collapse-btn"
+                    onClick={() => togglePanel('weather')}
+                    title={collapsedPanels.weather ? 'Expand' : 'Collapse'}
+                  >
+                    {collapsedPanels.weather ? '▶' : '▼'}
+                  </button>
+                </div>
+                {!collapsedPanels.weather && (
+                  <WeatherPane 
+                    latitude={deLocation?.latitude || 40.7128} 
+                    longitude={deLocation?.longitude || -74.0060}
+                    temperatureUnit={temperatureUnit}
+                  />
                 )}
               </div>
             )}

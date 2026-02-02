@@ -133,6 +133,16 @@ async def set_units(units: str):
     return settings_service.get_settings()
 
 
+@router.post("/temperature-unit/{temperature_unit}", response_model=UserSettings)
+async def set_temperature_unit(temperature_unit: str):
+    """Set temperature unit (celsius, fahrenheit, or kelvin)."""
+    if temperature_unit not in ("celsius", "fahrenheit", "kelvin"):
+        raise HTTPException(status_code=400, detail="Temperature unit must be 'celsius', 'fahrenheit', or 'kelvin'")
+
+    settings_service.set_temperature_unit(temperature_unit)
+    return settings_service.get_settings()
+
+
 @router.post("/callsign/{callsign}", response_model=UserSettings)
 async def set_callsign(callsign: str):
     """Set amateur radio callsign."""
