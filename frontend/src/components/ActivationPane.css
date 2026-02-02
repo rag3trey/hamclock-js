@@ -16,6 +16,18 @@
   overflow-y: auto;
 }
 
+@media (max-width: 768px) {
+  .activation-list {
+    max-height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .activation-list {
+    max-height: auto;
+  }
+}
+
 .activation-item {
   margin-bottom: 8px;
   padding: 6px;

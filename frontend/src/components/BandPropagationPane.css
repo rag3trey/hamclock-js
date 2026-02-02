@@ -12,6 +12,18 @@
   scrollbar-color: rgba(100, 150, 200, 0.5) rgba(20, 30, 50, 0.3);
 }
 
+@media (max-width: 768px) {
+  .band-propagation-pane {
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .band-propagation-pane {
+    max-height: auto;
+  }
+}
+
 .band-propagation-pane::-webkit-scrollbar {
   width: 6px;
 }

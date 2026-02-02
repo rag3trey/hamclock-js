@@ -582,7 +582,8 @@ function AzimuthalCanvas({ deLocation, dxSpots, activations, satellites, onMapCl
       width={1320}
       height={660}
       onClick={handleClick}
-      style={{ width: '100%', height: '660px', cursor: 'crosshair', backgroundColor: '#001a33' }}
+      onTouchStart={(e) => e.preventDefault()}
+      style={{ width: '100%', height: '660px', cursor: 'crosshair', backgroundColor: '#001a33', touchAction: 'none' }}
     />
   );
 }
@@ -1013,7 +1014,8 @@ function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
       width={1320}
       height={660}
       onClick={handleClick}
-      style={{ width: '100%', height: '660px', cursor: 'crosshair', backgroundColor: '#001a33' }}
+      onTouchStart={(e) => e.preventDefault()}
+      style={{ width: '100%', height: '660px', cursor: 'crosshair', backgroundColor: '#001a33', touchAction: 'none' }}
     />
   );
 }
@@ -1440,7 +1442,8 @@ function RobinsonCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
       width={1320}
       height={660}
       onClick={handleClick}
-      style={{ width: '100%', height: '660px', cursor: 'crosshair', backgroundColor: '#001a33' }}
+      onTouchStart={(e) => e.preventDefault()}
+      style={{ width: '100%', height: '660px', cursor: 'crosshair', backgroundColor: '#001a33', touchAction: 'none' }}
     />
   );
 }

@@ -12,6 +12,18 @@
   font-size: 13px;
 }
 
+@media (max-width: 768px) {
+  .contests-pane {
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contests-pane {
+    max-height: auto;
+  }
+}
+
 .contests-pane.loading {
   display: flex;
   align-items: center;

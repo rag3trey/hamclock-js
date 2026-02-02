@@ -61,6 +61,53 @@
   }
 }
 
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .maidenhead-display {
+    padding: 8px 10px;
+    margin: 4px 0;
+    gap: 4px;
+  }
+  
+  .maidenhead-display label {
+    font-size: 9px;
+    letter-spacing: 0.3px;
+  }
+  
+  .grid-container {
+    gap: 6px;
+  }
+  
+  .grid-value {
+    font-size: 16px;
+    letter-spacing: 1px;
+    min-width: 65px;
+  }
+}
+
+@media (max-width: 480px) {
+  .maidenhead-display {
+    padding: 6px 8px;
+    margin: 2px 0;
+    gap: 3px;
+  }
+  
+  .maidenhead-display label {
+    font-size: 8px;
+    letter-spacing: 0.2px;
+  }
+  
+  .grid-container {
+    gap: 4px;
+  }
+  
+  .grid-value {
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    min-width: 55px;
+  }
+}
+
 .precision-selector {
   display: flex;
   gap: 4px;

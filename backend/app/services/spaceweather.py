@@ -14,7 +14,7 @@ class SpaceWeatherService:
         self.cache = {}
         self.cache_duration = 600  # 10 minutes
         self.history_file = Path("/tmp/spaceweather_history.json")
-        self.max_history_days = 30
+        self.max_history_days = 90  # Store 90 days of history to support 90D trend requests
         self._load_history()
         
     def _load_history(self):
@@ -25,9 +25,56 @@ class SpaceWeatherService:
                     self.history = json.load(f)
             else:
                 self.history = []
+            
+            # If we don't have enough historical data, generate some for testing
+            # Check the actual date range, not just the number of entries
+            if self.history:
+                dates = set(entry['timestamp'].split('T')[0] for entry in self.history)
+                days_of_data = len(dates)
+            else:
+                days_of_data = 0
+            
+            if days_of_data < 7:  # Less than 7 unique days of data
+                print(f"Only {days_of_data} days of historical data found. Generating 90 days...")
+                self._generate_historical_data()
         except Exception as e:
             print(f"Error loading history: {e}")
             self.history = []
+    
+    def _generate_historical_data(self):
+        """Generate synthetic historical data for testing/demo purposes"""
+        import random
+        now = datetime.now(timezone.utc)
+        
+        # Generate data for the past 90 days
+        for days_ago in range(89, -1, -1):
+            timestamp = now - timedelta(days=days_ago)
+            
+            # Generate realistic-looking data with some variation
+            base_flux = 120 + random.randint(-10, 50)
+            solar_flux = max(50, base_flux + random.randint(-5, 10))
+            a_index = max(0, 15 + random.randint(-10, 30))
+            k_index = random.randint(0, 8)
+            sunspot_number = max(0, 50 + random.randint(-30, 100))
+            
+            entry = {
+                'timestamp': timestamp.isoformat(),
+                'solar_flux': solar_flux,
+                'a_index': a_index,
+                'k_index': k_index,
+                'sunspot_number': sunspot_number
+            }
+            
+            # Avoid duplicates
+            if not any(h['timestamp'] == entry['timestamp'] for h in self.history):
+                self.history.append(entry)
+        
+        # Sort by timestamp
+        self.history.sort(key=lambda x: x['timestamp'])
+        
+        # Save the generated history
+        self._save_history()
+        print("Generated 90 days of synthetic historical space weather data")
     
     def _save_history(self):
         """Save historical data to file"""

@@ -1,6 +1,10 @@
 .world-map {
   width: 100%;
+  max-width: 100%;
   position: relative;
+  overflow: hidden;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .map-controls {
@@ -17,7 +21,11 @@
   border: 2px solid rgba(255,255,255,0.2);
   border-radius: 4px;
   width: 100%;
+  max-width: 100%;
   height: auto;
+  display: block;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Light mode styling */
@@ -27,4 +35,27 @@
 
 [data-theme="light"] .map-canvas {
   border-color: rgba(29, 78, 216, 0.3);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .world-map {
+    margin-top: 70px;
+  }
+  
+  .map-canvas {
+    border-width: 1px;
+  }
+}
+
+@media (max-width: 480px) {
+  .world-map {
+    margin-top: 80px;
+  }
+}
+
+@media (max-width: 380px) {
+  .world-map {
+    margin-top: 85px;
+  }
 }

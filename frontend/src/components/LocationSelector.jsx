@@ -46,7 +46,7 @@ const LocationSelector = ({ label, location, onLocationChange }) => {
       <span className="location-coords">
         {location.latitude.toFixed(4)}°, {location.longitude.toFixed(4)}°
       </span>
-      <button onClick={() => setEditing(true)}>Edit</button>
+      <button className="edit-btn" onClick={() => setEditing(true)}>Edit</button>
     </div>
   );
 };

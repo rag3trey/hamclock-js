@@ -161,6 +161,18 @@
   background: rgba(15, 52, 96, 0.3);
 }
 
+@media (max-width: 768px) {
+  .psk-spots-container {
+    max-height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .psk-spots-container {
+    max-height: auto;
+  }
+}
+
 .psk-spots-container::-webkit-scrollbar {
   height: 8px;
 }

@@ -293,12 +293,13 @@ const HomePage = () => {
                 longitude={deLocation.longitude}
                 label="My Grid"
               />
-              <div style={{ display: 'flex', gap: '8px' }}>
+              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                 <button 
                   onClick={getUserLocation}
                   disabled={gettingLocation}
                   style={{
-                    flex: 1,
+                    flex: '1 1 auto',
+                    minWidth: '120px',
                     padding: '8px 12px',
                     backgroundColor: '#4CAF50',
                     color: 'white',
@@ -313,6 +314,7 @@ const HomePage = () => {
                 <button 
                   onClick={() => setSettingsOpen(true)}
                   style={{
+                    flex: '0 0 auto',
                     padding: '8px 12px',
                     backgroundColor: '#2196F3',
                     color: 'white',

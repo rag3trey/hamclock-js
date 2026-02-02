@@ -16,6 +16,21 @@
   font-family: 'Courier New', monospace;
 }
 
+.edit-btn {
+  background: #2196F3;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.edit-btn:hover {
+  background: #1976D2;
+}
+
 /* Light mode styling */
 [data-theme="light"] .location-selector {
   background: rgba(29, 78, 216, 0.08);
@@ -27,4 +42,47 @@
 
 [data-theme="light"] .location-coords {
   color: #0a1428;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .location-selector {
+    gap: 0.25rem;
+    padding: 0.35rem;
+    font-size: 0.85rem;
+  }
+  
+  .location-label {
+    font-size: 0.8rem;
+  }
+  
+  .location-coords {
+    font-size: 0.8rem;
+  }
+  
+  .edit-btn {
+    padding: 3px 6px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .location-selector {
+    gap: 0.2rem;
+    padding: 0.25rem;
+    font-size: 0.75rem;
+  }
+  
+  .location-label {
+    font-size: 0.7rem;
+  }
+  
+  .location-coords {
+    font-size: 0.7rem;
+  }
+  
+  .edit-btn {
+    padding: 2px 5px;
+    font-size: 9px;
+  }
 }

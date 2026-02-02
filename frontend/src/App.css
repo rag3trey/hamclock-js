@@ -4,6 +4,9 @@
   flex-direction: column;
   background: var(--bg-primary);
   color: var(--text-primary);
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 .app-header {
@@ -73,12 +76,16 @@
   padding: 2rem 0;
   background: var(--bg-primary);
   transition: background 0.3s ease;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 .container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 1rem;
+  width: 100%;
 }
 
 .app-footer {
@@ -88,4 +95,48 @@
   text-align: center;
   border-top: 1px solid var(--border-secondary);
   transition: all 0.3s ease;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .app-title {
+    font-size: 1.5rem;
+  }
+  
+  .title-icon {
+    font-size: 1.8rem;
+  }
+  
+  .app-header {
+    padding: 0.8rem 0;
+  }
+  
+  .main-nav {
+    display: none;
+  }
+  
+  .nav-link {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-title {
+    font-size: 1.2rem;
+  }
+  
+  .title-icon {
+    font-size: 1.4rem;
+  }
+  
+  .callsign-badge {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    margin-left: 0.5rem;
+  }
+  
+  .container {
+    padding: 0 0.5rem;
+  }
 }

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import HomePage from './pages/HomePage';
 import SatellitePage from './pages/SatellitePage';
+import MobileMenu from './components/MobileMenu';
 import { fetchGetCallsign, fetchGetSettings } from './api';
 import './App.css';
 
@@ -17,6 +18,7 @@ const queryClient = new QueryClient({
 
 function App() {
   const [callsign, setCallsign] = useState(null);
+  const [theme, setTheme] = useState('dark');
 
   useEffect(() => {
     const loadCallsign = async () => {
@@ -36,16 +38,26 @@ function App() {
       try {
         // Try to load from backend settings
         const settings = await fetchGetSettings();
-        const theme = settings?.theme || 'dark';
-        document.documentElement.setAttribute('data-theme', theme);
+        const initialTheme = settings?.theme || 'dark';
+        setTheme(initialTheme);
+        document.documentElement.setAttribute('data-theme', initialTheme);
       } catch (err) {
         // Fallback to localStorage
         const savedTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(savedTheme);
         document.documentElement.setAttribute('data-theme', savedTheme);
       }
     };
     initTheme();
   }, []);
+
+  // Toggle theme
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -63,6 +75,7 @@ function App() {
                   <Link to="/" className="nav-link">Home</Link>
                   <Link to="/satellite" className="nav-link">Satellites</Link>
                 </nav>
+                <MobileMenu callsign={callsign} onThemeToggle={toggleTheme} currentTheme={theme} />
               </div>
             </div>
           </header>

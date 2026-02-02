@@ -28,3 +28,32 @@
 [data-theme="light"] .clock-time {
   color: #0a1428;
 }
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .clock-display {
+    gap: 0.75rem;
+  }
+  
+  .clock-label {
+    font-size: 0.7rem;
+  }
+  
+  .clock-time {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .clock-display {
+    gap: 0.4rem;
+  }
+  
+  .clock-label {
+    font-size: 0.6rem;
+  }
+  
+  .clock-time {
+    font-size: 0.85rem;
+  }
+}
