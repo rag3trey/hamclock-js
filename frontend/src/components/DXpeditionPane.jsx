@@ -224,7 +224,7 @@ const DXpeditionPane = ({ deLocation = { latitude: 40.7128, longitude: -74.0060 
                     <span className="location">{expedition.location}</span>
                     {distance !== null && (
                       <span className="distance">
-                        {distance} km {bearing !== null && `@ ${getBearingLabel(bearing)}`}
+                        {distance} km
                       </span>
                     )}
                     {daysLeft > 0 && (
@@ -283,6 +283,15 @@ const DXpeditionPane = ({ deLocation = { latitude: 40.7128, longitude: -74.0060 
                         >
                           🔗 Visit Website
                         </a>
+                      </div>
+                    )}
+
+                    {distance !== null && bearing !== null && (
+                      <div className="detail-row">
+                        <span className="detail-label">Distance:</span>
+                        <span className="detail-value">
+                          {distance.toLocaleString()} km @ {getBearingLabel(bearing)} ({bearing}°)
+                        </span>
                       </div>
                     )}
 

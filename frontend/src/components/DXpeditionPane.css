@@ -184,7 +184,6 @@
   align-items: center;
   gap: 12px;
   min-width: 0;
-  overflow: hidden;
 }
 
 .location {
@@ -194,19 +193,19 @@
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
-  flex-shrink: 1;
+  flex: 1;
+  max-width: 150px;
 }
 
 .distance {
   font-size: 11px;
   color: rgba(96, 165, 250, 0.8);
   background: rgba(96, 165, 250, 0.1);
-  padding: 2px 6px;
+  padding: 2px 8px;
   border-radius: 3px;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   flex-shrink: 0;
+  min-width: 70px;
 }
 
 .days-left {
