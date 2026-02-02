@@ -24,11 +24,11 @@ async def update_tles(background_tasks: BackgroundTasks):
 
 @router.post("/update-supplemental-tles")
 async def update_supplemental_tles(background_tasks: BackgroundTasks):
-    """Trigger supplemental TLE update from Celestrak"""
+    """Trigger supplemental TLE update from Celestrak (amateur radio group)"""
     background_tasks.add_task(sat_service.update_supplemental_tles)
     return {
         "message": "Supplemental TLE update started",
-        "source": "https://celestrak.org/NORAD/elements/supplemental/sup-gp.php?FILE=starlink&FORMAT=tle",
+        "source": "https://celestrak.org/NORAD/elements/gp.php?GROUP=amateur&FORMAT=tle",
         "last_update": sat_service.last_tle_update.isoformat() if sat_service.last_tle_update else None
     }
 
