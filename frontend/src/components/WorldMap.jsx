@@ -699,22 +699,16 @@ function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
             .center([zoomCenter.lng + lngOffset, zoomCenter.lat])
             .translate([width / 2, height / 2]);
           
-          const bounds = offsetProjection.invert([0, 0]);
-          const boundsMax = offsetProjection.invert([width, height]);
-          const minLat = Math.min(bounds[1], boundsMax[1]);
-          const maxLat = Math.max(bounds[1], boundsMax[1]);
-          const minLng = Math.min(bounds[0], boundsMax[0]);
-          const maxLng = Math.max(bounds[0], boundsMax[0]);
-          
           ctx.strokeStyle = 'rgba(100, 200, 255, 0.25)';
           ctx.lineWidth = 0.8;
           ctx.beginPath();
           
-          const gridLines = generateMaidenheadGrid(minLat, maxLat, minLng, maxLng);
+          // Always use world bounds for simplicity and reliability
+          const gridLines = generateMaidenheadGrid(-85, 85, -180, 180);
           gridLines?.forEach(line => {
             line.coordinates?.forEach((point, i) => {
               const projected = offsetProjection(point);
-              if (projected) {
+              if (projected && isFinite(projected[0]) && isFinite(projected[1])) {
                 if (i === 0) ctx.moveTo(projected[0], projected[1]);
                 else ctx.lineTo(projected[0], projected[1]);
               }
@@ -729,21 +723,15 @@ function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
             .center([zoomCenter.lng + lngOffset, zoomCenter.lat])
             .translate([width / 2, height / 2]);
           
-          const bounds = offsetProjection.invert([0, 0]);
-          const boundsMax = offsetProjection.invert([width, height]);
-          const minLat = Math.min(bounds[1], boundsMax[1]);
-          const maxLat = Math.max(bounds[1], boundsMax[1]);
-          const minLng = Math.min(bounds[0], boundsMax[0]);
-          const maxLng = Math.max(bounds[0], boundsMax[0]);
-          
-          const gridLines = generateCQZoneGridLines(minLat, maxLat, minLng, maxLng);
+          // Always use world bounds for simplicity and reliability
+          const gridLines = generateCQZoneGridLines(-85, 85, -180, 180);
           gridLines?.forEach(line => {
             ctx.strokeStyle = line.style?.color || 'rgba(255, 200, 100, 0.3)';
             ctx.lineWidth = line.style?.width || 1;
             ctx.beginPath();
             line.coordinates?.forEach((point, i) => {
               const projected = offsetProjection(point);
-              if (projected) {
+              if (projected && isFinite(projected[0]) && isFinite(projected[1])) {
                 if (i === 0) ctx.moveTo(projected[0], projected[1]);
                 else ctx.lineTo(projected[0], projected[1]);
               }
@@ -758,21 +746,15 @@ function MercatorCanvas({ deLocation, dxSpots, activations, satellites, onMapCli
             .center([zoomCenter.lng + lngOffset, zoomCenter.lat])
             .translate([width / 2, height / 2]);
           
-          const bounds = offsetProjection.invert([0, 0]);
-          const boundsMax = offsetProjection.invert([width, height]);
-          const minLat = Math.min(bounds[1], boundsMax[1]);
-          const maxLat = Math.max(bounds[1], boundsMax[1]);
-          const minLng = Math.min(bounds[0], boundsMax[0]);
-          const maxLng = Math.max(bounds[0], boundsMax[0]);
-          
-          const gridLines = generateITURegionGridLines(minLat, maxLat, minLng, maxLng);
+          // Always use world bounds for simplicity and reliability
+          const gridLines = generateITURegionGridLines(-85, 85, -180, 180);
           gridLines?.forEach(line => {
             ctx.strokeStyle = line.style?.color || 'rgba(255, 150, 50, 0.6)';
             ctx.lineWidth = line.style?.width || 2.5;
             ctx.beginPath();
             line.coordinates?.forEach((point, i) => {
               const projected = offsetProjection(point);
-              if (projected) {
+              if (projected && isFinite(projected[0]) && isFinite(projected[1])) {
                 if (i === 0) ctx.moveTo(projected[0], projected[1]);
                 else ctx.lineTo(projected[0], projected[1]);
               }
